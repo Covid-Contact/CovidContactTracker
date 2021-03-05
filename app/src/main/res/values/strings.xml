@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">CovidContactTracker</string>
+    <string name="app_name">Covid Contact Tracker</string>
+
+    <!-- Authentication -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="not_account">You do not have an account?</string>
 </resources>

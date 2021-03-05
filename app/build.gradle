@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'com.google.gms.google-services'
     id 'androidx.navigation.safeargs.kotlin'
     id 'org.jetbrains.dokka'
     id 'kotlin-kapt'
@@ -76,7 +75,7 @@ dependencies {
 
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleLiveDataVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion"
@@ -94,7 +93,8 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$daggerHiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltLifecycleVersion"
-    kapt "androidx.hilt:hilt-compiler:$daggerHiltLifecycleVersion"
+    //kapt "androidx.hilt:hilt-compiler:$daggerHiltLifecycleVersion"
+    kapt "com.google.dagger:hilt-android-compiler:2.31.2-alpha"
 
     // Unit testing
     testImplementation "junit:junit:$junitVersion"
