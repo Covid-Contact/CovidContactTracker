@@ -37,6 +37,13 @@ class LogInFragment : Fragment() {
         viewModel.anyEmptyField.observe(viewLifecycleOwner, ::emptyFieldObserver)
         viewModel.isEmailInvalid.observe(viewLifecycleOwner, ::invalidEmailObserver)
         viewModel.isPasswordInvalid.observe(viewLifecycleOwner, ::invalidPasswordObserver)
+
+        binding.btnLogIn.setOnClickListener {
+            val email = binding.logInEmailLayout.editText.toString()
+            val password = binding.logInPasswordLayout.editText.toString()
+
+            viewModel.onMakeLogIn(email, password)
+        }
     }
 
     private fun invalidEmailObserver(isInvalid: Boolean) {
