@@ -1,4 +1,4 @@
-package cat.covidcontact.tracker.authactivity.login
+package cat.covidcontact.tracker.authactivity.signup
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,26 +10,25 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.ScreenState
-import cat.covidcontact.tracker.databinding.FragmentLogInBinding
+import cat.covidcontact.tracker.databinding.FragmentSignUpBinding
 import cat.covidcontact.tracker.extensions.getStringWithParams
 import cat.covidcontact.tracker.extensions.isEmpty
 import cat.covidcontact.tracker.extensions.showError
 import com.google.android.material.textfield.TextInputLayout
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class LogInFragment : Fragment() {
-    private lateinit var binding: FragmentLogInBinding
-    private val viewModel: LogInViewModel by viewModels()
+class SignUpFragment : Fragment() {
+    private lateinit var binding: FragmentSignUpBinding
+    private val viewModel: SignUpViewModel by viewModels()
 
     private var isEmailBeingChecked = false
     private var isPasswordBeingChecked = false
+    private var arePasswordEqualsBeingChecked = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLogInBinding.inflate(inflater, container, false)
+        binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -39,19 +38,13 @@ class LogInFragment : Fragment() {
         viewModel.anyEmptyField.observe(viewLifecycleOwner, ::emptyFieldObserver)
         viewModel.isEmailInvalid.observe(viewLifecycleOwner, ::invalidEmailObserver)
         viewModel.isPasswordInvalid.observe(viewLifecycleOwner, ::invalidPasswordObserver)
+        viewModel.arePasswordsEquals.observe(viewLifecycleOwner, ::equalsPasswordObserver)
         viewModel.screenState.observe(viewLifecycleOwner, ::stateObserver)
-
-        binding.btnLogIn.setOnClickListener {
-            val email = binding.logInEmailLayout.editText.toString()
-            val password = binding.logInPasswordLayout.editText.toString()
-
-            viewModel.onMakeLogIn(email, password)
-        }
     }
 
     private fun invalidEmailObserver(isInvalid: Boolean) {
         isEmailBeingChecked = isInvalid
-        binding.logInEmailLayout.editText?.addTextChangedListener(
+        binding.signUpEmailLayout.editText?.addTextChangedListener(
             onTextChanged = { email, _, _, _ ->
                 if (isEmailBeingChecked) {
                     viewModel.onVerifyEmail(email.toString())
@@ -62,7 +55,7 @@ class LogInFragment : Fragment() {
 
     private fun invalidPasswordObserver(isInvalid: Boolean) {
         isPasswordBeingChecked = isInvalid
-        binding.logInPasswordLayout.editText?.addTextChangedListener(
+        binding.signUpPasswordLayout.editText?.addTextChangedListener(
             onTextChanged = { password, _, _, _ ->
                 if (isPasswordBeingChecked) {
                     viewModel.onVerifyPassword(password.toString())
@@ -71,13 +64,27 @@ class LogInFragment : Fragment() {
         )
     }
 
+    private fun equalsPasswordObserver(arePasswordEquals: Boolean) {
+        arePasswordEqualsBeingChecked = !arePasswordEquals
+        binding.signUpRepeatPasswordLayout.editText?.addTextChangedListener(
+            onTextChanged = { repeatedPassword, _, _, _ ->
+                if (arePasswordEqualsBeingChecked) {
+                    viewModel.onVerifyRepeatedPasswords(
+                        binding.signUpPasswordLayout.editText?.text.toString(),
+                        repeatedPassword.toString()
+                    )
+                }
+            }
+        )
+    }
+
     private fun emptyFieldObserver(isEmpty: Boolean) {
         if (isEmpty) {
-            showErrorInLayout(binding.logInEmailLayout, R.string.not_empty, R.string.email)
-            showErrorInLayout(binding.logInPasswordLayout, R.string.not_empty, R.string.password)
+            showErrorInLayout(binding.signUpEmailLayout, R.string.not_empty, R.string.email)
+            showErrorInLayout(binding.signUpPasswordLayout, R.string.not_empty, R.string.password)
         } else {
-            showErrorInLayout(binding.logInEmailLayout)
-            showErrorInLayout(binding.logInPasswordLayout)
+            showErrorInLayout(binding.signUpEmailLayout)
+            showErrorInLayout(binding.signUpPasswordLayout)
         }
     }
 
@@ -103,23 +110,19 @@ class LogInFragment : Fragment() {
             }
             ScreenState.OtherError -> {
             }
-            else -> logInObserver(screenState as LogInState)
+            else -> signUpObserver(screenState as SignUpState)
         }
     }
 
-    private fun logInObserver(logInState: LogInState) {
-        when (logInState) {
-            LogInState.ChangeToSignUp -> {
-                val action = LogInFragmentDirections.actionLogInFragmentToSignUpFragment()
+    private fun signUpObserver(signUpState: SignUpState) {
+        when (signUpState) {
+            SignUpState.ChangeToLogIn -> {
+                val action = SignUpFragmentDirections.actionSignUpFragmentToLogInFragment()
                 findNavController().navigate(action)
             }
-            is LogInState.EmailNotFound -> {
+            is SignUpState.EmailAlreadyRegistered -> {
             }
-            LogInState.WrongPassword -> {
-            }
-            is LogInState.EmailNotValidated -> {
-            }
-            is LogInState.SuccessLogIn -> {
+            is SignUpState.VerifyCodeSent -> {
             }
         }
     }

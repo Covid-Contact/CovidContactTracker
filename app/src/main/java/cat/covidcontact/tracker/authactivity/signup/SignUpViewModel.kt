@@ -1,10 +1,13 @@
-package cat.covidcontact.tracker.authactivity.login
+package cat.covidcontact.tracker.authactivity.signup
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.data.UserException
 import cat.covidcontact.tracker.usecase.UseCaseResultHandler
-import cat.covidcontact.tracker.usecase.login.MakeLogIn
+import cat.covidcontact.tracker.usecase.signup.MakeSignUp
 import cat.covidcontact.tracker.util.FieldValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,11 +16,10 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class LogInViewModel @Inject constructor(
-    private val makeLogIn: MakeLogIn,
+class SignUpViewModel @Inject constructor(
+    private val makeSignUp: MakeSignUp,
     private val fieldValidator: FieldValidator
 ) : ViewModel() {
-
     private val _screenState = MutableLiveData<ScreenState>(ScreenState.Loading)
     val screenState: LiveData<ScreenState>
         get() = _screenState
@@ -34,45 +36,46 @@ class LogInViewModel @Inject constructor(
     val isPasswordInvalid: LiveData<Boolean>
         get() = _isPasswordInvalid
 
-    private val makeLogInHandler = UseCaseResultHandler<MakeLogIn.Response>(
-        onSuccess = { LogInState.SuccessLogIn(it.user) },
-        onFailure = { exception ->
-            when (exception) {
-                is UserException.EmailNotFoundException -> LogInState.EmailNotFound(
-                    exception.email
-                )
-                UserException.WrongPasswordException -> LogInState.WrongPassword
-                is UserException.EmailNotValidatedException -> LogInState.EmailNotValidated(
-                    exception.email
-                )
-                else -> ScreenState.OtherError
-            }
+    private val _arePasswordsEquals = MutableLiveData(false)
+    val arePasswordsEquals: LiveData<Boolean>
+        get() = _arePasswordsEquals
+
+    private val makeSignUpHandler = UseCaseResultHandler<MakeSignUp.Response>(
+        onSuccess = { SignUpState.VerifyCodeSent(it.email) },
+        onFailure = {
+            val email = (it as UserException.EmailAlreadyRegistered).email
+            SignUpState.EmailAlreadyRegistered(email)
         }
     )
 
-    fun onChangeToSignUp() {
-        _screenState.value = LogInState.ChangeToSignUp
+    fun onChangeToLogIn() {
+        _screenState.value = SignUpState.ChangeToLogIn
     }
 
-    fun onMakeLogIn(email: String, password: String) {
+    fun onMakeSignUp(email: String, password: String, repeatedPassword: String) {
         viewModelScope.launch {
-            if (!areParametersValid(email, password)) return@launch
+            if (!areParametersValid(email, password, repeatedPassword)) return@launch
 
             val result = withContext(Dispatchers.IO) {
-                makeLogIn.execute(MakeLogIn.Request(email, password))
+                makeSignUp.execute(MakeSignUp.Request(email, password))
             }
 
-            _screenState.value = makeLogInHandler.getScreenState(result)
+            _screenState.value = makeSignUpHandler.getScreenState(result)
         }
     }
 
-    private fun areParametersValid(email: String, password: String): Boolean {
+    private fun areParametersValid(
+        email: String,
+        password: String,
+        repeatedPassword: String
+    ): Boolean {
         if (email.isEmpty() || password.isEmpty()) {
             _anyEmptyField.value = true
             return false
         }
 
         return onVerifyEmail(email) && onVerifyPassword(password)
+            && onVerifyRepeatedPasswords(password, repeatedPassword)
     }
 
     fun onVerifyEmail(email: String): Boolean {
@@ -83,5 +86,10 @@ class LogInViewModel @Inject constructor(
     fun onVerifyPassword(password: String): Boolean {
         _isPasswordInvalid.value = !fieldValidator.isPasswordValid(password)
         return !isPasswordInvalid.value!!
+    }
+
+    fun onVerifyRepeatedPasswords(password: String, repeatedPassword: String): Boolean {
+        _arePasswordsEquals.value = password == repeatedPassword
+        return arePasswordsEquals.value!!
     }
 }

@@ -1,6 +1,6 @@
-package cat.covidcontact.tracker.authactivity.login.usecases
+package cat.covidcontact.tracker.usecase.login
 
-import cat.covidcontact.tracker.authactivity.model.User
+import cat.covidcontact.tracker.model.User
 import cat.covidcontact.tracker.usecase.UseCase
 
 interface MakeLogIn : UseCase<MakeLogIn.Request, MakeLogIn.Response> {

@@ -1,7 +1,7 @@
 package cat.covidcontact.tracker.authactivity.login
 
 import cat.covidcontact.tracker.ScreenState
-import cat.covidcontact.tracker.authactivity.model.User
+import cat.covidcontact.tracker.model.User
 
 sealed class LogInState : ScreenState() {
     object ChangeToSignUp : LogInState()

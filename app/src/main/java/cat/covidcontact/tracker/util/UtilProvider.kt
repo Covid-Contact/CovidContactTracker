@@ -1,6 +1,5 @@
-package cat.covidcontact.tracker.authactivity.login
+package cat.covidcontact.tracker.util
 
-import cat.covidcontact.tracker.usecase.login.MakeLogIn
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,9 +8,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class LogInProvider {
+class UtilProvider {
 
     @Provides
     @Singleton
-    fun provideMakeLogIn(): MakeLogIn = Any() as MakeLogIn
+    fun provideFieldValidator(): FieldValidator = FieldValidatorImpl()
 }

@@ -6,4 +6,5 @@ abstract class UserException(msg: String) : Exception(msg) {
     class OtherError(msg: String) : UserException(msg)
     class EmailNotFoundException(val email: String) : UserException("$email is not found")
     class EmailNotValidatedException(val email: String) : UserException("$email is not validated")
+    class EmailAlreadyRegistered(val email: String) : UserException("$email already registered")
 }
