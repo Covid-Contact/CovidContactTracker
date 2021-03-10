@@ -39,3 +39,33 @@ fun <T> LiveData<T>.getOrAwaitValue(
     @Suppress("UNCHECKED_CAST")
     return data as T
 }
+
+@VisibleForTesting(otherwise = VisibleForTesting.NONE)
+fun LiveData<ScreenState>.getAfterLoading(
+    time: Long = 2,
+    timeUnit: TimeUnit = TimeUnit.SECONDS
+): ScreenState {
+    var data: ScreenState? = null
+    val latch = CountDownLatch(1)
+    val observer: Observer<ScreenState> = object : Observer<ScreenState> {
+        override fun onChanged(value: ScreenState?) {
+            if (value !is ScreenState.Loading) {
+                data = value
+                latch.countDown()
+                this@getAfterLoading.removeObserver(this)
+            }
+        }
+    }
+
+    this.observeForever(observer)
+
+    try {
+        if (!latch.await(time, timeUnit)) {
+            throw TimeoutException("LiveData value was never set or it always was Loading")
+        }
+    } finally {
+        this.removeObserver(observer)
+    }
+
+    return data!!
+}

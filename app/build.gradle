@@ -60,6 +60,7 @@ hilt {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "androidx.core:core-ktx:$androidXCoreVersion"
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
@@ -95,6 +96,10 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltLifecycleVersion"
     //kapt "androidx.hilt:hilt-compiler:$daggerHiltLifecycleVersion"
     kapt "com.google.dagger:hilt-android-compiler:2.31.2-alpha"
+
+    // Retrofit2 and Moshi
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit2Version"
 
     // Unit testing
     testImplementation "junit:junit:$junitVersion"

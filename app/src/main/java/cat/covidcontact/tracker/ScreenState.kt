@@ -1,6 +1,7 @@
 package cat.covidcontact.tracker
 
-sealed class ScreenState<T> {
-    object Loading : ScreenState<Nothing>()
-    class Render<T>(renderState: T) : ScreenState<T>()
+abstract class ScreenState {
+    object Loading : ScreenState()
+    object NoInternet : ScreenState()
+    object OtherError : ScreenState()
 }

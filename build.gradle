@@ -51,6 +51,7 @@ ext {
     mockitoVersion = "3.5.5"
     playServicesAuthVersion = "18.1.0"
     recyclerViewVersion = "1.1.0"
+    retrofit2Version = "2.1.0"
 }
 
 task clean(type: Delete) {

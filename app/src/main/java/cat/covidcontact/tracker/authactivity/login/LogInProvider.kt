@@ -1,5 +1,6 @@
 package cat.covidcontact.tracker.authactivity.login
 
+import cat.covidcontact.tracker.authactivity.login.usecases.MakeLogIn
 import cat.covidcontact.tracker.util.FieldValidator
 import cat.covidcontact.tracker.util.FieldValidatorImpl
 import dagger.Module
@@ -15,4 +16,8 @@ class LogInProvider {
     @Provides
     @Singleton
     fun provideFieldValidator(): FieldValidator = FieldValidatorImpl()
+
+    @Provides
+    @Singleton
+    fun provideMakeLogIn(): MakeLogIn = Any() as MakeLogIn
 }

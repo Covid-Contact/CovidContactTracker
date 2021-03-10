@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">Covid Contact Tracker</string>
 
+    <!-- Common -->
+    <string name="not_empty">%1$s cannot be empty</string>
+
     <!-- Authentication -->
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="log_in">Log in</string>
     <string name="not_account">You do not have an account?</string>
+    <string name="invalid_email">The email format is invalid</string>
+
 </resources>

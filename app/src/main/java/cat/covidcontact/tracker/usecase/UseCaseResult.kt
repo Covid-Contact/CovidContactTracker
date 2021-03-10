@@ -1,6 +1,6 @@
 package cat.covidcontact.tracker.usecase
 
 sealed class UseCaseResult<T> {
-    class Success<T>(result: T) : UseCaseResult<T>()
-    class Error(exception: Exception) : UseCaseResult<Nothing>()
+    class Success<T>(val result: T) : UseCaseResult<T>()
+    class Error<T>(val exception: Exception) : UseCaseResult<T>()
 }
