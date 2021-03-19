@@ -1,4 +1,4 @@
-package cat.covidcontact.tracker.usecase
+package cat.covidcontact.usecases
 
 sealed class UseCaseResult<T> {
     class Success<T>(val result: T) : UseCaseResult<T>()

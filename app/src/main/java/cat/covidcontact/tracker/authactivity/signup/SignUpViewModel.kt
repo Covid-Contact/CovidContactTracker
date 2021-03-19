@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cat.covidcontact.data.UserException
 import cat.covidcontact.tracker.ScreenState
-import cat.covidcontact.tracker.data.UserException
-import cat.covidcontact.tracker.usecase.UseCaseResultHandler
-import cat.covidcontact.tracker.usecase.signup.MakeSignUp
+import cat.covidcontact.tracker.UseCaseResultHandler
 import cat.covidcontact.tracker.util.FieldValidator
+import cat.covidcontact.usecases.signup.MakeSignUp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

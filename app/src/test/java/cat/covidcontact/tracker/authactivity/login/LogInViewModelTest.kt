@@ -1,16 +1,14 @@
 package cat.covidcontact.tracker.authactivity.login
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import cat.covidcontact.data.UserException
 import cat.covidcontact.tracker.MainCoroutineRule
 import cat.covidcontact.tracker.ScreenState
-import cat.covidcontact.tracker.data.UserException
 import cat.covidcontact.tracker.getAfterLoading
 import cat.covidcontact.tracker.getOrAwaitValue
-import cat.covidcontact.tracker.model.Gender
-import cat.covidcontact.tracker.model.User
-import cat.covidcontact.tracker.usecase.UseCaseResult
-import cat.covidcontact.tracker.usecase.login.MakeLogIn
 import cat.covidcontact.tracker.util.FieldValidator
+import cat.covidcontact.usecases.UseCaseResult
+import cat.covidcontact.usecases.login.MakeLogIn
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.MatcherAssert.assertThat
@@ -28,7 +26,6 @@ class LogInViewModelTest {
 
     private val email = "albert@gmail.com"
     private val password = "Barcelona2020$"
-    private val user = User(email, password, Gender.Male)
 
     @Mock
     private lateinit var makeLogIn: MakeLogIn
@@ -224,7 +221,7 @@ class LogInViewModelTest {
     fun `email valid and correct password makeLogIn use case success`() = runBlockingTest {
         // When there is not any error
         `when`(makeLogIn.execute(MakeLogIn.Request(email, password))).thenReturn(
-            UseCaseResult.Success(MakeLogIn.Response(user))
+            UseCaseResult.Success(MakeLogIn.Response(email))
         )
 
         viewModel.onMakeLogIn(email, password)
@@ -237,6 +234,6 @@ class LogInViewModelTest {
         )
 
         val successLogInState = state as LogInState.SuccessLogIn
-        assertThat(successLogInState.user, `is`(user))
+        assertThat(successLogInState.email, `is`(email))
     }
 }

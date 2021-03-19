@@ -9,7 +9,7 @@ import java.util.concurrent.TimeoutException
 
 @VisibleForTesting(otherwise = VisibleForTesting.NONE)
 fun <T> LiveData<T>.getOrAwaitValue(
-    time: Long = 2,
+    time: Long = 5,
     timeUnit: TimeUnit = TimeUnit.SECONDS,
     afterObserve: () -> Unit = {}
 ): T {
@@ -42,7 +42,7 @@ fun <T> LiveData<T>.getOrAwaitValue(
 
 @VisibleForTesting(otherwise = VisibleForTesting.NONE)
 fun LiveData<ScreenState>.getAfterLoading(
-    time: Long = 2,
+    time: Long = 5,
     timeUnit: TimeUnit = TimeUnit.SECONDS
 ): ScreenState {
     var data: ScreenState? = null

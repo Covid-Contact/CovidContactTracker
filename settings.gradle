@@ -1,2 +1,5 @@
+include ':Model'
+include ':Data'
+include ':UseCases'
 include ':app'
 rootProject.name = "CovidContactTracker"

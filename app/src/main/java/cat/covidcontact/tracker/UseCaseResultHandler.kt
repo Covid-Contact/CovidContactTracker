@@ -1,7 +1,8 @@
-package cat.covidcontact.tracker.usecase
+package cat.covidcontact.tracker
 
-import cat.covidcontact.tracker.ScreenState
-import cat.covidcontact.tracker.data.UserException
+import cat.covidcontact.data.UserException
+import cat.covidcontact.usecases.UseCase
+import cat.covidcontact.usecases.UseCaseResult
 
 @Suppress("UNCHECKED_CAST")
 class UseCaseResultHandler<T : UseCase.UseCaseResponse>(

@@ -1,11 +1,11 @@
 package cat.covidcontact.tracker.authactivity.login
 
 import androidx.lifecycle.*
+import cat.covidcontact.data.UserException
 import cat.covidcontact.tracker.ScreenState
-import cat.covidcontact.tracker.data.UserException
-import cat.covidcontact.tracker.usecase.UseCaseResultHandler
-import cat.covidcontact.tracker.usecase.login.MakeLogIn
+import cat.covidcontact.tracker.UseCaseResultHandler
 import cat.covidcontact.tracker.util.FieldValidator
+import cat.covidcontact.usecases.login.MakeLogIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,7 +35,7 @@ class LogInViewModel @Inject constructor(
         get() = _isPasswordInvalid
 
     private val makeLogInHandler = UseCaseResultHandler<MakeLogIn.Response>(
-        onSuccess = { LogInState.SuccessLogIn(it.user) },
+        onSuccess = { LogInState.SuccessLogIn(it.email) },
         onFailure = { exception ->
             when (exception) {
                 is UserException.EmailNotFoundException -> LogInState.EmailNotFound(

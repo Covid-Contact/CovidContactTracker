@@ -1,7 +1,6 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
-    id 'androidx.navigation.safeargs.kotlin'
     id 'org.jetbrains.dokka'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
@@ -12,13 +11,13 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "cat.covidcontact.tracker"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
-        versionName "0.0.1"
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -26,14 +25,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-
-        debug {
-            testCoverageEnabled true
-        }
-    }
-
-    buildFeatures {
-        viewBinding true
     }
 
     compileOptions {
@@ -59,45 +50,19 @@ hilt {
 }
 
 dependencies {
-    implementation project(":UseCases")
     implementation project(":Data")
     implementation project(":Model")
 
     implementation libs.kotlin_std
     implementation libs.kotlin_reflect
-    implementation libs.core
-    implementation libs.appCompat
-    implementation libs.constraint_layout
-    implementation libs.legacy
-    implementation libs.recycler_view
-
-    // Activity and fragment extensions for kotlin
-    implementation libs.activity
-    implementation libs.fragment
-
-    // Material design
-    implementation libs.material
-
-    // Lifecycle
-    implementation libs.lifecycle_viewmodel
-    implementation libs.lifecycle_livedata
-    implementation libs.lifecycle_runtime
-    implementation libs.lifecycle_extensions
-    implementation libs.lifecycle_vm_state
 
     // Coroutines
     implementation libs.coroutines_core
     implementation libs.coroutines_services
 
-    // Navigation
-    implementation libs.nav_fragment
-    implementation libs.nav_ui
-    implementation libs.nav_syn_fragment
-
     // Dagger Hilt
     implementation libs.hilt
     kapt libs.hilt_compiler_kapt
-    implementation libs.hilt_lifecycle
 
     // Unit testing
     testImplementation libs.junit
@@ -107,13 +72,4 @@ dependencies {
     testImplementation libs.mockito
     testImplementation libs.hilt_test
     kaptTest libs.hilt_kapt_test
-
-    // Android testing
-    androidTestImplementation libs.junit_android_test
-    androidTestImplementation libs.espresso_android_test
-    androidTestImplementation libs.mockito_android_test
-    androidTestImplementation libs.nav_android_test
-    debugImplementation libs.fragment_debug
-    androidTestImplementation libs.hilt_android_test
-    kaptAndroidTest libs.hilt_kapt_android_test
 }

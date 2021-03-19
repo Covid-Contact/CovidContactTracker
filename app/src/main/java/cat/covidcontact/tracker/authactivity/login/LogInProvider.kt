@@ -1,6 +1,6 @@
 package cat.covidcontact.tracker.authactivity.login
 
-import cat.covidcontact.tracker.usecase.login.MakeLogIn
+import cat.covidcontact.usecases.login.MakeLogIn
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

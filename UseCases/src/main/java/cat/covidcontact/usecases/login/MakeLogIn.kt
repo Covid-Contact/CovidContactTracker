@@ -1,7 +1,6 @@
-package cat.covidcontact.tracker.usecase.login
+package cat.covidcontact.usecases.login
 
-import cat.covidcontact.tracker.model.User
-import cat.covidcontact.tracker.usecase.UseCase
+import cat.covidcontact.usecases.UseCase
 
 interface MakeLogIn : UseCase<MakeLogIn.Request, MakeLogIn.Response> {
     data class Request(
@@ -10,6 +9,6 @@ interface MakeLogIn : UseCase<MakeLogIn.Request, MakeLogIn.Response> {
     ) : UseCase.UseCaseRequest
 
     data class Response(
-        val user: User
+        val email: String
     ) : UseCase.UseCaseResponse
 }

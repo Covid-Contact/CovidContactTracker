@@ -1,4 +1,4 @@
-package cat.covidcontact.tracker.model
+package cat.covidcontact.model
 
 class User(
     val email: String,

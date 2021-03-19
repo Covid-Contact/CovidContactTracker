@@ -1,6 +1,6 @@
-package cat.covidcontact.tracker.usecase.signup
+package cat.covidcontact.usecases.signup
 
-import cat.covidcontact.tracker.usecase.UseCase
+import cat.covidcontact.usecases.UseCase
 
 interface MakeSignUp : UseCase<MakeSignUp.Request, MakeSignUp.Response> {
     data class Request(

@@ -1,14 +1,14 @@
 package cat.covidcontact.tracker.authactivity.signup
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import cat.covidcontact.data.UserException
 import cat.covidcontact.tracker.MainCoroutineRule
 import cat.covidcontact.tracker.ScreenState
-import cat.covidcontact.tracker.data.UserException
 import cat.covidcontact.tracker.getAfterLoading
 import cat.covidcontact.tracker.getOrAwaitValue
-import cat.covidcontact.tracker.usecase.UseCaseResult
-import cat.covidcontact.tracker.usecase.signup.MakeSignUp
 import cat.covidcontact.tracker.util.FieldValidator
+import cat.covidcontact.usecases.UseCaseResult
+import cat.covidcontact.usecases.signup.MakeSignUp
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.MatcherAssert.assertThat
