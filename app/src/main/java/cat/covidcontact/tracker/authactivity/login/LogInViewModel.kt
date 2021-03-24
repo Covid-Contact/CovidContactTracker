@@ -22,15 +22,15 @@ class LogInViewModel @Inject constructor(
     val screenState: LiveData<ScreenState>
         get() = _screenState
 
-    private val _anyEmptyField = MutableLiveData(false)
+    private val _anyEmptyField = MutableLiveData<Boolean>()
     val anyEmptyField: LiveData<Boolean>
         get() = _anyEmptyField
 
-    private val _isEmailInvalid = MutableLiveData(false)
+    private val _isEmailInvalid = MutableLiveData<Boolean>()
     val isEmailInvalid: LiveData<Boolean>
         get() = _isEmailInvalid
 
-    private val _isPasswordInvalid = MutableLiveData(false)
+    private val _isPasswordInvalid = MutableLiveData<Boolean>()
     val isPasswordInvalid: LiveData<Boolean>
         get() = _isPasswordInvalid
 

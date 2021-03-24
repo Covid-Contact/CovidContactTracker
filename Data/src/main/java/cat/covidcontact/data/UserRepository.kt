@@ -1,5 +1,7 @@
 package cat.covidcontact.data
 
 interface UserRepository {
-    fun makeLogIn(email: String, password: String): Any
+    suspend fun makeLogIn(email: String, password: String)
+
+    suspend fun makeSignUp(email: String, password: String)
 }

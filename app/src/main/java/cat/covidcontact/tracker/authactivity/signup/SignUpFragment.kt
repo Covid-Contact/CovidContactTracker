@@ -15,7 +15,9 @@ import cat.covidcontact.tracker.extensions.getStringWithParams
 import cat.covidcontact.tracker.extensions.isEmpty
 import cat.covidcontact.tracker.extensions.showError
 import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
     private val viewModel: SignUpViewModel by viewModels()
@@ -40,6 +42,18 @@ class SignUpFragment : Fragment() {
         viewModel.isPasswordInvalid.observe(viewLifecycleOwner, ::invalidPasswordObserver)
         viewModel.arePasswordsEquals.observe(viewLifecycleOwner, ::equalsPasswordObserver)
         viewModel.screenState.observe(viewLifecycleOwner, ::stateObserver)
+
+        binding.txtMakeLogIn.setOnClickListener {
+            viewModel.onChangeToLogIn()
+        }
+
+        binding.btnSignUp.setOnClickListener {
+            val email = binding.signUpEmailLayout.editText?.text.toString()
+            val password = binding.signUpPasswordLayout.editText?.text.toString()
+            val repeatPassword = binding.signUpRepeatPasswordLayout.editText?.text.toString()
+
+            viewModel.onMakeSignUp(email, password, repeatPassword)
+        }
     }
 
     private fun invalidEmailObserver(isInvalid: Boolean) {

@@ -6,6 +6,7 @@ import cat.covidcontact.data.UserRepository
 import cat.covidcontact.usecases.MainCoroutineRule
 import cat.covidcontact.usecases.UseCaseResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
@@ -38,7 +39,22 @@ class MakeLogInImplTest {
     }
 
     @Test
-    fun `use case error`() {
+    fun `no internet makes use case result error`() = runBlockingTest {
+        // When an exception is thrown by the user repository
+        `when`(userRepository.makeLogIn(email, password))
+            .thenThrow(UserException.NoInternetException)
+        val result = makeLogInImpl.execute(MakeLogIn.Request(email, password))
+        verify(userRepository).makeLogIn(email, password)
+
+        // Then the use case returns an error
+        assertThat(result, instanceOf(UseCaseResult.Error::class.java))
+
+        val error = result as UseCaseResult.Error
+        assertThat(error.exception, instanceOf(UserException.NoInternetException::class.java))
+    }
+
+    @Test
+    fun `other error makes use case result error`() = runBlockingTest {
         // When an exception is thrown by the user repository
         `when`(userRepository.makeLogIn(email, password))
             .thenThrow(UserException.OtherError(""))
@@ -47,10 +63,61 @@ class MakeLogInImplTest {
 
         // Then the use case returns an error
         assertThat(result, instanceOf(UseCaseResult.Error::class.java))
+
+        val error = result as UseCaseResult.Error
+        assertThat(error.exception, instanceOf(UserException.OtherError::class.java))
     }
 
     @Test
-    fun `use case success`() {
+    fun `wrong password makes use case result error`() = runBlockingTest {
+        // When an exception is thrown by the user repository
+        `when`(userRepository.makeLogIn(email, password))
+            .thenThrow(UserException.WrongPasswordException)
+        val result = makeLogInImpl.execute(MakeLogIn.Request(email, password))
+        verify(userRepository).makeLogIn(email, password)
+
+        // Then the use case returns an error
+        assertThat(result, instanceOf(UseCaseResult.Error::class.java))
+
+        val error = result as UseCaseResult.Error
+        assertThat(error.exception, instanceOf(UserException.WrongPasswordException::class.java))
+    }
+
+    @Test
+    fun `email not found makes use case result error`() = runBlockingTest {
+        // When an exception is thrown by the user repository
+        `when`(userRepository.makeLogIn(email, password))
+            .thenThrow(UserException.EmailNotFoundException(email))
+        val result = makeLogInImpl.execute(MakeLogIn.Request(email, password))
+        verify(userRepository).makeLogIn(email, password)
+
+        // Then the use case returns an error
+        assertThat(result, instanceOf(UseCaseResult.Error::class.java))
+
+        val error = result as UseCaseResult.Error
+        assertThat(error.exception, instanceOf(UserException.EmailNotFoundException::class.java))
+    }
+
+    @Test
+    fun `email not validated makes use case result error`() = runBlockingTest {
+        // When an exception is thrown by the user repository
+        `when`(userRepository.makeLogIn(email, password))
+            .thenThrow(UserException.EmailNotValidatedException(email))
+        val result = makeLogInImpl.execute(MakeLogIn.Request(email, password))
+        verify(userRepository).makeLogIn(email, password)
+
+        // Then the use case returns an error
+        assertThat(result, instanceOf(UseCaseResult.Error::class.java))
+
+        val error = result as UseCaseResult.Error
+        assertThat(
+            error.exception,
+            instanceOf(UserException.EmailNotValidatedException::class.java)
+        )
+    }
+
+    @Test
+    fun `use case success`() = runBlockingTest {
         // When there is not any exception thrown by the user repository
         val result = makeLogInImpl.execute(MakeLogIn.Request(email, password))
         verify(userRepository).makeLogIn(email, password)

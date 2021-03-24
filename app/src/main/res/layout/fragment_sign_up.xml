@@ -72,7 +72,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignUp"
             style="@style/fullWidthButton"
-            android:text="@string/log_in" />
+            android:text="@string/sign_up" />
 
     </LinearLayout>
 

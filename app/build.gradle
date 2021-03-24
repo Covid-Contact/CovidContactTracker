@@ -71,6 +71,15 @@ dependencies {
     implementation libs.legacy
     implementation libs.recycler_view
 
+    implementation "com.github.kittinunf.result:result:4.0.0"
+    implementation "com.github.kittinunf.result:result-coroutines:4.0.0"
+
+    implementation "com.github.kittinunf.fuel:fuel:2.3.1"
+    implementation "com.github.kittinunf.fuel:fuel-android:2.3.1"
+    implementation "com.github.kittinunf.fuel:fuel-coroutines:2.3.1"
+    implementation "com.github.kittinunf.fuel:fuel-gson:2.3.1"
+    implementation "com.google.code.gson:gson:2.8.6"
+
     // Activity and fragment extensions for kotlin
     implementation libs.activity
     implementation libs.fragment

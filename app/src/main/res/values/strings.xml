@@ -3,12 +3,23 @@
 
     <!-- Common -->
     <string name="not_empty">%1$s cannot be empty</string>
+    <string name="no_internet_title">No internet</string>
+    <string name="no_internet_message">
+        There has been a problem when connecting to the network.
+        Please check your internet connection
+    </string>
+    <string name="other_error_title">Unexpected error</string>
+    <string name="other_error_message">
+        There has been an unexpected error.
+        Please contact the support service
+    </string>
 
     <!-- Authentication -->
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="repeat_password">Repeat password</string>
     <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
     <string name="invalid_email">The email format is invalid</string>
     <string name="not_account">You do not have an account?</string>
     <string name="already_account">You already have an account?</string>
