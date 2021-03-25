@@ -1,11 +1,9 @@
-package cat.covidcontact.tracker.extensions
+package cat.covidcontact.tracker.util.extensions
 
 import android.content.Context
 import android.content.DialogInterface
 import androidx.annotation.StringRes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-
-fun Context.getStringWithParams(id: Int, paramsId: IntArray) = getString(id, paramsId)
 
 fun Context.showDialog(
     title: String,

@@ -1,5 +1,6 @@
 package cat.covidcontact.tracker.util
 
+import cat.covidcontact.tracker.util.fieldvalidator.FieldValidatorImpl
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before

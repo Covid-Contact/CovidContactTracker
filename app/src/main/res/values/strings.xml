@@ -2,7 +2,7 @@
     <string name="app_name">Covid Contact Tracker</string>
 
     <!-- Common -->
-    <string name="not_empty">%1$s cannot be empty</string>
+    <string name="not_empty">%s cannot be empty</string>
     <string name="no_internet_title">No internet</string>
     <string name="no_internet_message">
         There has been a problem when connecting to the network.
@@ -20,8 +20,16 @@
     <string name="repeat_password">Repeat password</string>
     <string name="log_in">Log in</string>
     <string name="sign_up">Sign up</string>
-    <string name="invalid_email">The email format is invalid</string>
+    <string name="invalid_email">The email is invalid</string>
+    <string name="invalid_password">
+        Password should have at least 8 characters and must contain at least:
+        an uppercase letter, an lowercase letter, a digit and a special character
+    </string>
     <string name="not_account">You do not have an account?</string>
     <string name="already_account">You already have an account?</string>
+    <string name="wrong_password_title">Wrong password</string>
+    <string name="wrong_password_message">
+        The password you have introduced does not belong to that email.
+    </string>
 
 </resources>

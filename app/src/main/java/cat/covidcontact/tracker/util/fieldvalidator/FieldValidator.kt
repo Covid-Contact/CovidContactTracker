@@ -1,4 +1,4 @@
-package cat.covidcontact.tracker.util
+package cat.covidcontact.tracker.util.fieldvalidator
 
 interface FieldValidator {
     fun isEmailValid(email: String): Boolean

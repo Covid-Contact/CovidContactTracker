@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cat.covidcontact.data.UserException
 import cat.covidcontact.tracker.ScreenState
-import cat.covidcontact.tracker.UseCaseResultHandler
-import cat.covidcontact.tracker.util.FieldValidator
+import cat.covidcontact.tracker.util.fieldvalidator.FieldValidator
+import cat.covidcontact.tracker.util.handlers.UseCaseResultHandler
 import cat.covidcontact.usecases.signup.MakeSignUp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

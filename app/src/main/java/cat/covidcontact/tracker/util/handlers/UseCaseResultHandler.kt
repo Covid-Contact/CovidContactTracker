@@ -1,13 +1,14 @@
-package cat.covidcontact.tracker
+package cat.covidcontact.tracker.util.handlers
 
 import cat.covidcontact.data.UserException
+import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.usecases.UseCase
 import cat.covidcontact.usecases.UseCaseResult
 
 @Suppress("UNCHECKED_CAST")
 class UseCaseResultHandler<T : UseCase.UseCaseResponse>(
     private val onSuccess: (T) -> ScreenState,
-    private val onFailure: (Exception) -> ScreenState
+    private val onFailure: (Exception) -> ScreenState,
 ) {
 
     fun getScreenState(useCaseResult: UseCaseResult<*>?): ScreenState {

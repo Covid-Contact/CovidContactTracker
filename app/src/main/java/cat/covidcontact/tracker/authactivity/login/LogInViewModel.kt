@@ -3,28 +3,19 @@ package cat.covidcontact.tracker.authactivity.login
 import androidx.lifecycle.*
 import cat.covidcontact.data.UserException
 import cat.covidcontact.tracker.ScreenState
-import cat.covidcontact.tracker.UseCaseResultHandler
-import cat.covidcontact.tracker.util.FieldValidator
+import cat.covidcontact.tracker.util.BaseViewModel
+import cat.covidcontact.tracker.util.fieldvalidator.FieldValidator
+import cat.covidcontact.tracker.util.handlers.UseCaseResultHandler
 import cat.covidcontact.usecases.login.MakeLogIn
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class LogInViewModel @Inject constructor(
     private val makeLogIn: MakeLogIn,
     private val fieldValidator: FieldValidator
-) : ViewModel() {
-
-    private val _screenState = MutableLiveData<ScreenState>(ScreenState.Loading)
-    val screenState: LiveData<ScreenState>
-        get() = _screenState
-
-    private val _anyEmptyField = MutableLiveData<Boolean>()
-    val anyEmptyField: LiveData<Boolean>
-        get() = _anyEmptyField
+) : BaseViewModel() {
 
     private val _isEmailInvalid = MutableLiveData<Boolean>()
     val isEmailInvalid: LiveData<Boolean>
@@ -51,29 +42,21 @@ class LogInViewModel @Inject constructor(
     )
 
     fun onChangeToSignUp() {
-        _screenState.value = LogInState.ChangeToSignUp
+        loadState(LogInState.ChangeToSignUp)
     }
 
     fun onMakeLogIn(email: String, password: String) {
         viewModelScope.launch {
             if (!areParametersValid(email, password)) return@launch
 
-            val result = withContext(Dispatchers.IO) {
-                makeLogIn.execute(MakeLogIn.Request(email, password))
+            executeUseCase(makeLogIn, makeLogInHandler) {
+                MakeLogIn.Request(email, password)
             }
-
-            _screenState.value = makeLogInHandler.getScreenState(result)
         }
     }
 
-    private fun areParametersValid(email: String, password: String): Boolean {
-        if (email.isEmpty() || password.isEmpty()) {
-            _anyEmptyField.value = true
-            return false
-        }
-
-        return onVerifyEmail(email) && onVerifyPassword(password)
-    }
+    private fun areParametersValid(email: String, password: String) =
+        onVerifyEmail(email) and onVerifyPassword(password)
 
     fun onVerifyEmail(email: String): Boolean {
         _isEmailInvalid.value = !fieldValidator.isEmailValid(email)

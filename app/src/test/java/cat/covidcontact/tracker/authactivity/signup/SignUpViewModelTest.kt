@@ -6,7 +6,7 @@ import cat.covidcontact.tracker.MainCoroutineRule
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.getAfterLoading
 import cat.covidcontact.tracker.getOrAwaitValue
-import cat.covidcontact.tracker.util.FieldValidator
+import cat.covidcontact.tracker.util.fieldvalidator.FieldValidator
 import cat.covidcontact.usecases.UseCaseResult
 import cat.covidcontact.usecases.signup.MakeSignUp
 import kotlinx.coroutines.ExperimentalCoroutinesApi

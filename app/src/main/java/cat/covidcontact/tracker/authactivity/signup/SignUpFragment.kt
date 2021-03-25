@@ -11,9 +11,8 @@ import androidx.navigation.fragment.findNavController
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.databinding.FragmentSignUpBinding
-import cat.covidcontact.tracker.extensions.getStringWithParams
-import cat.covidcontact.tracker.extensions.isEmpty
-import cat.covidcontact.tracker.extensions.showError
+import cat.covidcontact.tracker.util.extensions.isEmpty
+import cat.covidcontact.tracker.util.extensions.showError
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -108,7 +107,8 @@ class SignUpFragment : Fragment() {
         vararg args: Int
     ) {
         val msg = if (textInputLayout.isEmpty()) {
-            requireContext().getStringWithParams(id!!, args)
+            //requireContext().getStringWithParams(id!!, args)
+            null
         } else {
             null
         }

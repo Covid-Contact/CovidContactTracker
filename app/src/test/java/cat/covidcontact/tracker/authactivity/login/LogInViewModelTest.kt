@@ -6,7 +6,7 @@ import cat.covidcontact.tracker.MainCoroutineRule
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.getAfterLoading
 import cat.covidcontact.tracker.getOrAwaitValue
-import cat.covidcontact.tracker.util.FieldValidator
+import cat.covidcontact.tracker.util.fieldvalidator.FieldValidator
 import cat.covidcontact.usecases.UseCaseResult
 import cat.covidcontact.usecases.login.MakeLogIn
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -63,15 +63,6 @@ class LogInViewModelTest {
     }
 
     @Test
-    fun `anyEmptyField is false when the email is empty`() = runBlockingTest {
-        // When the onMakeLogIn method is called with an empty email
-        viewModel.onMakeLogIn("", password)
-
-        // Then the anyEmptyField value is true
-        assertThat(viewModel.anyEmptyField.value, `is`(true))
-    }
-
-    @Test
     fun `isEmailInvalid is true when the email is invalid`() = runBlockingTest {
         // Given a field validator that verifies the invalidity of the email
         `when`(fieldValidator.isEmailValid(anyString())).thenReturn(false)
@@ -88,18 +79,8 @@ class LogInViewModelTest {
         // When the onMakeLogIn method is called
         viewModel.onMakeLogIn(email, password)
 
-        // Then the anyEmptyField and isEmailInvalid values are false
-        assertThat(viewModel.anyEmptyField.value, `is`(false))
+        // Then the isEmailInvalid value is false
         assertThat(viewModel.isEmailInvalid.value, `is`(false))
-    }
-
-    @Test
-    fun `anyEmptyField is false when the password is empty`() = runBlockingTest {
-        // When the onMakeLogIn method is called with an empty password
-        viewModel.onMakeLogIn(email, "")
-
-        // Then the anyEmptyField value is true
-        assertThat(viewModel.anyEmptyField.value, `is`(true))
     }
 
     @Test
@@ -119,8 +100,7 @@ class LogInViewModelTest {
         // When the onMakeLogIn method is called
         viewModel.onMakeLogIn(email, password)
 
-        // Then the anyEmptyField and isPasswordInvalid values are false
-        assertThat(viewModel.anyEmptyField.value, `is`(false))
+        // Then the isPasswordInvalid value is false
         assertThat(viewModel.isPasswordInvalid.value, `is`(false))
     }
 

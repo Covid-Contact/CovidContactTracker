@@ -1,5 +1,7 @@
 package cat.covidcontact.tracker.util
 
+import cat.covidcontact.tracker.util.fieldvalidator.FieldValidator
+import cat.covidcontact.tracker.util.fieldvalidator.FieldValidatorImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
