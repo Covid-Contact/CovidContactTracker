@@ -67,15 +67,6 @@ class SignUpViewModelTest {
     }
 
     @Test
-    fun `anyEmptyField is false when the email is empty`() = runBlockingTest {
-        // When the onMakeSignUp method is called with an empty email
-        viewModel.onMakeSignUp("", password, password)
-
-        // Then the anyEmptyField value is true
-        assertThat(viewModel.anyEmptyField.value, `is`(true))
-    }
-
-    @Test
     fun `isEmailInvalid is true when the email is invalid`() = runBlockingTest {
         // Given a field validator that verifies the invalidity of the email
         `when`(fieldValidator.isEmailValid(anyString())).thenReturn(false)
@@ -93,17 +84,7 @@ class SignUpViewModelTest {
         viewModel.onMakeSignUp(email, password, password)
 
         // Then the anyEmptyField and isEmailInvalid values are false
-        assertThat(viewModel.anyEmptyField.value, `is`(false))
         assertThat(viewModel.isEmailInvalid.value, `is`(false))
-    }
-
-    @Test
-    fun `anyEmptyField is false when the password is empty`() = runBlockingTest {
-        // When the onMakeSignUp method is called with an empty password
-        viewModel.onMakeSignUp(email, "", "")
-
-        // Then the anyEmptyField value is true
-        assertThat(viewModel.anyEmptyField.value, `is`(true))
     }
 
     @Test
@@ -116,16 +97,6 @@ class SignUpViewModelTest {
 
         // Then the isPasswordInvalid value is true
         assertThat(viewModel.isPasswordInvalid.value, `is`(true))
-    }
-
-    @Test
-    fun `anyEmptyField and isPasswordInvalid are false if password is correct`() = runBlockingTest {
-        // When the onMakeSignUp method is called
-        viewModel.onMakeSignUp(email, password, password)
-
-        // Then the anyEmptyField and isPasswordInvalid values are false
-        assertThat(viewModel.anyEmptyField.value, `is`(false))
-        assertThat(viewModel.isPasswordInvalid.value, `is`(false))
     }
 
     @Test
@@ -207,10 +178,10 @@ class SignUpViewModelTest {
         val state = viewModel.screenState.getAfterLoading()
         assertThat(
             state,
-            Matchers.instanceOf(SignUpState.VerifyCodeSent::class.java)
+            Matchers.instanceOf(SignUpState.VerifyEmailSent::class.java)
         )
 
-        val verifyCodeSent = state as SignUpState.VerifyCodeSent
+        val verifyCodeSent = state as SignUpState.VerifyEmailSent
         assertThat(verifyCodeSent.email, `is`(email))
     }
 }

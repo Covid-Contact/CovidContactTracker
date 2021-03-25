@@ -25,6 +25,7 @@
         Password should have at least 8 characters and must contain at least:
         an uppercase letter, an lowercase letter, a digit and a special character
     </string>
+    <string name="passwords_not_equals">The passwords do not match</string>
     <string name="not_account">You do not have an account?</string>
     <string name="already_account">You already have an account?</string>
     <string name="wrong_password_title">Wrong password</string>

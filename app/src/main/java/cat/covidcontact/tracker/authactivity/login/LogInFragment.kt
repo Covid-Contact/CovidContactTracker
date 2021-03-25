@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.databinding.FragmentLogInBinding
-import cat.covidcontact.tracker.util.extensions.*
+import cat.covidcontact.tracker.util.extensions.observeInvalidField
+import cat.covidcontact.tracker.util.extensions.observeScreenState
+import cat.covidcontact.tracker.util.extensions.showDialog
 import cat.covidcontact.tracker.util.handlers.ScreenStateHandler
-import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -61,8 +61,8 @@ class LogInFragment : Fragment() {
         }
 
         btnLogIn.setOnClickListener {
-            val email = binding.logInEmailLayout.editText?.text.toString()
-            val password = binding.logInPasswordLayout.editText?.text.toString()
+            val email = logInEmailLayout.editText?.text.toString()
+            val password = logInPasswordLayout.editText?.text.toString()
 
             viewModel.onMakeLogIn(email, password)
 
@@ -97,29 +97,5 @@ class LogInFragment : Fragment() {
             viewModel::onVerifyPassword
         )
         screenState.observeScreenState(viewLifecycleOwner, screenStateHandler)
-    }
-
-    private fun emptyFieldObserver(isEmpty: Boolean) {
-        if (isEmpty) {
-            showErrorInLayout(binding.logInEmailLayout, R.string.not_empty, R.string.email)
-            showErrorInLayout(binding.logInPasswordLayout, R.string.not_empty, R.string.password)
-        } else {
-            showErrorInLayout(binding.logInEmailLayout)
-            showErrorInLayout(binding.logInPasswordLayout)
-        }
-    }
-
-    private fun showErrorInLayout(
-        textInputLayout: TextInputLayout,
-        @StringRes messageId: Int? = null,
-        @StringRes fieldId: Int? = null
-    ) {
-        val msg = if (textInputLayout.isEmpty()) {
-            null
-        } else {
-            null
-        }
-
-        textInputLayout.showError(msg)
     }
 }
