@@ -23,7 +23,7 @@ class ScreenStateHandler<T : ScreenState>(
 
     fun executeStateAction(state: ScreenState) {
         context?.let {
-            it.cancelLoadingDialog()
+            cancelLoadingDialog()
             when (state) {
                 ScreenState.Loading -> onLoading(it)
                 ScreenState.NoInternet -> onNoInternet(it)
@@ -31,6 +31,6 @@ class ScreenStateHandler<T : ScreenState>(
                 ScreenState.ExecutingUseCase -> onExecutingUseCase(it)
                 else -> action(it, state as T)
             }
-        } ?: throw Exception("Please do not forget to call super.onCreateView()")
+        } ?: throw ContextNotSetException()
     }
 }

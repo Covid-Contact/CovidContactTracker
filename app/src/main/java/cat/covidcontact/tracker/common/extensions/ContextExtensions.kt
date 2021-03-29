@@ -65,6 +65,10 @@ fun Context.showLoadingDialog() {
     }
 }
 
-fun Context.cancelLoadingDialog() {
-    loadingDialog?.dismiss()
+fun cancelLoadingDialog() {
+    loadingDialog?.let {
+        if (it.isShowing) {
+            it.dismiss()
+        }
+    }
 }
