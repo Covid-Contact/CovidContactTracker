@@ -32,5 +32,11 @@
     <string name="wrong_password_message">
         The password you have introduced does not belong to that email.
     </string>
+    <string name="email_already_registered_title">Email already registered</string>
+    <string name="email_already_registered_message">
+        The email %s is already registered
+    </string>
+    <string name="verify_email_title">Verify email</string>
+    <string name="verify_email_message">An email has been sent to %s</string>
 
 </resources>

@@ -11,7 +11,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@Module(includes = [RepositoryProviders::class])
+@Module(includes = [DataProviders::class])
 @InstallIn(SingletonComponent::class)
 class UseCaseProviders {
 

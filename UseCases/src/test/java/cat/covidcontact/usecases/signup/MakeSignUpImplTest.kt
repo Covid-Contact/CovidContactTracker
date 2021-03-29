@@ -1,6 +1,7 @@
 package cat.covidcontact.usecases.signup
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import cat.covidcontact.data.CommonException
 import cat.covidcontact.data.UserException
 import cat.covidcontact.data.UserRepository
 import cat.covidcontact.usecases.MainCoroutineRule
@@ -44,7 +45,7 @@ class MakeSignUpImplTest {
     fun `no internet makes use case result error`() = runBlockingTest {
         // When an exception is thrown by the user repository
         `when`(userRepository.makeSignUp(email, password))
-            .thenThrow(UserException.NoInternetException)
+            .thenThrow(CommonException.NoInternetException)
         val result = makeSignUpImpl.execute(MakeSignUp.Request(email, password))
         verify(userRepository).makeSignUp(email, password)
 
@@ -54,7 +55,7 @@ class MakeSignUpImplTest {
         val error = result as UseCaseResult.Error
         assertThat(
             error.exception,
-            instanceOf(UserException.NoInternetException::class.java)
+            instanceOf(CommonException.NoInternetException::class.java)
         )
     }
 
@@ -62,7 +63,7 @@ class MakeSignUpImplTest {
     fun `other error makes use case result error`() = runBlockingTest {
         // When an exception is thrown by the user repository
         `when`(userRepository.makeSignUp(email, password))
-            .thenThrow(UserException.OtherError(""))
+            .thenThrow(CommonException.OtherError)
         val result = makeSignUpImpl.execute(MakeSignUp.Request(email, password))
         verify(userRepository).makeSignUp(email, password)
 
@@ -72,7 +73,7 @@ class MakeSignUpImplTest {
         val error = result as UseCaseResult.Error
         assertThat(
             error.exception,
-            instanceOf(UserException.OtherError::class.java)
+            instanceOf(CommonException.OtherError::class.java)
         )
     }
 

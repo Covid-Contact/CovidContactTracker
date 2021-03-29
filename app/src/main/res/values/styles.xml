@@ -7,6 +7,24 @@
         <item name="colorAccent">@color/primaryLightColor</item>
     </style>
 
+    <style name="dialog" parent="Base.Theme.MaterialComponents.Light.Dialog">
+        <item name="buttonBarPositiveButtonStyle">@style/materialAlertPositiveButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/materialAlertNegativeButton</item>
+        <item name="buttonBarNeutralButtonStyle">@style/materialAlertNeutralButton</item>
+    </style>
+
+    <style name="materialAlertPositiveButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <style name="materialAlertNegativeButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="materialAlertNeutralButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
     <style name="AuthText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

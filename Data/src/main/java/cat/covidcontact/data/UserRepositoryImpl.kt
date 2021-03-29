@@ -1,12 +1,12 @@
 package cat.covidcontact.data
 
-import android.util.Log
-import cat.covidcontact.data.services.HttpRequest
-import cat.covidcontact.data.services.Server
-import cat.covidcontact.data.services.UserService
+import cat.covidcontact.data.controllers.CovidContactBaseController
+import cat.covidcontact.data.controllers.HttpStatus
+import cat.covidcontact.data.controllers.UserController
+import cat.covidcontact.model.ApplicationUser
 
 class UserRepositoryImpl(
-    private val httpRequest: HttpRequest
+    private val userController: UserController
 ) : UserRepository {
 
     override suspend fun makeLogIn(email: String, password: String) {
@@ -22,17 +22,11 @@ class UserRepositoryImpl(
     }
 
     override suspend fun makeSignUp(email: String, password: String) {
-        val result = httpRequest.make(
-            Server.userService.makeSignUp(
-                UserService.EmailPassword(email, password)
-            )
-        )
-
-        if (result.isSuccessful) {
-            Log.i("Test", "makeSignUp: CORRECT")
-        } else {
-            Log.i("Test", "makeSignUp: ERROR")
-            Log.i("Test", "makeSignUp: ${result.failure}")
+        val serverResponse = userController.makeSignUp(ApplicationUser(email, password))
+        when (serverResponse.response.statusCode) {
+            CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
+            HttpStatus.BAD_REQUEST -> throw UserException.EmailAlreadyRegistered(email)
+            else -> CommonException.OtherError
         }
     }
 }
