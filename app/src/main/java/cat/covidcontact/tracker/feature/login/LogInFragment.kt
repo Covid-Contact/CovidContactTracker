@@ -5,18 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.hideKeyboard
+import cat.covidcontact.tracker.common.extensions.navigate
 import cat.covidcontact.tracker.common.extensions.observeInvalidField
 import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentLogInBinding
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.Serializable
 
 @AndroidEntryPoint
 class LogInFragment : BaseFragment() {
@@ -26,19 +23,42 @@ class LogInFragment : BaseFragment() {
     override val screenStateHandler = ScreenStateHandler<LogInState> { context, state ->
         when (state) {
             LogInState.ChangeToSignUp -> {
-                val action = LogInFragmentDirections.actionLogInFragmentToSignUpFragment()
-                findNavController().navigate(action)
+                navigateToSignUp()
             }
             is LogInState.EmailNotFound -> {
+                context.showDialog(
+                    title = context.getString(R.string.email_not_found_title),
+                    message = context.getString(R.string.email_not_found_message, state.email),
+                    positiveButtonText = context.getString(R.string.sign_up),
+                    positiveButtonAction = { _, _ -> navigateToSignUp() }
+                )
             }
             LogInState.WrongPassword -> {
-                context.showDialog(R.string.wrong_password_title, R.string.wrong_password_message)
+                context.showDialog(
+                    title = R.string.wrong_password_title,
+                    message = R.string.wrong_password_message
+                )
             }
             is LogInState.EmailNotValidated -> {
+                context.showDialog(
+                    title = context.getString(R.string.email_not_validated_title),
+                    message = context.getString(R.string.email_not_validated_message, state.email)
+                )
             }
             is LogInState.SuccessLogIn -> {
+                navigateToMain()
             }
         }
+    }
+
+    private fun navigateToMain() {
+        val action = LogInFragmentDirections.actionLogInFragmentToMainFragment()
+        navigate(action)
+    }
+
+    private fun navigateToSignUp() {
+        val action = LogInFragmentDirections.actionLogInFragmentToSignUpFragment()
+        navigate(action)
     }
 
     override fun onCreateView(
@@ -85,18 +105,4 @@ class LogInFragment : BaseFragment() {
             viewModel::onVerifyPassword
         )
     }
-
-    data class UserPassword(
-        @SerializedName("username")
-        @Expose
-        val username: String,
-        @SerializedName("password")
-        @Expose
-        val password: String
-    ) : Serializable
-
-    data class UserEmail(
-        var username: String,
-        var password: String
-    ) : Serializable
 }

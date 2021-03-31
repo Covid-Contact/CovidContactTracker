@@ -6,4 +6,5 @@ object HttpStatus {
     const val ACCEPTED = 204
     const val BAD_REQUEST = 400
     const val NOT_FOUND = 404
+    const val SERVER_ERROR = 500
 }

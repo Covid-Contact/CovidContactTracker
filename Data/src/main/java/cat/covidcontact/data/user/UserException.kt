@@ -1,4 +1,4 @@
-package cat.covidcontact.data
+package cat.covidcontact.data.user
 
 sealed class UserException(msg: String) : RuntimeException(msg) {
     object WrongPasswordException : UserException("The password is wrong")

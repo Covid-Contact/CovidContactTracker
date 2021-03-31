@@ -49,7 +49,7 @@ fun LiveData<ScreenState>.getAfterLoading(
     val latch = CountDownLatch(1)
     val observer: Observer<ScreenState> = object : Observer<ScreenState> {
         override fun onChanged(value: ScreenState?) {
-            if (value !is ScreenState.Loading) {
+            if (value !is ScreenState.Loading && value !is ScreenState.ExecutingUseCase) {
                 data = value
                 latch.countDown()
                 this@getAfterLoading.removeObserver(this)

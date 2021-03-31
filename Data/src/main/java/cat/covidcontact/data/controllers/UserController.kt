@@ -7,4 +7,6 @@ abstract class UserController : CovidContactBaseController() {
         get() = super.url + "/user"
 
     abstract suspend fun makeSignUp(applicationUser: ApplicationUser): ServerResponse
+    abstract suspend fun isUserValidated(email: String): ServerResponse
+    abstract suspend fun makeLogIn(applicationUser: ApplicationUser): ServerResponse
 }

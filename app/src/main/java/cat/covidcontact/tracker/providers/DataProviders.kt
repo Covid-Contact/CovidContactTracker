@@ -1,9 +1,9 @@
 package cat.covidcontact.tracker.providers
 
-import cat.covidcontact.data.UserRepository
-import cat.covidcontact.data.UserRepositoryImpl
 import cat.covidcontact.data.controllers.UserController
 import cat.covidcontact.data.controllers.UserControllerImpl
+import cat.covidcontact.data.user.UserRepository
+import cat.covidcontact.data.user.UserRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

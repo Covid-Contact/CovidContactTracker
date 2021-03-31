@@ -1,4 +1,4 @@
-package cat.covidcontact.data
+package cat.covidcontact.data.user
 
 interface UserRepository {
     suspend fun makeLogIn(email: String, password: String)

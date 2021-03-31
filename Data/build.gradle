@@ -59,19 +59,14 @@ dependencies {
     implementation libs.hilt
     kapt libs.hilt_compiler_kapt
 
-    // Retrofit and moshi
-    implementation libs.retrofit
-    implementation libs.moshi
-    implementation libs.moshi_converter
-
-    implementation "com.github.kittinunf.result:result:4.0.0"
-    implementation "com.github.kittinunf.result:result-coroutines:4.0.0"
-
-    implementation "com.github.kittinunf.fuel:fuel:2.3.1"
-    implementation "com.github.kittinunf.fuel:fuel-android:2.3.1"
-    implementation "com.github.kittinunf.fuel:fuel-coroutines:2.3.1"
-    implementation "com.github.kittinunf.fuel:fuel-gson:2.3.1"
-    implementation "com.google.code.gson:gson:2.8.6"
+    // Internet connection
+    implementation libs.result
+    implementation libs.result_coroutines
+    implementation libs.gson
+    implementation libs.fuel
+    implementation libs.fuel_android
+    implementation libs.fuel_coroutines
+    implementation libs.fuel_gson
 
     // Unit testing
     testImplementation libs.junit

@@ -1,7 +1,6 @@
 package cat.covidcontact.tracker.feature.signup
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
-import cat.covidcontact.tracker.common.extensions.hideKeyboard
-import cat.covidcontact.tracker.common.extensions.observeInvalidField
-import cat.covidcontact.tracker.common.extensions.observeScreenState
-import cat.covidcontact.tracker.common.extensions.showDialog
+import cat.covidcontact.tracker.common.extensions.*
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentSignUpBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,16 +28,19 @@ class SignUpFragment : BaseFragment() {
             }
             is SignUpState.EmailAlreadyRegistered -> {
                 context.showDialog(
-                    context.getString(R.string.email_already_registered_title),
-                    context.getString(R.string.email_already_registered_message, state.email),
+                    title = context.getString(R.string.email_already_registered_title),
+                    message = context.getString(
+                        R.string.email_already_registered_message,
+                        state.email
+                    ),
                     positiveButtonText = context.getString(R.string.log_in),
                     positiveButtonAction = { _, _ -> navigateToLogIn() }
                 )
             }
             is SignUpState.VerifyEmailSent -> {
                 context.showDialog(
-                    context.getString(R.string.verify_email_title),
-                    context.getString(R.string.verify_email_message, state.email),
+                    title = context.getString(R.string.verify_email_title),
+                    message = context.getString(R.string.verify_email_message, state.email),
                     positiveButtonText = context.getString(R.string.log_in),
                     positiveButtonAction = { _, _ -> navigateToLogIn() }
                 )
@@ -104,7 +103,6 @@ class SignUpFragment : BaseFragment() {
 
     private fun navigateToLogIn() {
         val action = SignUpFragmentDirections.actionSignUpFragmentToLogInFragment()
-        Log.i("Test", "navigateToLogIn: ${findNavController().currentDestination?.id}")
-        findNavController().navigate(action)
+        navigate(action)
     }
 }

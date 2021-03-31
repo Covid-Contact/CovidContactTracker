@@ -1,6 +1,6 @@
 package cat.covidcontact.tracker.providers
 
-import cat.covidcontact.data.UserRepository
+import cat.covidcontact.data.user.UserRepository
 import cat.covidcontact.usecases.login.MakeLogIn
 import cat.covidcontact.usecases.login.MakeLogInImpl
 import cat.covidcontact.usecases.signup.MakeSignUp

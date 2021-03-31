@@ -2,7 +2,7 @@ package cat.covidcontact.tracker.feature.signup
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import cat.covidcontact.data.CommonException
-import cat.covidcontact.data.UserException
+import cat.covidcontact.data.user.UserException
 import cat.covidcontact.tracker.MainCoroutineRule
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.fieldvalidator.FieldValidator

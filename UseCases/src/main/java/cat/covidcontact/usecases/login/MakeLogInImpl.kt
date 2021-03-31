@@ -1,6 +1,6 @@
 package cat.covidcontact.usecases.login
 
-import cat.covidcontact.data.UserRepository
+import cat.covidcontact.data.user.UserRepository
 import cat.covidcontact.usecases.runUseCase
 import javax.inject.Inject
 

@@ -3,7 +3,7 @@ package cat.covidcontact.tracker.feature.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import cat.covidcontact.data.UserException
+import cat.covidcontact.data.user.UserException
 import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.fieldvalidator.FieldValidator
 import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler

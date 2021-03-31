@@ -38,5 +38,13 @@
     </string>
     <string name="verify_email_title">Verify email</string>
     <string name="verify_email_message">An email has been sent to %s</string>
+    <string name="email_not_found_title">Email not found</string>
+    <string name="email_not_found_message">
+        The email %s is not associated with any account.
+    </string>
+    <string name="email_not_validated_title">Email not validated</string>
+    <string name="email_not_validated_message">
+        Please check your %s inbox to verify the account.
+    </string>
 
 </resources>

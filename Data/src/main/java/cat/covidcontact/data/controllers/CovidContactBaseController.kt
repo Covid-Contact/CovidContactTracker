@@ -9,7 +9,6 @@ import com.github.kittinunf.fuel.httpPut
 
 abstract class CovidContactBaseController {
     open val url = "http://covidcontact.cat:8080"
-    var token: String? = null
 
     suspend fun get(
         url: String,
@@ -65,5 +64,6 @@ abstract class CovidContactBaseController {
 
     companion object {
         const val NO_INTERNET = -1
+        var token: String? = null
     }
 }
