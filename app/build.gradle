@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'com.google.gms.google-services'
     id 'androidx.navigation.safeargs.kotlin'
     id 'org.jetbrains.dokka'
     id 'kotlin-kapt'
@@ -60,57 +59,61 @@ hilt {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:$androidXCoreVersion"
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
-    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    implementation project(":UseCases")
+    implementation project(":Data")
+    implementation project(":Model")
+
+    implementation libs.kotlin_std
+    implementation libs.kotlin_reflect
+    implementation libs.core
+    implementation libs.appCompat
+    implementation libs.constraint_layout
+    implementation libs.legacy
+    implementation libs.recycler_view
 
     // Activity and fragment extensions for kotlin
-    implementation "androidx.activity:activity-ktx:$activityKotlinVersion"
-    implementation "androidx.fragment:fragment-ktx:$fragmentKotlinVersion"
+    implementation libs.activity
+    implementation libs.fragment
 
     // Material design
-    implementation "com.google.android.material:material:$materialDesignVersion"
+    implementation libs.material
 
     // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion"
+    implementation libs.lifecycle_viewmodel
+    implementation libs.lifecycle_livedata
+    implementation libs.lifecycle_runtime
+    implementation libs.lifecycle_extensions
+    implementation libs.lifecycle_vm_state
 
     // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutinesVersion"
+    implementation libs.coroutines_core
+    implementation libs.coroutines_services
 
     // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigationVersion"
+    implementation libs.nav_fragment
+    implementation libs.nav_ui
+    implementation libs.nav_syn_fragment
 
     // Dagger Hilt
-    implementation "com.google.dagger:hilt-android:$daggerHiltVersion"
-    kapt "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltLifecycleVersion"
-    kapt "androidx.hilt:hilt-compiler:$daggerHiltLifecycleVersion"
+    implementation libs.hilt
+    kapt libs.hilt_compiler_kapt
+    implementation libs.hilt_lifecycle
 
     // Unit testing
-    testImplementation "junit:junit:$junitVersion"
-    testImplementation "androidx.arch.core:core-testing:$archVersion"
-    testImplementation "org.hamcrest:hamcrest:$hamcrestVersion"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
-    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
-    testImplementation "com.google.dagger:hilt-android-testing:$daggerHiltVersion"
-    kaptTest "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
+    testImplementation libs.junit
+    testImplementation libs.core_testing
+    testImplementation libs.hamcrest
+    testImplementation libs.coroutines_test
+    testImplementation libs.mockito
+    testImplementation libs.hilt_test
+    kaptTest libs.hilt_kapt_test
 
     // Android testing
-    androidTestImplementation "androidx.test.ext:junit:$androidTestJunitVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
-    androidTestImplementation "androidx.navigation:navigation-testing:$navigationVersion"
-    debugImplementation "androidx.fragment:fragment-testing:$fragmentKotlinVersion"
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$daggerHiltVersion"
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
+    androidTestImplementation libs.junit_android_test
+    androidTestImplementation libs.espresso_android_test
+    androidTestImplementation libs.mockito_android_test
+    androidTestImplementation libs.nav_android_test
+    debugImplementation libs.fragment_debug
+    androidTestImplementation libs.hilt_android_test
+    kaptAndroidTest libs.hilt_kapt_android_test
 }

@@ -1,3 +1,50 @@
 <resources>
-    <string name="app_name">CovidContactTracker</string>
+    <string name="app_name">Covid Contact Tracker</string>
+
+    <!-- Common -->
+    <string name="not_empty">%s cannot be empty</string>
+    <string name="no_internet_title">No internet</string>
+    <string name="no_internet_message">
+        There has been a problem when connecting to the network.
+        Please check your internet connection
+    </string>
+    <string name="other_error_title">Unexpected error</string>
+    <string name="other_error_message">
+        There has been an unexpected error.
+        Please contact the support service
+    </string>
+
+    <!-- Authentication -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="invalid_email">The email is invalid</string>
+    <string name="invalid_password">
+        Password should have at least 8 characters and must contain at least:
+        an uppercase letter, an lowercase letter, a digit and a special character
+    </string>
+    <string name="passwords_not_equals">The passwords do not match</string>
+    <string name="not_account">You do not have an account?</string>
+    <string name="already_account">You already have an account?</string>
+    <string name="wrong_password_title">Wrong password</string>
+    <string name="wrong_password_message">
+        The password you have introduced does not belong to that email.
+    </string>
+    <string name="email_already_registered_title">Email already registered</string>
+    <string name="email_already_registered_message">
+        The email %s is already registered
+    </string>
+    <string name="verify_email_title">Verify email</string>
+    <string name="verify_email_message">An email has been sent to %s</string>
+    <string name="email_not_found_title">Email not found</string>
+    <string name="email_not_found_message">
+        The email %s is not associated with any account.
+    </string>
+    <string name="email_not_validated_title">Email not validated</string>
+    <string name="email_not_validated_message">
+        Please check your %s inbox to verify the account.
+    </string>
+
 </resources>
