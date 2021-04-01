@@ -7,19 +7,15 @@ class User(
     var studies: String? = null,
     var occupation: String? = null,
     var marriage: String? = null,
-    var children: Int? = null
+    var children: Int? = null,
+    var isVaccinated: Boolean? = null
 ) {
-    var authToken: String? = null
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-
         other as User
-
         if (email != other.email) return false
         if (username != other.username) return false
-
         return true
     }
 
