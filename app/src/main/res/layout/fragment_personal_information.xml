@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/app_padding"
+    tools:context=".feature.userinfo.fragments.PersonalInformationFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/personalInformationTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:gravity="center"
+            android:text="@string/personal_information"
+            android:textColor="@color/primaryColor"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/personalInformationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/personalInformationTitle">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cityLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/city"
+                android:inputType="none"
+                app:endIconDrawable="@drawable/ic_gps"
+                app:endIconMode="custom"
+                app:helperText="">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/studiesLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/studies"
+                android:inputType="text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/occupationLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/occupation"
+                android:inputType="text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/marriageLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/marriage"
+                android:inputType="text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/childrenLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/children"
+                android:inputType="number">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPersonalInformationPrevious"
+            style="@style/icon_button"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="64dp"
+            app:icon="@drawable/ic_arrow_previous"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPersonalInformationNext"
+            style="@style/icon_button"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="64dp"
+            app:icon="@drawable/ic_arrow_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

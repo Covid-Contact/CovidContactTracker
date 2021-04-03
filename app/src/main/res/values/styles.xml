@@ -53,4 +53,20 @@
     <style name="fullWidthTextInputLayout" parent="textInputLayout">
         <item name="android:layout_width">match_parent</item>
     </style>
+
+    <style name="exposed_dropdown_menu" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="full_width_exposed_dropdown_menu" parent="exposed_dropdown_menu">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="icon_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+    </style>
 </resources>

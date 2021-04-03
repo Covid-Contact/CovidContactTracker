@@ -6,6 +6,7 @@ import cat.covidcontact.data.controllers.CovidContactBaseController
 import cat.covidcontact.data.controllers.HttpStatus
 import cat.covidcontact.data.controllers.UserController
 import cat.covidcontact.model.ApplicationUser
+import cat.covidcontact.model.User
 
 class UserRepositoryImpl(
     private val userController: UserController
@@ -49,5 +50,9 @@ class UserRepositoryImpl(
             HttpStatus.BAD_REQUEST -> throw UserException.EmailAlreadyRegistered(email)
             else -> throw CommonException.OtherError
         }
+    }
+
+    override suspend fun getUserData(email: String): User {
+        TODO("Not yet implemented")
     }
 }

@@ -45,4 +45,5 @@ dependencies {
     testImplementation libs.hamcrest
     testImplementation libs.coroutines_test
     testImplementation libs.mockito
+    testImplementation libs.mockk
 }

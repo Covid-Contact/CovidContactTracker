@@ -4,17 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import cat.covidcontact.tracker.common.BaseFragment
+import cat.covidcontact.tracker.common.extensions.navigate
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : BaseFragment() {
     private lateinit var binding: FragmentMainBinding
 
-    override val viewModel: MainViewModel by viewModels()
+    override val viewModel: MainViewModel by activityViewModels()
     override val screenStateHandler = ScreenStateHandler<MainState> { context, state ->
-
+        when (state) {
+            is MainState.UserInfoNotFound -> {
+            }
+            is MainState.UserInfoFound -> {
+            }
+        }
     }
 
     override fun onCreateView(
@@ -27,5 +35,13 @@ class MainFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.observe()
+
+        val action = MainFragmentDirections.actionMainFragmentToWelcomeFragment()
+        navigate(action)
+    }
+
+    private fun MainViewModel.observe() {
+
     }
 }
