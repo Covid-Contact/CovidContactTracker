@@ -1,6 +1,11 @@
 package cat.covidcontact.tracker.common.extensions
 
+import android.content.Context
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import androidx.annotation.LayoutRes
 import androidx.core.widget.addTextChangedListener
+import cat.covidcontact.tracker.R
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
@@ -51,4 +56,22 @@ fun TextInputLayout.makeRequired(isRequired: Boolean) {
             else -> it
         }
     }
+}
+
+inline fun <reified T : Enum<T>> TextInputLayout.setExposedMenuItems(
+    context: Context,
+    @LayoutRes layoutId: Int = R.layout.list_item
+) {
+    val values = enumValues<T>()
+    val adapter = ArrayAdapter(context, layoutId, values)
+    (editText as? AutoCompleteTextView)?.setAdapter(adapter)
+}
+
+fun TextInputLayout.setExposedMenuItems(
+    context: Context,
+    values: List<String>,
+    @LayoutRes layoutId: Int = R.layout.list_item
+) {
+    val adapter = ArrayAdapter(context, layoutId, values)
+    (editText as? AutoCompleteTextView)?.setAdapter(adapter)
 }

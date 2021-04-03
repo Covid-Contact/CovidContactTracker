@@ -50,6 +50,9 @@
         <action
             android:id="@+id/action_welcomeFragment_to_basicUserInfoFragment"
             app:destination="@id/basicUserInfoFragment" />
+        <argument
+            android:name="email"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/basicUserInfoFragment"

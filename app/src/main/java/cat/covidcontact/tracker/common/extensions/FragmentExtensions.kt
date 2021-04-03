@@ -8,7 +8,6 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import cat.covidcontact.tracker.R
 import com.google.android.material.datepicker.MaterialDatePicker
 
 fun Fragment.hideKeyboard() {
@@ -41,7 +40,6 @@ fun Fragment.showCalendarPicker(
         .setTitleText(title)
         .setSelection(selection)
         .setInputMode(inputMode)
-        .setTheme(R.style.AppTheme)
         .build()
         .also {
             it.addOnPositiveButtonClickListener(onPositiveButtonClicked)

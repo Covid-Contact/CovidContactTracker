@@ -6,7 +6,7 @@ import cat.covidcontact.data.controllers.CovidContactBaseController
 import cat.covidcontact.data.controllers.HttpStatus
 import cat.covidcontact.data.controllers.UserController
 import cat.covidcontact.model.ApplicationUser
-import cat.covidcontact.model.User
+import cat.covidcontact.model.user.User
 
 class UserRepositoryImpl(
     private val userController: UserController

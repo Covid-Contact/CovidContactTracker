@@ -1,6 +1,6 @@
 package cat.covidcontact.tracker.feature.main
 
-import cat.covidcontact.model.User
+import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.ScreenState
 
 sealed class MainState : ScreenState() {

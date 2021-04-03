@@ -1,8 +1,8 @@
 package cat.covidcontact.tracker.feature.userinfo
 
 import androidx.navigation.NavDirections
-import cat.covidcontact.model.Gender
-import cat.covidcontact.model.User
+import cat.covidcontact.model.user.Gender
+import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.allNotNull

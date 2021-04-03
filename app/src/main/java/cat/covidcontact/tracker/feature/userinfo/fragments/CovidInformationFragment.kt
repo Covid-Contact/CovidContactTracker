@@ -5,10 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.extensions.addOnTextChanged
+import cat.covidcontact.tracker.common.extensions.setExposedMenuItems
 import cat.covidcontact.tracker.databinding.FragmentCovidInformationBinding
 import cat.covidcontact.tracker.feature.userinfo.UserInfoFragment
 
@@ -35,14 +34,11 @@ class CovidInformationFragment : UserInfoFragment() {
             getString(R.string.no),
             getString(R.string.decline_to_answer)
         )
-        val positiveAdapter = ArrayAdapter(requireContext(), R.layout.list_item, options)
-        val vaccinatedAdapter = ArrayAdapter(requireContext(), R.layout.list_item, options)
+        positiveLayout.setExposedMenuItems(requireContext(), options)
+        vaccinatedLayout.setExposedMenuItems(requireContext(), options)
 
-        (positiveLayout.editText as? AutoCompleteTextView)?.setAdapter(positiveAdapter)
-        (vaccinatedLayout.editText as? AutoCompleteTextView)?.setAdapter(vaccinatedAdapter)
-
-        positiveLayout.editText?.setText(positiveAdapter.getItem(2))
-        vaccinatedLayout.editText?.setText(vaccinatedAdapter.getItem(2))
+        /*positiveLayout.editText?.setText(positiveAdapter.getItem(2))
+        vaccinatedLayout.editText?.setText(vaccinatedAdapter.getItem(2))*/
 
         viewModel.currentUser?.let { user ->
             positiveLayout.addOnTextChanged { text ->

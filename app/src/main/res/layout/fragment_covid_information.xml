@@ -37,12 +37,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/positiveLayout"
                 style="@style/full_width_exposed_dropdown_menu"
-                android:hint="@string/being_positive"
-                android:inputType="none">
+                android:hint="@string/being_positive">
 
                 <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/edit_text"
                     android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -54,12 +52,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/vaccinatedLayout"
                 style="@style/full_width_exposed_dropdown_menu"
-                android:hint="@string/being_vaccinated"
-                android:inputType="none">
+                android:hint="@string/being_vaccinated">
 
                 <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/edit_text"
                     android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +65,7 @@
             android:id="@+id/btnCovid19InformationPrevious"
             style="@style/icon_button"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="@dimen/user_info_button"
             app:icon="@drawable/ic_arrow_previous"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -78,7 +74,7 @@
             android:id="@+id/btnConfirmCreation"
             style="@style/button"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="@dimen/user_info_button"
             android:text="@string/confirm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

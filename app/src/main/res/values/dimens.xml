@@ -2,4 +2,5 @@
 <resources>
     <dimen name="app_padding">20dp</dimen>
     <dimen name="space">20dp</dimen>
+    <dimen name="user_info_button">32dp</dimen>
 </resources>

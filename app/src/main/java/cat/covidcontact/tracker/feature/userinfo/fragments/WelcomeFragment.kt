@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import cat.covidcontact.tracker.databinding.FragmentWelcomeBinding
 import cat.covidcontact.tracker.feature.userinfo.UserInfoFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class WelcomeFragment : UserInfoFragment() {
     private lateinit var binding: FragmentWelcomeBinding
+    private val args: WelcomeFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +26,7 @@ class WelcomeFragment : UserInfoFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.bind()
+        viewModel.inputEmail = args.email
     }
 
     private fun FragmentWelcomeBinding.bind() {

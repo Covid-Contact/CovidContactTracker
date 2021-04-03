@@ -1,4 +1,4 @@
-package cat.covidcontact.model
+package cat.covidcontact.model.user
 
 import java.io.Serializable
 
@@ -9,8 +9,8 @@ class User(
     val birthDate: Long,
     var city: String? = null,
     var studies: String? = null,
-    var occupation: String? = null,
-    var marriage: String? = null,
+    var occupation: Occupation? = null,
+    var marriage: Marriage? = null,
     var children: Int? = null,
     var hasBeenPositive: Boolean? = null,
     var isVaccinated: Boolean? = null

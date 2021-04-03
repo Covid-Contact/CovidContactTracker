@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import cat.covidcontact.data.CommonException
 import cat.covidcontact.data.user.UserException
 import cat.covidcontact.data.user.UserRepository
-import cat.covidcontact.model.Gender
-import cat.covidcontact.model.User
+import cat.covidcontact.model.user.Gender
+import cat.covidcontact.model.user.User
 import cat.covidcontact.usecases.MainCoroutineRule
 import cat.covidcontact.usecases.UseCaseResult
 import io.mockk.coEvery

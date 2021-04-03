@@ -1,6 +1,6 @@
 package cat.covidcontact.data.user
 
-import cat.covidcontact.model.User
+import cat.covidcontact.model.user.User
 
 interface UserRepository {
     suspend fun makeLogIn(email: String, password: String)

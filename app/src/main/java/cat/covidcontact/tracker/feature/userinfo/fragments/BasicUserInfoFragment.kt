@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import cat.covidcontact.model.Gender
+import cat.covidcontact.model.user.Gender
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.extensions.*
 import cat.covidcontact.tracker.databinding.FragmentBasicUserInfoBinding
@@ -32,9 +30,7 @@ class BasicUserInfoFragment : UserInfoFragment() {
     }
 
     private fun FragmentBasicUserInfoBinding.bind() {
-        val genders = Gender.values().map { it.name }
-        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, genders)
-        (genderLayout.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+        genderLayout.setExposedMenuItems<Gender>(requireContext())
 
         birthDateLayout.setEndIconOnClickListener {
             showCalendarPicker(
@@ -47,10 +43,19 @@ class BasicUserInfoFragment : UserInfoFragment() {
             )
         }
 
-        usernameLayout.runWhenTextChanged(::enableNextButton)
+        usernameLayout.addOnTextChanged { text ->
+            text?.let { viewModel.inputUsername = if (it.isNotEmpty()) it.toString() else null }
+            enableNextButton()
+        }
         usernameLayout.makeRequired(true)
 
-        genderLayout.runWhenTextChanged(::enableNextButton)
+        genderLayout.addOnTextChanged { text ->
+            text?.let {
+                viewModel.inputGender =
+                    if (it.isNotEmpty()) Gender.valueOf(it.toString()) else null
+            }
+            enableNextButton()
+        }
         genderLayout.makeRequired(true)
 
         birthDateLayout.runWhenTextChanged(::enableNextButton)
