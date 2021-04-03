@@ -9,6 +9,6 @@ class GetUserDataImpl @Inject constructor(
 ) : GetUserData {
     override suspend fun execute(request: GetUserData.Request) = runUseCase {
         val userInfo = userRepository.getUserData(request.email)
-        GetUserData.Result(userInfo)
+        GetUserData.Response(userInfo)
     }
 }

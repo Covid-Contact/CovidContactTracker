@@ -10,6 +10,7 @@ import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.getAfterLoading
 import cat.covidcontact.usecases.UseCaseResult
 import cat.covidcontact.usecases.getuserdata.GetUserData
+import cat.covidcontact.usecases.registerDevice.RegisterDevice
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
@@ -32,6 +33,9 @@ class MainViewModelTest {
     @MockK
     private lateinit var getUserData: GetUserData
 
+    @MockK
+    private lateinit var registerDevice: RegisterDevice
+
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
@@ -41,7 +45,8 @@ class MainViewModelTest {
     @Before
     fun setUp() {
         getUserData = mockk()
-        viewModel = MainViewModel(getUserData)
+        registerDevice = mockk()
+        viewModel = MainViewModel(getUserData, registerDevice)
     }
 
     @Test
@@ -80,7 +85,7 @@ class MainViewModelTest {
     @Test
     fun `when the user is found in the system then the UserInfoFound state is loaded`() {
         coEvery { getUserData.execute(any()) } returns
-            UseCaseResult.Success(GetUserData.Result(user))
+            UseCaseResult.Success(GetUserData.Response(user))
 
         viewModel.onGetCurrentUser(email)
         val state = viewModel.screenState.getAfterLoading()

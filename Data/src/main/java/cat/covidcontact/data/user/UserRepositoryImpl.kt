@@ -6,6 +6,7 @@ import cat.covidcontact.data.controllers.CovidContactBaseController
 import cat.covidcontact.data.controllers.HttpStatus
 import cat.covidcontact.data.controllers.UserController
 import cat.covidcontact.model.ApplicationUser
+import cat.covidcontact.model.Device
 import cat.covidcontact.model.user.User
 
 class UserRepositoryImpl(
@@ -57,6 +58,10 @@ class UserRepositoryImpl(
     }
 
     override suspend fun addUserData(user: User): String {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun registerUserDevice(email: String, device: Device) {
         TODO("Not yet implemented")
     }
 }

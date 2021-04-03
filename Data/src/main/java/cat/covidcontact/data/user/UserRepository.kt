@@ -1,5 +1,6 @@
 package cat.covidcontact.data.user
 
+import cat.covidcontact.model.Device
 import cat.covidcontact.model.user.User
 
 interface UserRepository {
@@ -10,4 +11,6 @@ interface UserRepository {
     suspend fun getUserData(email: String): User
 
     suspend fun addUserData(user: User): String
+
+    suspend fun registerUserDevice(email: String, device: Device)
 }
