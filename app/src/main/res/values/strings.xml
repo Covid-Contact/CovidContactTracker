@@ -53,10 +53,19 @@
 
     <!-- User info -->
     <string name="welcome">Welcome to</string>
-    <string name="fill_information">Please fill the following fields about you</string>
-    <string name="basic_information">Basic information</string>
-    <string name="personal_information">Personal information</string>
-    <string name="COVID19_information">COVID-19 information</string>
+    <string name="next_screens_information">
+        In the next screens you will be presented with some fields to be filled with information
+        about you.
+    </string>
+    <string name="private_information">
+        The only public information will be your username, which cannot be changed later.
+    </string>
+    <string name="required_fields">
+        Only the fields marked with an asterisk (*) are required.
+    </string>
+    <string name="basic_information">Basic Information</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="COVID19_information">COVID-19 Information</string>
     <string name="select_birth_date">Select birth date</string>
 
     <string name="username">Username</string>
@@ -69,8 +78,5 @@
     <string name="children">Children</string>
     <string name="being_positive">Have you been positive?</string>
     <string name="being_vaccinated">Have you been vaccinated?</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

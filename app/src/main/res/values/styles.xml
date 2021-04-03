@@ -58,6 +58,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:inputType">text</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
         <item name="singleLine">true</item>
     </style>
 
@@ -75,5 +76,44 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
+    </style>
+
+    <style name="user_info_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/user_info_title_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/user_info_title_size</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="app_title" parent="user_info_title">
+        <item name="android:textSize">@dimen/title</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:text">@string/app_name</item>
+    </style>
+
+    <style name="full_color_constraint_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/primaryColor</item>
+    </style>
+
+    <style name="welcome_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:textSize">@dimen/welcome_text</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="round_linear_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/app_padding</item>
+        <item name="android:layout_marginTop">@dimen/round_linear_layout_margin</item>
+        <item name="android:background">@drawable/linear_layout_corner</item>
     </style>
 </resources>
