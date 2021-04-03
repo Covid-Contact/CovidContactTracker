@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.extensions.addOnTextChanged
 import cat.covidcontact.tracker.common.extensions.setExposedMenuItems
+import cat.covidcontact.tracker.common.extensions.setText
 import cat.covidcontact.tracker.databinding.FragmentCovidInformationBinding
 import cat.covidcontact.tracker.feature.userinfo.UserInfoFragment
 
@@ -28,6 +30,10 @@ class CovidInformationFragment : UserInfoFragment() {
         binding.bind()
     }
 
+    override fun setUpExistingData(user: User) {
+        binding.bindUserInfo(user)
+    }
+
     private fun FragmentCovidInformationBinding.bind() {
         val options = listOf(
             getString(R.string.yes),
@@ -36,9 +42,6 @@ class CovidInformationFragment : UserInfoFragment() {
         )
         positiveLayout.setExposedMenuItems(requireContext(), options)
         vaccinatedLayout.setExposedMenuItems(requireContext(), options)
-
-        /*positiveLayout.editText?.setText(positiveAdapter.getItem(2))
-        vaccinatedLayout.editText?.setText(vaccinatedAdapter.getItem(2))*/
 
         viewModel.currentUser?.let { user ->
             positiveLayout.addOnTextChanged { text ->
@@ -60,6 +63,18 @@ class CovidInformationFragment : UserInfoFragment() {
 
         btnCovid19InformationPrevious.setOnClickListener {
             viewModel.onPreviousFragment()
+        }
+    }
+
+    private fun FragmentCovidInformationBinding.bindUserInfo(user: User) {
+        user.hasBeenPositive?.let { hasBeenPositive ->
+            val textId = if (hasBeenPositive) R.string.yes else R.string.no
+            positiveLayout.setText(textId)
+        }
+
+        user.isVaccinated?.let { isVaccinated ->
+            val textId = if (isVaccinated) R.string.yes else R.string.no
+            vaccinatedLayout.setText(textId)
         }
     }
 }

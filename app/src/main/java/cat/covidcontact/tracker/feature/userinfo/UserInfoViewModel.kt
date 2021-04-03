@@ -1,17 +1,21 @@
 package cat.covidcontact.tracker.feature.userinfo
 
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
 import cat.covidcontact.model.user.Gender
 import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.allNotNull
+import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler
+import cat.covidcontact.usecases.adduserdata.AddUserData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class UserInfoViewModel @Inject constructor(
-
+    private val addUserData: AddUserData
 ) : BaseViewModel() {
     private lateinit var user: User
     val currentUser: User?
@@ -22,6 +26,11 @@ class UserInfoViewModel @Inject constructor(
     var inputGender: Gender? = null
     var inputBirthDate: Long? = null
 
+    private val addUserHandler = UseCaseResultHandler<AddUserData.Response>(
+        onSuccess = { UserInfoState.UserInfoCreated(it.email) },
+        onFailure = { ScreenState.Nothing }
+    )
+
     fun onCheckBasicInfo() = allNotNull(inputEmail, inputUsername, inputGender, inputBirthDate)
 
     fun onBasicUserInfoIntroduced(navDirections: NavDirections) {
@@ -30,7 +39,10 @@ class UserInfoViewModel @Inject constructor(
         val gender = inputGender ?: return
         val birthDate = inputBirthDate ?: return
 
-        user = User(email, username, gender, birthDate)
+        if (currentUser == null) {
+            user = User(email, username, gender, birthDate)
+        }
+
         onNextFragment(navDirections)
     }
 
@@ -43,10 +55,10 @@ class UserInfoViewModel @Inject constructor(
     }
 
     fun onUserCreated() {
-
-    }
-
-    fun onLoadNothing() {
-        loadState(ScreenState.Nothing)
+        viewModelScope.launch {
+            executeUseCase(addUserData, addUserHandler) {
+                AddUserData.Request(user)
+            }
+        }
     }
 }

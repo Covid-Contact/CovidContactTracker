@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cat.covidcontact.model.user.Gender
+import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.extensions.*
 import cat.covidcontact.tracker.databinding.FragmentBasicUserInfoBinding
@@ -29,6 +30,8 @@ class BasicUserInfoFragment : UserInfoFragment() {
         binding.bind()
     }
 
+    override fun setUpExistingData(user: User) {}
+
     private fun FragmentBasicUserInfoBinding.bind() {
         genderLayout.setExposedMenuItems<Gender>(requireContext())
 
@@ -43,12 +46,14 @@ class BasicUserInfoFragment : UserInfoFragment() {
             )
         }
 
+        viewModel.inputUsername?.let { usernameLayout.setText(it) }
         usernameLayout.addOnTextChanged { text ->
             text?.let { viewModel.inputUsername = if (it.isNotEmpty()) it.toString() else null }
             enableNextButton()
         }
         usernameLayout.makeRequired(true)
 
+        viewModel.inputGender?.let { genderLayout.setText(it.name) }
         genderLayout.addOnTextChanged { text ->
             text?.let {
                 viewModel.inputGender =
@@ -58,6 +63,7 @@ class BasicUserInfoFragment : UserInfoFragment() {
         }
         genderLayout.makeRequired(true)
 
+        viewModel.inputBirthDate?.let { birthDateLayout.showDate(it) }
         birthDateLayout.runWhenTextChanged(::enableNextButton)
         birthDateLayout.makeRequired(true)
 
@@ -70,6 +76,8 @@ class BasicUserInfoFragment : UserInfoFragment() {
         btnBasicInformationPrevious.setOnClickListener {
             viewModel.onPreviousFragment()
         }
+
+        enableNextButton()
     }
 
     private fun enableNextButton() {

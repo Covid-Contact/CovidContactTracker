@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.databinding.FragmentWelcomeBinding
 import cat.covidcontact.tracker.feature.userinfo.UserInfoFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +29,8 @@ class WelcomeFragment : UserInfoFragment() {
         binding.bind()
         viewModel.inputEmail = args.email
     }
+
+    override fun setUpExistingData(user: User) {}
 
     private fun FragmentWelcomeBinding.bind() {
         btnWelcomeNext.setOnClickListener {

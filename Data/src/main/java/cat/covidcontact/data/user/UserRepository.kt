@@ -8,4 +8,6 @@ interface UserRepository {
     suspend fun makeSignUp(email: String, password: String)
 
     suspend fun getUserData(email: String): User
+
+    suspend fun addUserData(user: User): String
 }

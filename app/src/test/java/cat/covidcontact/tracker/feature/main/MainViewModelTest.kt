@@ -9,7 +9,7 @@ import cat.covidcontact.tracker.MainCoroutineRule
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.getAfterLoading
 import cat.covidcontact.usecases.UseCaseResult
-import cat.covidcontact.usecases.userinfo.GetUserData
+import cat.covidcontact.usecases.getuserdata.GetUserData
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk

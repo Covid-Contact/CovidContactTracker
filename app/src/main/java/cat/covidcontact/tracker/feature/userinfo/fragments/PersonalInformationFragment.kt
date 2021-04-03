@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import cat.covidcontact.model.user.Marriage
 import cat.covidcontact.model.user.Occupation
+import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.common.extensions.addOnTextChanged
 import cat.covidcontact.tracker.common.extensions.setExposedMenuItems
+import cat.covidcontact.tracker.common.extensions.setText
 import cat.covidcontact.tracker.databinding.FragmentPersonalInformationBinding
 import cat.covidcontact.tracker.feature.userinfo.UserInfoFragment
 
@@ -26,6 +28,10 @@ class PersonalInformationFragment : UserInfoFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.bind()
+    }
+
+    override fun setUpExistingData(user: User) {
+        binding.bindUserInfo(user)
     }
 
     private fun FragmentPersonalInformationBinding.bind() {
@@ -65,5 +71,13 @@ class PersonalInformationFragment : UserInfoFragment() {
         btnPersonalInformationPrevious.setOnClickListener {
             viewModel.onPreviousFragment()
         }
+    }
+
+    private fun FragmentPersonalInformationBinding.bindUserInfo(user: User) {
+        user.city?.let { cityLayout.setText(it) }
+        user.studies?.let { studiesLayout.setText(it) }
+        user.occupation?.let { occupationLayout.setText(it.name) }
+        user.marriage?.let { marriageLayout.setText(it.name) }
+        user.children?.let { childrenLayout.setText(it.toString()) }
     }
 }

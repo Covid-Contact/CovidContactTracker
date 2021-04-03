@@ -1,4 +1,4 @@
-package cat.covidcontact.usecases.userinfo
+package cat.covidcontact.usecases.getuserdata
 
 import cat.covidcontact.model.user.User
 import cat.covidcontact.usecases.UseCase

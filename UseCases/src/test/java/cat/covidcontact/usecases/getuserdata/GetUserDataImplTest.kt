@@ -1,4 +1,4 @@
-package cat.covidcontact.usecases.userinfo
+package cat.covidcontact.usecases.getuserdata
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import cat.covidcontact.data.CommonException

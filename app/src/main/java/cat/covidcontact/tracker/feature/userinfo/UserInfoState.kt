@@ -7,4 +7,5 @@ sealed class UserInfoState : ScreenState() {
     class LoadNextFragment(val navDirections: NavDirections) : UserInfoState()
     object LoadPreviousFragment : UserInfoState()
     class UserInfoIntroduced(val navDirections: NavDirections) : UserInfoState()
+    class UserInfoCreated(val email: String) : UserInfoState()
 }

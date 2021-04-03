@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
 import androidx.core.widget.addTextChangedListener
 import cat.covidcontact.tracker.R
 import com.google.android.material.textfield.TextInputLayout
@@ -65,6 +66,12 @@ inline fun <reified T : Enum<T>> TextInputLayout.setExposedMenuItems(
     val values = enumValues<T>()
     val adapter = ArrayAdapter(context, layoutId, values)
     (editText as? AutoCompleteTextView)?.setAdapter(adapter)
+
+    setOnFocusChangeListener { v, hasFocus ->
+        if (hasFocus) {
+            setText("")
+        }
+    }
 }
 
 fun TextInputLayout.setExposedMenuItems(
@@ -74,4 +81,12 @@ fun TextInputLayout.setExposedMenuItems(
 ) {
     val adapter = ArrayAdapter(context, layoutId, values)
     (editText as? AutoCompleteTextView)?.setAdapter(adapter)
+}
+
+fun TextInputLayout.setText(text: String) {
+    editText?.setText(text)
+}
+
+fun TextInputLayout.setText(@StringRes textId: Int) {
+    editText?.setText(textId)
 }

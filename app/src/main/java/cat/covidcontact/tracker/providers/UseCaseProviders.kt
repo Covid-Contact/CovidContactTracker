@@ -1,12 +1,14 @@
 package cat.covidcontact.tracker.providers
 
 import cat.covidcontact.data.user.UserRepository
+import cat.covidcontact.usecases.adduserdata.AddUserData
+import cat.covidcontact.usecases.adduserdata.AddUserDataImpl
+import cat.covidcontact.usecases.getuserdata.GetUserData
+import cat.covidcontact.usecases.getuserdata.GetUserDataImpl
 import cat.covidcontact.usecases.login.MakeLogIn
 import cat.covidcontact.usecases.login.MakeLogInImpl
 import cat.covidcontact.usecases.signup.MakeSignUp
 import cat.covidcontact.usecases.signup.MakeSignUpImpl
-import cat.covidcontact.usecases.userinfo.GetUserData
-import cat.covidcontact.usecases.userinfo.GetUserDataImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,4 +36,10 @@ class UseCaseProviders {
     fun provideGetUserInfo(
         userRepository: UserRepository,
     ): GetUserData = GetUserDataImpl(userRepository)
+
+    @Provides
+    @Singleton
+    fun provideAddUserInfo(
+        userRepository: UserRepository
+    ): AddUserData = AddUserDataImpl(userRepository)
 }

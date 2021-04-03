@@ -55,4 +55,8 @@ class UserRepositoryImpl(
     override suspend fun getUserData(email: String): User {
         TODO("Not yet implemented")
     }
+
+    override suspend fun addUserData(user: User): String {
+        TODO("Not yet implemented")
+    }
 }

@@ -5,7 +5,7 @@ import cat.covidcontact.data.user.UserException
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler
-import cat.covidcontact.usecases.userinfo.GetUserData
+import cat.covidcontact.usecases.getuserdata.GetUserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

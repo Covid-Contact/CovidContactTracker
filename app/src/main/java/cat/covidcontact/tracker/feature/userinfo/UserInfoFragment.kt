@@ -1,6 +1,9 @@
 package cat.covidcontact.tracker.feature.userinfo
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.activityViewModels
+import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.navigate
 import cat.covidcontact.tracker.common.extensions.navigateUp
@@ -16,8 +19,10 @@ abstract class UserInfoFragment : BaseFragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        viewModel.onLoadNothing()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.currentUser?.let { setUpExistingData(it) }
     }
+
+    abstract fun setUpExistingData(user: User)
 }
