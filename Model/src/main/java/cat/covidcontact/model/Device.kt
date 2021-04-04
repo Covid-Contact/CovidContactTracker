@@ -1,12 +1,12 @@
 package cat.covidcontact.model
 
-import java.security.MessageDigest
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class Device(
-    macAddress: String,
+data class Device(
+    @SerializedName("id")
+    val id: String,
+
+    @SerializedName("name")
     val name: String? = null
-) {
-    val id = MessageDigest.getInstance("SHA-512")
-        .digest(macAddress.toByteArray())
-        .fold("") { str, byte -> str + "%02x".format(byte) }
-}
+) : Serializable

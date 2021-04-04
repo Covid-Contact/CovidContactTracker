@@ -35,7 +35,6 @@ class WelcomeFragment : UserInfoFragment() {
     private fun FragmentWelcomeBinding.bind() {
         btnWelcomeNext.setOnClickListener {
             val action = WelcomeFragmentDirections
-
                 .actionWelcomeFragmentToBasicUserInfoFragment()
             viewModel.onNextFragment(action)
         }

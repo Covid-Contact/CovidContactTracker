@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                style="@style/user_info_title"
+                style="@style/screen_title"
                 android:layout_marginTop="0dp"
                 android:text="@string/welcome" />
 
@@ -58,23 +58,10 @@
 
         </LinearLayout>
 
-        <!--<TextView
-            android:id="@+id/txtFillInfo"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:gravity="center"
-            android:text="@string/fill_information"
-            android:textColor="@color/primaryColor"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/welcomeTitleLayout" />-->
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnWelcomeNext"
             style="@style/icon_button"
-            android:layout_marginBottom="@dimen/user_info_button"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
             app:icon="@drawable/ic_arrow_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,7 +1,6 @@
 package cat.covidcontact.tracker.feature.userinfo.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,7 +57,7 @@ class CovidInformationFragment : UserInfoFragment() {
         }
 
         btnConfirmCreation.setOnClickListener {
-            Log.i("Test", "bind: ${viewModel.currentUser}")
+            viewModel.onUserCreated()
         }
 
         btnCovid19InformationPrevious.setOnClickListener {

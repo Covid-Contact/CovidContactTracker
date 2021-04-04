@@ -2,7 +2,8 @@
 <resources>
     <dimen name="app_padding">20dp</dimen>
     <dimen name="space">20dp</dimen>
-    <dimen name="user_info_button">32dp</dimen>
+    <dimen name="auth_text">16sp</dimen>
+    <dimen name="button_bottom_margin">32dp</dimen>
     <dimen name="user_info_title_margin">64dp</dimen>
     <dimen name="user_info_title_size">28sp</dimen>
     <dimen name="layout_corner_radius">24dp</dimen>

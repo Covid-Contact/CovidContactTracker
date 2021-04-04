@@ -60,10 +60,15 @@ abstract class CovidContactBaseController {
         return ServerResponse(request, response, result)
     }
 
-    private fun getAuthHeader(isAuthenticated: Boolean) = emptyMap<String, String>()
+    private fun getAuthHeader(isAuthenticated: Boolean): Map<String, Any> {
+        return token?.let {
+            if (isAuthenticated) mapOf(AUTH_HEADER to it) else emptyMap()
+        } ?: emptyMap()
+    }
 
     companion object {
         const val NO_INTERNET = -1
+        const val AUTH_HEADER = "Authorization"
         var token: String? = null
     }
 }

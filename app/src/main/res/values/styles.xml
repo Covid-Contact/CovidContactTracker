@@ -29,8 +29,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/auth_text</item>
         <item name="android:textColor">@color/primaryColor</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
     <style name="button">
@@ -38,6 +39,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="backgroundTint">@color/primaryColor</item>
         <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="fontFamily">@font/roboto_medium</item>
     </style>
 
     <style name="fullWidthButton" parent="button">
@@ -78,7 +80,7 @@
         <item name="iconPadding">0dp</item>
     </style>
 
-    <style name="user_info_title">
+    <style name="screen_title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/user_info_title_margin</item>
@@ -88,7 +90,7 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
-    <style name="app_title" parent="user_info_title">
+    <style name="app_title" parent="screen_title">
         <item name="android:textSize">@dimen/title</item>
         <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:text">@string/app_name</item>

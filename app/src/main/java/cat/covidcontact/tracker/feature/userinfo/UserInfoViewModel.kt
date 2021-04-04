@@ -57,7 +57,7 @@ class UserInfoViewModel @Inject constructor(
     fun onUserCreated() {
         viewModelScope.launch {
             executeUseCase(addUserData, addUserHandler) {
-                AddUserData.Request(user)
+                AddUserData.Request(currentUser!!)
             }
         }
     }

@@ -10,7 +10,7 @@
 
         <TextView
             android:id="@+id/covidInformationTitle"
-            style="@style/user_info_title"
+            style="@style/screen_title"
             android:text="@string/COVID19_information"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
             android:id="@+id/btnCovid19InformationPrevious"
             style="@style/icon_button"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="@dimen/user_info_button"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
             app:icon="@drawable/ic_arrow_previous"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -63,7 +63,7 @@
             android:id="@+id/btnConfirmCreation"
             style="@style/button"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="@dimen/user_info_button"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
             android:text="@string/confirm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

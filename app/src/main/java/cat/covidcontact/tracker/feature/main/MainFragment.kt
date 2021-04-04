@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import cat.covidcontact.model.Device
 import cat.covidcontact.tracker.common.BaseFragment
+import cat.covidcontact.tracker.common.extensions.generateDeviceId
 import cat.covidcontact.tracker.common.extensions.navigate
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentMainBinding
@@ -30,10 +32,14 @@ class MainFragment : BaseFragment() {
             }
             is MainState.UserInfoFound -> {
                 val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-                val device = Device(bluetoothAdapter.address, bluetoothAdapter.name)
+                val device = Device(
+                    bluetoothAdapter.address.generateDeviceId(),
+                    bluetoothAdapter.name
+                )
                 viewModel.onRegisterDevice(state.user, device)
             }
             MainState.DeviceRegistered -> {
+                Toast.makeText(requireContext(), "Done", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -48,10 +54,6 @@ class MainFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.observe()
-    }
-
-    private fun MainViewModel.observe() {
-
+        viewModel.onGetCurrentUser(args.email)
     }
 }

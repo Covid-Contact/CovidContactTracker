@@ -8,6 +8,7 @@ import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.navigate
 import cat.covidcontact.tracker.common.extensions.navigateUp
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
+import cat.covidcontact.tracker.feature.userinfo.fragments.CovidInformationFragmentDirections
 
 abstract class UserInfoFragment : BaseFragment() {
     override val viewModel: UserInfoViewModel by activityViewModels()
@@ -16,6 +17,11 @@ abstract class UserInfoFragment : BaseFragment() {
             is UserInfoState.LoadNextFragment -> navigate(state.navDirections)
             UserInfoState.LoadPreviousFragment -> navigateUp()
             is UserInfoState.UserInfoIntroduced -> navigate(state.navDirections)
+            is UserInfoState.UserInfoCreated -> {
+                val action = CovidInformationFragmentDirections
+                    .actionCovidInformationFragmentToMainFragment(state.email)
+                navigate(action)
+            }
         }
     }
 
