@@ -1,4 +1,4 @@
-package cat.covidcontact.tracker.common
+package cat.covidcontact.tracker.providers
 
 import cat.covidcontact.tracker.common.fieldvalidator.FieldValidator
 import cat.covidcontact.tracker.common.fieldvalidator.FieldValidatorImpl
@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class CommonProvider {
+class CommonProviders {
 
     @Provides
     @Singleton

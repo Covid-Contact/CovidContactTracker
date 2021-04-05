@@ -35,7 +35,7 @@ class UseCaseProviders {
 
     @Provides
     @Singleton
-    fun provideGetUserInfo(
+    fun provideGetUserData(
         userRepository: UserRepository,
     ): GetUserData = GetUserDataImpl(userRepository)
 
