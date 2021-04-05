@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.handlers.InvalidFieldHandler
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 
 fun <T : ScreenState> LiveData<ScreenState>.observeScreenState(
@@ -27,5 +28,14 @@ fun LiveData<Boolean>.observeInvalidField(
     observe(lifecycleOwner) { isInvalid ->
         handler.isBeingChecked = isInvalid
         textInputLayout.showErrorIf(isInvalid, errorMessage)
+    }
+}
+
+fun LiveData<Boolean>.observerButtonEnabled(
+    lifecycleOwner: LifecycleOwner,
+    button: MaterialButton
+) {
+    observe(lifecycleOwner) { isEnabled ->
+        button.isEnabled = isEnabled
     }
 }

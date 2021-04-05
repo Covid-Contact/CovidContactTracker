@@ -25,4 +25,9 @@ abstract class BaseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.screenState.observeScreenState(viewLifecycleOwner, screenStateHandler)
     }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.onLoadNothing()
+    }
 }

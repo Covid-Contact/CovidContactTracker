@@ -105,6 +105,7 @@ dependencies {
     testImplementation libs.hamcrest
     testImplementation libs.coroutines_test
     testImplementation libs.mockito
+    testImplementation libs.mockk
     testImplementation libs.hilt_test
     kaptTest libs.hilt_kapt_test
 
@@ -112,6 +113,7 @@ dependencies {
     androidTestImplementation libs.junit_android_test
     androidTestImplementation libs.espresso_android_test
     androidTestImplementation libs.mockito_android_test
+    androidTestImplementation libs.mockk_android_test
     androidTestImplementation libs.nav_android_test
     debugImplementation libs.fragment_debug
     androidTestImplementation libs.hilt_android_test

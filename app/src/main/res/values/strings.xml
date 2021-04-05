@@ -2,6 +2,10 @@
     <string name="app_name">Covid Contact Tracker</string>
 
     <!-- Common -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="decline_to_answer">Decline to answer</string>
+    <string name="confirm">Confirm</string>
     <string name="not_empty">%s cannot be empty</string>
     <string name="no_internet_title">No internet</string>
     <string name="no_internet_message">
@@ -46,5 +50,33 @@
     <string name="email_not_validated_message">
         Please check your %s inbox to verify the account.
     </string>
+
+    <!-- User info -->
+    <string name="welcome">Welcome to</string>
+    <string name="next_screens_information">
+        In the next screens you will be presented with some fields to be filled with information
+        about you.
+    </string>
+    <string name="private_information">
+        The only public information will be your username, which cannot be changed later.
+    </string>
+    <string name="required_fields">
+        Only the fields marked with an asterisk (*) are required.
+    </string>
+    <string name="basic_information">Basic Information</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="COVID19_information">COVID-19 Information</string>
+    <string name="select_birth_date">Select birth date</string>
+
+    <string name="username">Username</string>
+    <string name="gender">Gender</string>
+    <string name="birth_date">Birth date</string>
+    <string name="city">City</string>
+    <string name="studies">Studies</string>
+    <string name="occupation">Occupation</string>
+    <string name="marriage">Marriage</string>
+    <string name="children">Children</string>
+    <string name="being_positive">Have you been positive?</string>
+    <string name="being_vaccinated">Have you been vaccinated?</string>
 
 </resources>

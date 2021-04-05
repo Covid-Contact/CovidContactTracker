@@ -46,13 +46,13 @@ class LogInFragment : BaseFragment() {
                 )
             }
             is LogInState.SuccessLogIn -> {
-                navigateToMain()
+                navigateToMain(state.email)
             }
         }
     }
 
-    private fun navigateToMain() {
-        val action = LogInFragmentDirections.actionLogInFragmentToMainFragment()
+    private fun navigateToMain(email: String) {
+        val action = LogInFragmentDirections.actionLogInFragmentToMainFragment(email)
         navigate(action)
     }
 

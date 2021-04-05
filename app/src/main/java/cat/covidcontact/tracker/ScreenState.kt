@@ -5,4 +5,5 @@ abstract class ScreenState {
     object NoInternet : ScreenState()
     object OtherError : ScreenState()
     object ExecutingUseCase : ScreenState()
+    object Nothing : ScreenState()
 }

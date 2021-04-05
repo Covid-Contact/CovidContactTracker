@@ -39,10 +39,14 @@ dependencies {
     implementation libs.kotlin_std
     implementation libs.kotlin_reflect
 
+    // Internet
+    implementation libs.gson
+
     // Unit testing
     testImplementation libs.junit
     testImplementation libs.core_testing
     testImplementation libs.hamcrest
     testImplementation libs.coroutines_test
     testImplementation libs.mockito
+    testImplementation libs.mockk
 }
