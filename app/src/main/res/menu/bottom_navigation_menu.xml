@@ -13,9 +13,9 @@
         android:title="@string/search_contact_networks_bottom_nav" />
 
     <item
-        android:id="@+id/settingsFragment"
+        android:id="@+id/profileFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/settings_bottom_nav" />
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profile_bottom_nav" />
 
 </menu>

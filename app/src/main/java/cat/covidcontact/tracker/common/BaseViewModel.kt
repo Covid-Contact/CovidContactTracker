@@ -21,9 +21,12 @@ abstract class BaseViewModel : ViewModel() {
     protected suspend fun <I : UseCase.UseCaseRequest, O : UseCase.UseCaseResponse> executeUseCase(
         useCase: UseCase<I, O>,
         useCaseResultHandler: UseCaseResultHandler<O>,
+        isExecutingUseCaseStateLoad: Boolean = true,
         prepareInput: () -> I
     ) {
-        loadState(ScreenState.ExecutingUseCase)
+        if (isExecutingUseCaseStateLoad) {
+            loadState(ScreenState.ExecutingUseCase)
+        }
 
         val input = prepareInput()
         val result = withContext(Dispatchers.IO) {

@@ -1,11 +1,11 @@
-package cat.covidcontact.tracker.feature.settings
+package cat.covidcontact.tracker.feature.profile
 
 import cat.covidcontact.tracker.common.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor(
+class ProfileViewModel @Inject constructor(
 
 ) : BaseViewModel() {
 

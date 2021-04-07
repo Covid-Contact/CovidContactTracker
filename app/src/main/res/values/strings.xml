@@ -82,6 +82,6 @@
     <!-- Main fragment -->
     <string name="contact_networks_bottom_nav">Contact Networks</string>
     <string name="search_contact_networks_bottom_nav">Search</string>
-    <string name="settings_bottom_nav">Settings</string>
+    <string name="profile_bottom_nav">Profile</string>
 
 </resources>

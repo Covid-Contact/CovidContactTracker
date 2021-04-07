@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
@@ -47,7 +46,6 @@ class MainFragment : BaseFragment() {
             }
             MainState.DeviceRegistered -> {
                 binding.bind()
-                Toast.makeText(requireContext(), "Done", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -75,7 +73,7 @@ class MainFragment : BaseFragment() {
             topLevelDestinationIds = setOf(
                 R.id.contactNetworksFragment,
                 R.id.searchFragment,
-                R.id.settingsFragment
+                R.id.profileFragment
             )
         )
 

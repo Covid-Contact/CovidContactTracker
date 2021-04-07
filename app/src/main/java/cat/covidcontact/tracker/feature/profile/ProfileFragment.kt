@@ -1,4 +1,4 @@
-package cat.covidcontact.tracker.feature.settings
+package cat.covidcontact.tracker.feature.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
-import cat.covidcontact.tracker.databinding.FragmentSettingsBinding
+import cat.covidcontact.tracker.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SettingsFragment : BaseFragment() {
-    private lateinit var binding: FragmentSettingsBinding
-    override val viewModel: SettingsViewModel by viewModels()
-    override val screenStateHandler = ScreenStateHandler<SettingsState> { context, state ->
+class ProfileFragment : BaseFragment() {
+    private lateinit var binding: FragmentProfileBinding
+    override val viewModel: ProfileViewModel by viewModels()
+    override val screenStateHandler = ScreenStateHandler<ProfileState> { context, state ->
 
     }
 
@@ -23,7 +23,7 @@ class SettingsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -15,8 +15,8 @@
         android:label="@string/search_contact_networks_bottom_nav"
         tools:layout="@layout/fragment_search" />
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="cat.covidcontact.tracker.feature.settings.SettingsFragment"
-        android:label="@string/settings_bottom_nav"
-        tools:layout="@layout/fragment_settings" />
+        android:id="@+id/profileFragment"
+        android:name="cat.covidcontact.tracker.feature.profile.ProfileFragment"
+        android:label="@string/profile_bottom_nav"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
