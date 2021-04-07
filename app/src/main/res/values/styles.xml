@@ -96,6 +96,10 @@
         <item name="android:text">@string/app_name</item>
     </style>
 
+    <style name="main_app_title" parent="app_title">
+        <item name="android:layout_marginTop">@dimen/main_app_title_margin</item>
+    </style>
+
     <style name="full_color_constraint_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

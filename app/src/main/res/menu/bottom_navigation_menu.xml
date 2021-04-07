@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/contactNetworksFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_contact_network"
+        android:title="@string/contact_networks_bottom_nav" />
+
+    <item
+        android:id="@+id/searchFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search_contact_networks_bottom_nav" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings_bottom_nav" />
+
+</menu>

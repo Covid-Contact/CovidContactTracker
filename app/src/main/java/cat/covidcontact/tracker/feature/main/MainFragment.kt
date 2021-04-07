@@ -7,9 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import cat.covidcontact.model.Device
+import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.generateDeviceId
 import cat.covidcontact.tracker.common.extensions.navigate
@@ -39,6 +46,7 @@ class MainFragment : BaseFragment() {
                 viewModel.onRegisterDevice(state.user, device)
             }
             MainState.DeviceRegistered -> {
+                binding.bind()
                 Toast.makeText(requireContext(), "Done", Toast.LENGTH_LONG).show()
             }
         }
@@ -55,5 +63,25 @@ class MainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.onGetCurrentUser(args.email)
+    }
+
+    private fun FragmentMainBinding.bind() {
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.mainFragmentNavGraph)
+            as NavHostFragment
+        val navController = navHostFragment.findNavController()
+        bottomNavigationView.setupWithNavController(navController)
+
+        val appBarConfiguration = AppBarConfiguration(
+            topLevelDestinationIds = setOf(
+                R.id.contactNetworksFragment,
+                R.id.searchFragment,
+                R.id.settingsFragment
+            )
+        )
+
+        (requireActivity() as AppCompatActivity).let {
+            it.setSupportActionBar(topBar)
+            it.setupActionBarWithNavController(navController, appBarConfiguration)
+        }
     }
 }

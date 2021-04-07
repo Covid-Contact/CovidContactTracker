@@ -79,4 +79,9 @@
     <string name="being_positive">Have you been positive?</string>
     <string name="being_vaccinated">Have you been vaccinated?</string>
 
+    <!-- Main fragment -->
+    <string name="contact_networks_bottom_nav">Contact Networks</string>
+    <string name="search_contact_networks_bottom_nav">Search</string>
+    <string name="settings_bottom_nav">Settings</string>
+
 </resources>

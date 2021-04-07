@@ -5,6 +5,7 @@
     <dimen name="auth_text">16sp</dimen>
     <dimen name="button_bottom_margin">32dp</dimen>
     <dimen name="user_info_title_margin">64dp</dimen>
+    <dimen name="main_app_title_margin">32dp</dimen>
     <dimen name="user_info_title_size">28sp</dimen>
     <dimen name="layout_corner_radius">24dp</dimen>
     <dimen name="round_linear_layout_margin">150dp</dimen>
