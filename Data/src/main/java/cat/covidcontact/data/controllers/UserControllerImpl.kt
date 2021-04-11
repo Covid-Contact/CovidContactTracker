@@ -1,8 +1,8 @@
 package cat.covidcontact.data.controllers
 
 import cat.covidcontact.model.ApplicationUser
-import cat.covidcontact.model.Device
-import cat.covidcontact.model.user.User
+import cat.covidcontact.model.post.PostDevice
+import cat.covidcontact.model.post.PostUser
 
 class UserControllerImpl : UserController() {
 
@@ -22,11 +22,11 @@ class UserControllerImpl : UserController() {
         return get("$url/userinfo", listOf("email" to email))
     }
 
-    override suspend fun addUserData(user: User): ServerResponse {
+    override suspend fun addUserData(user: PostUser): ServerResponse {
         return post("$url/userinfo", user)
     }
 
-    override suspend fun registerUserDevice(email: String, device: Device): ServerResponse {
+    override suspend fun registerUserDevice(email: String, device: PostDevice): ServerResponse {
         return post("$url/userdevice", device, listOf("email" to email))
     }
 }

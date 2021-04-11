@@ -19,7 +19,7 @@ class MainViewModel @Inject constructor(
     private val getUserData: GetUserData,
     private val registerDevice: RegisterDevice
 ) : BaseViewModel() {
-    private lateinit var userDevice: UserDevice
+    lateinit var userDevice: UserDevice
 
     private val getUserDataHandler = UseCaseResultHandler<GetUserData.Response>(
         onSuccess = { MainState.UserInfoFound(it.user) },

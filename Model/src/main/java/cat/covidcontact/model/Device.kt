@@ -1,12 +1,13 @@
 package cat.covidcontact.model
 
-import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import cat.covidcontact.model.post.PostDevice
 
-data class Device(
-    @SerializedName("id")
+class Device(
     val id: String,
-
-    @SerializedName("name")
     val name: String? = null
-) : Serializable
+) {
+
+    fun createPost(): PostDevice {
+        return PostDevice(id, name)
+    }
+}

@@ -65,7 +65,7 @@
 
         <TextView
             android:id="@+id/txtMakeLogIn"
-            style="@style/AuthText"
+            style="@style/text_click"
             android:layout_marginStart="@dimen/app_padding"
             android:layout_marginEnd="@dimen/app_padding"
             android:layout_marginBottom="@dimen/button_bottom_margin"
