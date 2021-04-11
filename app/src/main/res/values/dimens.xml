@@ -11,4 +11,7 @@
     <dimen name="round_linear_layout_margin">150dp</dimen>
     <dimen name="title">32sp</dimen>
     <dimen name="welcome_text">14sp</dimen>
+    <dimen name="card_title">24sp</dimen>
+    <dimen name="card_title_max_width">250dp</dimen>
+    <dimen name="card_secondary_text">16sp</dimen>
 </resources>
