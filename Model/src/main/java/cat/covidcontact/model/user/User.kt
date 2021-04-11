@@ -59,6 +59,21 @@ class User(
         return username.hashCode()
     }
 
+    override fun toString(): String {
+        return "User(username='$username', " +
+            "email='$email', " +
+            "gender=$gender, " +
+            "birthDate=$birthDate, " +
+            "city=$city, " +
+            "studies=$studies, " +
+            "occupation=$occupation, " +
+            "marriage=$marriage, " +
+            "children=$children, " +
+            "hasBeenPositive=$hasBeenPositive, " +
+            "isVaccinated=$isVaccinated, " +
+            "contactNetworks=$contactNetworks)"
+    }
+
     companion object {
         @JvmStatic
         fun fromPost(postUser: PostUser): User {

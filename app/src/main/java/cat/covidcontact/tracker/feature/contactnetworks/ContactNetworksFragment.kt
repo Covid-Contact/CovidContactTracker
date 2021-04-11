@@ -1,6 +1,8 @@
 package cat.covidcontact.tracker.feature.contactnetworks
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,7 @@ import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.makeRequired
 import cat.covidcontact.tracker.common.extensions.observeInvalidField
+import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.DialogCreateContactNetworkBinding
 import cat.covidcontact.tracker.databinding.FragmentContactNetworksBinding
@@ -26,10 +29,18 @@ class ContactNetworksFragment : BaseFragment() {
     override val screenStateHandler = ScreenStateHandler<ContactNetworksState> { context, state ->
         when (state) {
             ContactNetworksState.CreateContactNetwork -> {
-                CreateContactNetworkDialog.showDialog(requireContext(), dialogBinding)
+                showCreateDialog(context)
+            }
+            is ContactNetworksState.ContactNetworkAlreadyExisting -> {
+                context.showDialog(
+                    title = R.string.contact_network_existing_title,
+                    message = R.string.contact_network_existing_message,
+                    positiveButtonText = context.getString(R.string.create),
+                    positiveButtonAction = { _, _ -> showCreateDialog(context) }
+                )
             }
             is ContactNetworksState.ContactNetworkCreated -> {
-
+                Log.i("Test", "Correct: ${state.contactNetwork}")
             }
         }
     }
@@ -40,15 +51,12 @@ class ContactNetworksFragment : BaseFragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = FragmentContactNetworksBinding.inflate(inflater, container, false)
-        dialogBinding = DialogCreateContactNetworkBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.bind()
-        dialogBinding.bind()
-        viewModel.observe()
     }
 
     private fun FragmentContactNetworksBinding.bind() {
@@ -66,21 +74,33 @@ class ContactNetworksFragment : BaseFragment() {
 
             if (isNameValid) {
                 CreateContactNetworkDialog.dismissDialog()
+
                 viewModel.onCreateContactNetwork(
                     name,
-                    password,
+                    if (password.isNotEmpty()) password else null,
                     mainViewModel.userDevice.user
                 )
             }
         }
+
+        txtCancelContactNetworkCreation.setOnClickListener {
+            CreateContactNetworkDialog.dismissDialog()
+        }
     }
 
-    private fun ContactNetworksViewModel.observe() {
+    private fun ContactNetworksViewModel.observeDialog() {
         isNameEmpty.observeInvalidField(
             viewLifecycleOwner,
             dialogBinding.txtContactNetworkName,
             getString(R.string.contact_network_name_cannot_be_empty),
             viewModel::onValidateName
         )
+    }
+
+    private fun showCreateDialog(context: Context) {
+        dialogBinding = DialogCreateContactNetworkBinding.inflate(layoutInflater)
+        dialogBinding.bind()
+        viewModel.observeDialog()
+        CreateContactNetworkDialog.showDialog(context, dialogBinding)
     }
 }

@@ -29,7 +29,7 @@ class ContactNetworksViewModel @Inject constructor(
         loadState(ContactNetworksState.CreateContactNetwork)
     }
 
-    fun onCreateContactNetwork(name: String, password: String, owner: User) {
+    fun onCreateContactNetwork(name: String, password: String?, owner: User) {
         viewModelScope.launch {
             executeUseCase(createContactNetwork, createContactNetworkHandler) {
                 CreateContactNetwork.Request(name, password, owner)

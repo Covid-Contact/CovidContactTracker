@@ -38,6 +38,12 @@ class ContactNetwork(
         )
     }
 
+    override fun toString(): String {
+        return "ContactNetwork(name='$name', " +
+            "password=$password, " +
+            "owner=$owner)"
+    }
+
     companion object {
         @JvmStatic
         fun fromPost(postContactNetwork: PostContactNetwork): ContactNetwork {

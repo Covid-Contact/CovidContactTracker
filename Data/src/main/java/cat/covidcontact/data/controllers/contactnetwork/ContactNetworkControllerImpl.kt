@@ -8,10 +8,10 @@ class ContactNetworkControllerImpl : ContactNetworkController() {
     override suspend fun createContactNetwork(
         postContactNetwork: PostContactNetwork
     ): ServerResponse {
-        return post(url, postContactNetwork)
+        return post("$url/", postContactNetwork)
     }
 
     override suspend fun getContactNetworks(email: String): ServerResponse {
-        return get(url, listOf("email" to email))
+        return get("$url/", listOf("email" to email))
     }
 }

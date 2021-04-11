@@ -18,6 +18,7 @@
         Please contact the support service
     </string>
     <string name="optional">Optional</string>
+    <string name="close">Close</string>
 
     <!-- Authentication -->
     <string name="email">Email</string>
@@ -93,5 +94,10 @@
     <string name="contact_network_name">Name</string>
     <string name="contact_network_password">Password</string>
     <string name="contact_network_name_cannot_be_empty">The name cannot be empty</string>
+    <string name="contact_network_existing_title">Existing name</string>
+    <string name="contact_network_existing_message">
+        You already have a contact network with that name, please choose another one.
+    </string>
+    <string name="create">Create</string>
 
 </resources>

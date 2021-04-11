@@ -1,5 +1,5 @@
 package cat.covidcontact.data.repositories.contactnetworks
 
-class ContactNetworkException(msg: String) : RuntimeException(msg) {
-
+sealed class ContactNetworkException(msg: String) : RuntimeException(msg) {
+    object ContactNetworkAlreadyExisting : ContactNetworkException("The contact network exists")
 }

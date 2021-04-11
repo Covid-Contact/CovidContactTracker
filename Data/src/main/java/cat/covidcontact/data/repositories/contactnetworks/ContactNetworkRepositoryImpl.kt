@@ -1,5 +1,6 @@
 package cat.covidcontact.data.repositories.contactnetworks
 
+import android.util.Log
 import cat.covidcontact.data.CommonException
 import cat.covidcontact.data.controllers.CovidContactBaseController
 import cat.covidcontact.data.controllers.HttpStatus
@@ -14,6 +15,7 @@ import javax.inject.Inject
 class ContactNetworkRepositoryImpl @Inject constructor(
     private val contactNetworkController: ContactNetworkController
 ) : ContactNetworkRepository {
+
     override suspend fun createContactNetwork(
         name: String,
         password: String?,
@@ -28,10 +30,16 @@ class ContactNetworkRepositoryImpl @Inject constructor(
             )
         )
 
+        Log.i("Test", "createContactNetwork: ${serverResponse.request}")
+        Log.i("Test", "createContactNetwork: ${serverResponse.response}")
+        Log.i("Test", "createContactNetwork: ${serverResponse.result.get()}")
+
         serverResponse.response.statusCode.run {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
                 HttpStatus.CREATED -> return@run
+                HttpStatus.BAD_REQUEST ->
+                    throw ContactNetworkException.ContactNetworkAlreadyExisting
                 else -> throw CommonException.OtherError
             }
         }
@@ -46,6 +54,10 @@ class ContactNetworkRepositoryImpl @Inject constructor(
 
     override suspend fun getContactNetworks(email: String): List<ContactNetwork> {
         val serverResponse = contactNetworkController.getContactNetworks(email)
+        Log.i("Test", "getContactNetworks: ${serverResponse.request}")
+        Log.i("Test", "getContactNetworks: ${serverResponse.response}")
+        Log.i("Test", "getContactNetworks: ${serverResponse.result.get()}")
+
         serverResponse.response.statusCode.run {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
