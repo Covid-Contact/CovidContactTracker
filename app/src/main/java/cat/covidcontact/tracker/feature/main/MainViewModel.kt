@@ -1,7 +1,7 @@
 package cat.covidcontact.tracker.feature.main
 
 import androidx.lifecycle.viewModelScope
-import cat.covidcontact.data.user.UserException
+import cat.covidcontact.data.repositories.user.UserException
 import cat.covidcontact.model.Device
 import cat.covidcontact.model.UserDevice
 import cat.covidcontact.model.user.User

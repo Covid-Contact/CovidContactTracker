@@ -28,6 +28,9 @@ class ContactNetworksFragment : BaseFragment() {
             ContactNetworksState.CreateContactNetwork -> {
                 CreateContactNetworkDialog.showDialog(requireContext(), dialogBinding)
             }
+            is ContactNetworksState.ContactNetworkCreated -> {
+
+            }
         }
     }
 
@@ -66,7 +69,7 @@ class ContactNetworksFragment : BaseFragment() {
                 viewModel.onCreateContactNetwork(
                     name,
                     password,
-                    mainViewModel.userDevice.user.username
+                    mainViewModel.userDevice.user
                 )
             }
         }

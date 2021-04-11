@@ -1,5 +1,6 @@
 package cat.covidcontact.model.user
 
+import cat.covidcontact.model.ContactNetwork
 import cat.covidcontact.model.post.PostUser
 
 class User(
@@ -15,6 +16,17 @@ class User(
     var hasBeenPositive: Boolean? = null,
     var isVaccinated: Boolean? = null
 ) {
+    private val _contactNetworks: MutableList<ContactNetwork> = mutableListOf()
+    val contactNetworks: List<ContactNetwork>
+        get() = _contactNetworks
+
+    fun addContactNetwork(contactNetwork: ContactNetwork) {
+        _contactNetworks.add(contactNetwork)
+    }
+
+    fun addContactNetworks(contactNetworks: List<ContactNetwork>) {
+        contactNetworks.forEach { addContactNetwork(it) }
+    }
 
     fun createPost(): PostUser {
         return PostUser(
@@ -30,6 +42,21 @@ class User(
             hasBeenPositive,
             isVaccinated
         )
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as User
+
+        if (username != other.username) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return username.hashCode()
     }
 
     companion object {

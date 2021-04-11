@@ -1,9 +1,13 @@
 package cat.covidcontact.tracker.providers
 
-import cat.covidcontact.data.controllers.UserController
-import cat.covidcontact.data.controllers.UserControllerImpl
-import cat.covidcontact.data.user.UserRepository
-import cat.covidcontact.data.user.UserRepositoryImpl
+import cat.covidcontact.data.controllers.contactnetwork.ContactNetworkController
+import cat.covidcontact.data.controllers.contactnetwork.ContactNetworkControllerImpl
+import cat.covidcontact.data.controllers.user.UserController
+import cat.covidcontact.data.controllers.user.UserControllerImpl
+import cat.covidcontact.data.repositories.contactnetworks.ContactNetworkRepository
+import cat.covidcontact.data.repositories.contactnetworks.ContactNetworkRepositoryImpl
+import cat.covidcontact.data.repositories.user.UserRepository
+import cat.covidcontact.data.repositories.user.UserRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,4 +27,14 @@ class DataProviders {
     @Provides
     @Singleton
     fun provideUserController(): UserController = UserControllerImpl()
+
+    @Provides
+    @Singleton
+    fun provideContactNetworkRepository(
+        contactNetworkController: ContactNetworkController
+    ): ContactNetworkRepository = ContactNetworkRepositoryImpl(contactNetworkController)
+
+    @Provides
+    @Singleton
+    fun provideContactNetworkController(): ContactNetworkController = ContactNetworkControllerImpl()
 }

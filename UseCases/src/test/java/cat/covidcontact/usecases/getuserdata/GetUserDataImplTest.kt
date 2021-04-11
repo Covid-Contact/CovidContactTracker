@@ -2,8 +2,9 @@ package cat.covidcontact.usecases.getuserdata
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import cat.covidcontact.data.CommonException
-import cat.covidcontact.data.user.UserException
-import cat.covidcontact.data.user.UserRepository
+import cat.covidcontact.data.repositories.contactnetworks.ContactNetworkRepository
+import cat.covidcontact.data.repositories.user.UserException
+import cat.covidcontact.data.repositories.user.UserRepository
 import cat.covidcontact.model.user.Gender
 import cat.covidcontact.model.user.User
 import cat.covidcontact.usecases.MainCoroutineRule
@@ -31,6 +32,9 @@ class GetUserDataImplTest {
     @MockK
     private lateinit var userRepository: UserRepository
 
+    @MockK
+    private lateinit var contactNetworkRepository: ContactNetworkRepository
+
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
@@ -40,7 +44,8 @@ class GetUserDataImplTest {
     @Before
     fun setUp() {
         userRepository = mockk()
-        getUserDataImpl = GetUserDataImpl(userRepository)
+        contactNetworkRepository = mockk()
+        getUserDataImpl = GetUserDataImpl(userRepository, contactNetworkRepository)
     }
 
     @Test

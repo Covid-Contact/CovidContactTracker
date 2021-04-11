@@ -1,9 +1,9 @@
-package cat.covidcontact.data.user
+package cat.covidcontact.data.repositories.user
 
 import cat.covidcontact.data.CommonException
 import cat.covidcontact.data.controllers.CovidContactBaseController
 import cat.covidcontact.data.controllers.HttpStatus
-import cat.covidcontact.data.controllers.UserController
+import cat.covidcontact.data.controllers.user.UserController
 import cat.covidcontact.model.ApplicationUser
 import cat.covidcontact.model.Device
 import cat.covidcontact.model.post.PostUser

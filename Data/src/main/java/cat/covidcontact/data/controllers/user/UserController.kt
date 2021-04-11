@@ -1,12 +1,13 @@
-package cat.covidcontact.data.controllers
+package cat.covidcontact.data.controllers.user
 
+import cat.covidcontact.data.controllers.CovidContactBaseController
+import cat.covidcontact.data.controllers.ServerResponse
 import cat.covidcontact.model.ApplicationUser
 import cat.covidcontact.model.post.PostDevice
 import cat.covidcontact.model.post.PostUser
 
 abstract class UserController : CovidContactBaseController() {
-    override val url: String
-        get() = super.url + "/user"
+    override val url = "${super.url}/user"
 
     abstract suspend fun makeSignUp(applicationUser: ApplicationUser): ServerResponse
     abstract suspend fun isUserValidated(email: String): ServerResponse

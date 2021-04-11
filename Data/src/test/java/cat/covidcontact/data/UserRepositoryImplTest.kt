@@ -1,7 +1,7 @@
 package cat.covidcontact.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import cat.covidcontact.data.user.UserRepositoryImpl
+import cat.covidcontact.data.repositories.user.UserRepositoryImpl
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
