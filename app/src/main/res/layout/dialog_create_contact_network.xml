@@ -47,7 +47,8 @@
             android:gravity="center_horizontal|start"
             android:text="@string/close"
             android:textAllCaps="true"
-            android:textColor="@color/red" />
+            android:textColor="@color/red"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txtConfirmContactNetworkCreation"
@@ -55,7 +56,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center_horizontal|end"
-            android:text="@android:string/ok" />
+            android:text="@android:string/ok"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
