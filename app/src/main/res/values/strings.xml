@@ -100,5 +100,12 @@
     </string>
     <string name="create">Create</string>
     <string name="quit">Quit</string>
+    <string name="owner_info">Created by %s</string>
+    <string name="network_visible">Visible</string>
+    <string name="network_invisible">Invisible</string>
+    <string name="network_almost_limit">Almost limit</string>
+    <string name="network_limit">Limit</string>
+    <string name="network_over_limit">Over limit</string>
+    <string name="network_positive_detected">Positive detected</string>
 
 </resources>

@@ -2,12 +2,12 @@ package cat.covidcontact.tracker.feature.contactnetworks
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.makeRequired
@@ -16,6 +16,9 @@ import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.DialogCreateContactNetworkBinding
 import cat.covidcontact.tracker.databinding.FragmentContactNetworksBinding
+import cat.covidcontact.tracker.feature.contactnetworks.recyclerview.ContactNetworkAdapter
+import cat.covidcontact.tracker.feature.contactnetworks.recyclerview.NetworkCardStateColor
+import cat.covidcontact.tracker.feature.contactnetworks.recyclerview.NetworkCardStateText
 import cat.covidcontact.tracker.feature.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ContactNetworksFragment : BaseFragment() {
     private lateinit var binding: FragmentContactNetworksBinding
     private lateinit var dialogBinding: DialogCreateContactNetworkBinding
+    private lateinit var adapter: ContactNetworkAdapter
 
     private val mainViewModel: MainViewModel by activityViewModels()
     override val viewModel: ContactNetworksViewModel by viewModels()
@@ -40,7 +44,8 @@ class ContactNetworksFragment : BaseFragment() {
                 )
             }
             is ContactNetworksState.ContactNetworkCreated -> {
-                Log.i("Test", "Correct: ${state.contactNetwork}")
+                mainViewModel.onAddContactNetwork(state.contactNetwork)
+                refreshRecyclerView()
             }
         }
     }
@@ -57,6 +62,7 @@ class ContactNetworksFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.bind()
+        mainViewModel.observe()
     }
 
     private fun FragmentContactNetworksBinding.bind() {
@@ -74,12 +80,13 @@ class ContactNetworksFragment : BaseFragment() {
 
             if (isNameValid) {
                 CreateContactNetworkDialog.dismissDialog()
-
-                viewModel.onCreateContactNetwork(
-                    name,
-                    if (password.isNotEmpty()) password else null,
-                    mainViewModel.userDevice.user
-                )
+                mainViewModel.userDevice.value?.let {
+                    viewModel.onCreateContactNetwork(
+                        name,
+                        if (password.isNotEmpty()) password else null,
+                        it.user
+                    )
+                }
             }
         }
 
@@ -97,10 +104,30 @@ class ContactNetworksFragment : BaseFragment() {
         )
     }
 
+    private fun MainViewModel.observe() {
+        userDevice.observe(viewLifecycleOwner) {
+            adapter = ContactNetworkAdapter(
+                requireContext(),
+                it.user.username,
+                NetworkCardStateColor(),
+                NetworkCardStateText()
+            )
+            binding.contactNetworkList.adapter = adapter
+            binding.contactNetworkList.layoutManager = LinearLayoutManager(requireContext())
+            refreshRecyclerView()
+        }
+    }
+
     private fun showCreateDialog(context: Context) {
         dialogBinding = DialogCreateContactNetworkBinding.inflate(layoutInflater)
         dialogBinding.bind()
         viewModel.observeDialog()
         CreateContactNetworkDialog.showDialog(context, dialogBinding)
+    }
+
+    private fun refreshRecyclerView() {
+        mainViewModel.userDevice.value?.let { userDevice ->
+            adapter.submitList(userDevice.user.contactNetworks.sortedBy { it.name })
+        }
     }
 }

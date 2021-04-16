@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="app_padding">20dp</dimen>
+    <dimen name="app_padding_half">10dp</dimen>
     <dimen name="space">20dp</dimen>
     <dimen name="auth_text">16sp</dimen>
     <dimen name="button_bottom_margin">32dp</dimen>
@@ -11,7 +12,7 @@
     <dimen name="round_linear_layout_margin">150dp</dimen>
     <dimen name="title">32sp</dimen>
     <dimen name="welcome_text">14sp</dimen>
-    <dimen name="card_title">24sp</dimen>
+    <dimen name="card_title">20sp</dimen>
     <dimen name="card_title_max_width">250dp</dimen>
-    <dimen name="card_secondary_text">16sp</dimen>
+    <dimen name="card_secondary_text">14sp</dimen>
 </resources>

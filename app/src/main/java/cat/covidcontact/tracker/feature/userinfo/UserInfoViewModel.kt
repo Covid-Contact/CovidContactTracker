@@ -34,13 +34,13 @@ class UserInfoViewModel @Inject constructor(
     fun onCheckBasicInfo() = allNotNull(inputEmail, inputUsername, inputGender, inputBirthDate)
 
     fun onBasicUserInfoIntroduced(navDirections: NavDirections) {
-        val email = inputEmail ?: return
         val username = inputUsername ?: return
+        val email = inputEmail ?: return
         val gender = inputGender ?: return
         val birthDate = inputBirthDate ?: return
 
         if (currentUser == null) {
-            user = User(email, username, gender, birthDate)
+            user = User(username, email, gender, birthDate)
         }
 
         onNextFragment(navDirections)

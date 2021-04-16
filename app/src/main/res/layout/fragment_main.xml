@@ -36,7 +36,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="?attr/actionBarSize"
-                android:padding="@dimen/app_padding"
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/main_fragment_nav_graph" />
 

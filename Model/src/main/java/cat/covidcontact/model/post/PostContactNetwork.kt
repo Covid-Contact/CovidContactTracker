@@ -14,8 +14,5 @@ data class PostContactNetwork(
     val ownerEmail: String? = null,
 
     @SerializedName("owner_username")
-    val ownerUsername: String,
-
-    @SerializedName("members_username")
-    val membersUsername: List<String> = emptyList()
+    val ownerUsername: String
 ) : Serializable

@@ -30,8 +30,8 @@ class User(
 
     fun createPost(): PostUser {
         return PostUser(
-            email,
             username,
+            email,
             gender,
             birthDate,
             city,

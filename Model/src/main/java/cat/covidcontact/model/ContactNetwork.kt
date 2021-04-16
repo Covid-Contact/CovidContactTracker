@@ -7,34 +7,15 @@ class ContactNetwork(
     val name: String,
     val password: String? = null,
     val owner: User,
+    val networkState: NetworkState = NetworkState.PositiveDetected
 ) {
-    private val _memberList: MutableList<User> = mutableListOf()
-    val memberList: List<User>
-        get() = _memberList
-
-    init {
-        addUser(owner)
-    }
-
-    fun addUser(user: User) {
-        if (!memberList.contains(user)) {
-            _memberList.add(user)
-            user.addContactNetwork(this)
-        }
-    }
-
-    fun addUsers(userList: List<User>) {
-        userList.forEach { addUser(it) }
-    }
 
     fun createPost(): PostContactNetwork {
-        val membersUsername = memberList.map { it.username }
         return PostContactNetwork(
             name = name,
             password = password,
             ownerEmail = owner.email,
-            ownerUsername = owner.username,
-            membersUsername = membersUsername
+            ownerUsername = owner.username
         )
     }
 
@@ -44,14 +25,26 @@ class ContactNetwork(
             "owner=$owner)"
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as ContactNetwork
+
+        if (name != other.name) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return name.hashCode()
+    }
+
     companion object {
         @JvmStatic
         fun fromPost(postContactNetwork: PostContactNetwork): ContactNetwork {
             return with(postContactNetwork) {
-                ContactNetwork(name, password, User(ownerUsername)).also { contactNetwork ->
-                    val users = membersUsername.map { User(username = it) }
-                    contactNetwork.addUsers(users)
-                }
+                ContactNetwork(name, password, User(ownerUsername))
             }
         }
     }

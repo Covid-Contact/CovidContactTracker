@@ -66,6 +66,9 @@ class ContactNetworkRepositoryImpl @Inject constructor(
             }
         }
 
-        return Gson().fromJson(serverResponse.result.get())
+        val contactNetworks = Gson().fromJson<List<PostContactNetwork>>(
+            serverResponse.result.get()
+        )
+        return contactNetworks.map { ContactNetwork.fromPost(it) }
     }
 }

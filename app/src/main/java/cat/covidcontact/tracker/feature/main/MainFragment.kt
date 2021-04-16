@@ -3,7 +3,6 @@ package cat.covidcontact.tracker.feature.main
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +46,6 @@ class MainFragment : BaseFragment() {
             }
             MainState.DeviceRegistered -> {
                 binding.bind()
-                Log.i("Test", "contact networks: ${viewModel.userDevice.user.contactNetworks}")
             }
         }
     }
@@ -57,12 +55,12 @@ class MainFragment : BaseFragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = FragmentMainBinding.inflate(inflater, container, false)
+        viewModel.onGetCurrentUser(args.email)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.onGetCurrentUser(args.email)
     }
 
     private fun FragmentMainBinding.bind() {

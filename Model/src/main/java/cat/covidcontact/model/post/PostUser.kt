@@ -7,11 +7,11 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 class PostUser(
-    @SerializedName("email")
-    val email: String,
-
     @SerializedName("username")
     val username: String,
+
+    @SerializedName("email")
+    val email: String,
 
     @SerializedName("gender")
     val gender: Gender,
