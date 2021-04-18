@@ -14,4 +14,11 @@ class ContactNetworkControllerImpl : ContactNetworkController() {
     override suspend fun getContactNetworks(email: String): ServerResponse {
         return get("$url/", listOf("email" to email))
     }
+
+    override suspend fun enableUserAddition(
+        contactNetworkName: String,
+        isEnabled: Boolean
+    ): ServerResponse {
+        return put("$url/$contactNetworkName", listOf("isEnabled" to isEnabled))
+    }
 }

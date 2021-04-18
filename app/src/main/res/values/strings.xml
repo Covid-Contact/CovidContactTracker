@@ -109,7 +109,9 @@
         You already have a contact network with that name, please choose another one.
     </string>
     <string name="create">Create</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Contact Network Settings fragment -->
+    <string name="visibility_configuration">Visibility configuration</string>
+    <string name="enable_users_addition">Allow users to join</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package cat.covidcontact.data.controllers
 
+import android.util.Log
 import com.github.kittinunf.fuel.core.Parameters
 import com.github.kittinunf.fuel.gson.jsonBody
 import com.github.kittinunf.fuel.httpDelete
@@ -19,7 +20,7 @@ abstract class CovidContactBaseController {
             .header(getAuthHeader(isAuthenticated))
             .responseString()
 
-        return ServerResponse(request, response, result)
+        return ServerResponse(request, response, result).logConnectionResult()
     }
 
     suspend fun post(
@@ -33,7 +34,7 @@ abstract class CovidContactBaseController {
             .header(getAuthHeader(isAuthenticated))
             .responseString()
 
-        return ServerResponse(request, response, result)
+        return ServerResponse(request, response, result).logConnectionResult()
     }
 
     suspend fun put(
@@ -45,7 +46,7 @@ abstract class CovidContactBaseController {
             .header(getAuthHeader(isAuthenticated))
             .responseString()
 
-        return ServerResponse(request, response, result)
+        return ServerResponse(request, response, result).logConnectionResult()
     }
 
     suspend fun delete(
@@ -57,13 +58,21 @@ abstract class CovidContactBaseController {
             .header(getAuthHeader(isAuthenticated))
             .responseString()
 
-        return ServerResponse(request, response, result)
+        return ServerResponse(request, response, result).logConnectionResult()
     }
 
     private fun getAuthHeader(isAuthenticated: Boolean): Map<String, Any> {
         return token?.let {
             if (isAuthenticated) mapOf(AUTH_HEADER to it) else emptyMap()
         } ?: emptyMap()
+    }
+
+    private fun ServerResponse.logConnectionResult(): ServerResponse {
+        Log.i("Server", "Request: $request")
+        Log.i("Server", "Response: $response")
+        Log.i("Server", "Result: $result")
+
+        return this
     }
 
     companion object {

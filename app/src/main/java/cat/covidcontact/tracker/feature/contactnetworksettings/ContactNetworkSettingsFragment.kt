@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import cat.covidcontact.tracker.common.BaseFragment
+import cat.covidcontact.tracker.common.extensions.observeChecked
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentContactNetworkSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +34,15 @@ class ContactNetworkSettingsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.bind()
+
         viewModel.contactNetwork.value = args.contactNetwork
+    }
+
+    private fun FragmentContactNetworkSettingsBinding.bind() {
+        swEnableUserAddition.observeChecked(viewLifecycleOwner, viewModel.isVisibleChecked)
+        swEnableUserAddition.setOnCheckedChangeListener { view, isChecked ->
+            viewModel.onEnableUsersAddition(isChecked)
+        }
     }
 }

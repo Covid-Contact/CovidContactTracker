@@ -1,6 +1,5 @@
 package cat.covidcontact.data.repositories.contactnetworks
 
-import android.util.Log
 import cat.covidcontact.data.CommonException
 import cat.covidcontact.data.controllers.CovidContactBaseController
 import cat.covidcontact.data.controllers.HttpStatus
@@ -30,10 +29,6 @@ class ContactNetworkRepositoryImpl @Inject constructor(
             )
         )
 
-        Log.i("Test", "createContactNetwork: ${serverResponse.request}")
-        Log.i("Test", "createContactNetwork: ${serverResponse.response}")
-        Log.i("Test", "createContactNetwork: ${serverResponse.result.get()}")
-
         serverResponse.response.statusCode.run {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
@@ -54,9 +49,6 @@ class ContactNetworkRepositoryImpl @Inject constructor(
 
     override suspend fun getContactNetworks(email: String): List<ContactNetwork> {
         val serverResponse = contactNetworkController.getContactNetworks(email)
-        Log.i("Test", "getContactNetworks: ${serverResponse.request}")
-        Log.i("Test", "getContactNetworks: ${serverResponse.response}")
-        Log.i("Test", "getContactNetworks: ${serverResponse.result.get()}")
 
         serverResponse.response.statusCode.run {
             when (this) {
@@ -70,5 +62,21 @@ class ContactNetworkRepositoryImpl @Inject constructor(
             serverResponse.result.get()
         )
         return contactNetworks.map { ContactNetwork.fromPost(it) }
+    }
+
+    override suspend fun enableUserAddition(contactNetworkName: String, isEnabled: Boolean) {
+        val serverResponse = contactNetworkController.enableUserAddition(
+            contactNetworkName,
+            isEnabled
+        )
+
+        serverResponse.response.statusCode.run {
+            when (this) {
+                CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
+                HttpStatus.NO_CONTENT -> return@run
+                HttpStatus.NOT_FOUND -> throw ContactNetworkException.ContactNetworkNotExisting
+                else -> throw CommonException.OtherError
+            }
+        }
     }
 }

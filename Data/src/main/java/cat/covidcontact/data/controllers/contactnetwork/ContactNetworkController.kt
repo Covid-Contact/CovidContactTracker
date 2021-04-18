@@ -11,5 +11,12 @@ abstract class ContactNetworkController : CovidContactBaseController() {
         postContactNetwork: PostContactNetwork
     ): ServerResponse
 
-    abstract suspend fun getContactNetworks(email: String): ServerResponse
+    abstract suspend fun getContactNetworks(
+        email: String
+    ): ServerResponse
+
+    abstract suspend fun enableUserAddition(
+        contactNetworkName: String,
+        isEnabled: Boolean
+    ): ServerResponse
 }

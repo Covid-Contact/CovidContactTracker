@@ -6,6 +6,8 @@ import cat.covidcontact.usecases.adduserdata.AddUserData
 import cat.covidcontact.usecases.adduserdata.AddUserDataImpl
 import cat.covidcontact.usecases.createContactNetwork.CreateContactNetwork
 import cat.covidcontact.usecases.createContactNetwork.CreateContactNetworkImpl
+import cat.covidcontact.usecases.enableUserAddition.EnableUserAddition
+import cat.covidcontact.usecases.enableUserAddition.EnableUserAdditionImpl
 import cat.covidcontact.usecases.getuserdata.GetUserData
 import cat.covidcontact.usecases.getuserdata.GetUserDataImpl
 import cat.covidcontact.usecases.login.MakeLogIn
@@ -60,4 +62,10 @@ class UseCaseProviders {
     fun provideCreateContactNetwork(
         contactNetworkRepository: ContactNetworkRepository
     ): CreateContactNetwork = CreateContactNetworkImpl(contactNetworkRepository)
+
+    @Provides
+    @Singleton
+    fun provideEnableUserAddition(
+        contactNetworkRepository: ContactNetworkRepository
+    ): EnableUserAddition = EnableUserAdditionImpl(contactNetworkRepository)
 }
