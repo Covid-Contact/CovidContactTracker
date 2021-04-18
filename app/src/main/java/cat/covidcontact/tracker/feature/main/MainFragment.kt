@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -18,7 +19,6 @@ import cat.covidcontact.model.Device
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.generateDeviceId
-import cat.covidcontact.tracker.common.extensions.navigate
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : BaseFragment() {
     private lateinit var binding: FragmentMainBinding
+    private lateinit var navController: NavController
     private val args: MainFragmentArgs by navArgs()
 
     override val viewModel: MainViewModel by activityViewModels()
@@ -55,18 +56,18 @@ class MainFragment : BaseFragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = FragmentMainBinding.inflate(inflater, container, false)
+        viewModel.onGetCurrentUser(args.email)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.onGetCurrentUser(args.email)
     }
 
     private fun FragmentMainBinding.bind() {
         val navHostFragment = childFragmentManager.findFragmentById(R.id.mainFragmentNavGraph)
             as NavHostFragment
-        val navController = navHostFragment.findNavController()
+        navController = navHostFragment.findNavController()
         bottomNavigationView.setupWithNavController(navController)
 
         val appBarConfiguration = AppBarConfiguration(
@@ -80,6 +81,10 @@ class MainFragment : BaseFragment() {
         (requireActivity() as AppCompatActivity).let {
             it.setSupportActionBar(topBar)
             it.setupActionBarWithNavController(navController, appBarConfiguration)
+        }
+
+        topBar.setNavigationOnClickListener {
+            navigateUp(navController)
         }
     }
 }

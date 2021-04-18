@@ -7,16 +7,25 @@
     <fragment
         android:id="@+id/contactNetworksFragment"
         android:name="cat.covidcontact.tracker.feature.contactnetworks.ContactNetworksFragment"
-        android:label="@string/contact_networks_bottom_nav"
-        tools:layout="@layout/fragment_contact_networks" />
+        android:label="@string/contact_networks_fragment"
+        tools:layout="@layout/fragment_contact_networks">
+        <action
+            android:id="@+id/action_contactNetworksFragment_to_createContactNetworkFragment"
+            app:destination="@id/createContactNetworkFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="cat.covidcontact.tracker.feature.search.SearchFragment"
-        android:label="@string/search_contact_networks_bottom_nav"
+        android:label="@string/search_contact_networks_fragment"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="cat.covidcontact.tracker.feature.profile.ProfileFragment"
-        android:label="@string/profile_bottom_nav"
+        android:label="@string/profile_bottom_fragments"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/createContactNetworkFragment"
+        android:name="cat.covidcontact.tracker.feature.createcontactnetwork.CreateContactNetworkFragment"
+        android:label="@string/create_contact_network_fragment"
+        tools:layout="@layout/fragment_create_contact_network" />
 </navigation>

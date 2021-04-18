@@ -2,7 +2,7 @@ package cat.covidcontact.tracker.feature.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import cat.covidcontact.data.CommonException
-import cat.covidcontact.data.user.UserException
+import cat.covidcontact.data.repositories.user.UserException
 import cat.covidcontact.model.user.Gender
 import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.MainCoroutineRule

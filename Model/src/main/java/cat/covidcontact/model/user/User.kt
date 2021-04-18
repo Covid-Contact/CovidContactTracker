@@ -1,60 +1,67 @@
 package cat.covidcontact.model.user
 
-import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import cat.covidcontact.model.ContactNetwork
+import cat.covidcontact.model.post.PostUser
 
 class User(
-    @SerializedName("email")
-    val email: String,
-
-    @SerializedName("username")
     val username: String,
-
-    @SerializedName("gender")
-    val gender: Gender,
-
-    @SerializedName("birth_date")
-    val birthDate: Long,
-
-    @SerializedName("city")
+    val email: String = "",
+    val gender: Gender = Gender.Other,
+    val birthDate: Long = 0,
     var city: String? = null,
-
-    @SerializedName("studies")
     var studies: String? = null,
-
-    @SerializedName("occupation")
     var occupation: Occupation? = null,
-
-    @SerializedName("marriage")
     var marriage: Marriage? = null,
-
-    @SerializedName("children")
     var children: Int? = null,
-
-    @SerializedName("has_been_positive")
     var hasBeenPositive: Boolean? = null,
-
-    @SerializedName("is_vaccinated")
     var isVaccinated: Boolean? = null
-) : Serializable {
+) {
+    private val _contactNetworks: MutableList<ContactNetwork> = mutableListOf()
+    val contactNetworks: List<ContactNetwork>
+        get() = _contactNetworks
+
+    fun addContactNetwork(contactNetwork: ContactNetwork) {
+        _contactNetworks.add(contactNetwork)
+    }
+
+    fun addContactNetworks(contactNetworks: List<ContactNetwork>) {
+        contactNetworks.forEach { addContactNetwork(it) }
+    }
+
+    fun createPost(): PostUser {
+        return PostUser(
+            username,
+            email,
+            gender,
+            birthDate,
+            city,
+            studies,
+            occupation,
+            marriage,
+            children,
+            hasBeenPositive,
+            isVaccinated
+        )
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
         other as User
 
-        if (email != other.email) return false
+        if (username != other.username) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return email.hashCode()
+        return username.hashCode()
     }
 
-    override fun toString() =
-        "User(email='$email', " +
-            "username='$username', " +
+    override fun toString(): String {
+        return "User(username='$username', " +
+            "email='$email', " +
             "gender=$gender, " +
             "birthDate=$birthDate, " +
             "city=$city, " +
@@ -63,6 +70,28 @@ class User(
             "marriage=$marriage, " +
             "children=$children, " +
             "hasBeenPositive=$hasBeenPositive, " +
-            "isVaccinated=$isVaccinated)"
+            "isVaccinated=$isVaccinated, " +
+            "contactNetworks=$contactNetworks)"
+    }
 
+    companion object {
+        @JvmStatic
+        fun fromPost(postUser: PostUser): User {
+            return with(postUser) {
+                User(
+                    username,
+                    email,
+                    gender,
+                    birthDate,
+                    city,
+                    studies,
+                    occupation,
+                    marriage,
+                    children,
+                    hasBeenPositive,
+                    isVaccinated
+                )
+            }
+        }
+    }
 }

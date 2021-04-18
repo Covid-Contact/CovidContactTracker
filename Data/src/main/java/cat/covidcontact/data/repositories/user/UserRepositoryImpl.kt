@@ -1,11 +1,12 @@
-package cat.covidcontact.data.user
+package cat.covidcontact.data.repositories.user
 
 import cat.covidcontact.data.CommonException
 import cat.covidcontact.data.controllers.CovidContactBaseController
 import cat.covidcontact.data.controllers.HttpStatus
-import cat.covidcontact.data.controllers.UserController
+import cat.covidcontact.data.controllers.user.UserController
 import cat.covidcontact.model.ApplicationUser
 import cat.covidcontact.model.Device
+import cat.covidcontact.model.post.PostUser
 import cat.covidcontact.model.user.User
 import com.google.gson.Gson
 
@@ -70,11 +71,12 @@ class UserRepositoryImpl(
             }
         }
 
-        return Gson().fromJson(serverResponse.result.get(), User::class.java)
+        val postUser = Gson().fromJson(serverResponse.result.get(), PostUser::class.java)
+        return User.fromPost(postUser)
     }
 
     override suspend fun addUserData(user: User): String {
-        val serverResponse = userController.addUserData(user)
+        val serverResponse = userController.addUserData(user.createPost())
         serverResponse.response.statusCode.run {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
@@ -88,7 +90,7 @@ class UserRepositoryImpl(
     }
 
     override suspend fun registerUserDevice(email: String, device: Device) {
-        val serverResponse = userController.registerUserDevice(email, device)
+        val serverResponse = userController.registerUserDevice(email, device.createPost())
         serverResponse.response.statusCode.run {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/contactNetworkBorder"
+            android:layout_width="6dp"
+            android:layout_height="match_parent"
+            android:background="@color/primaryColor"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/contactNetworkName"
+                    style="@style/card_title"
+                    tools:text="TownTeam" />
+
+                <TextView
+                    android:id="@+id/contactNetworkCode"
+                    style="@style/card_secondary_text"
+                    tools:text="#1234" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/contactNetworkWithPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_private"
+                    app:tint="@color/primaryColor" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/contactNetworkState"
+                    style="@style/card_secondary_text"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    tools:text="Invisible" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/contactNetworkExpandIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_expand" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contactNetworkExpandable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/contactNetworkOwner"
+                    style="@style/card_secondary_text"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/black"
+                    tools:text="Created by AlbertPG" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtCancelContactNetworkCreation"
+                        style="@style/card_secondary_text"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center_horizontal|start"
+                        android:text="@string/quit"
+                        android:textAllCaps="true"
+                        android:textColor="@color/red"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/contactNetworkConfiguration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_settings" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,7 +1,7 @@
 package cat.covidcontact.tracker.feature.login
 
 import androidx.lifecycle.*
-import cat.covidcontact.data.user.UserException
+import cat.covidcontact.data.repositories.user.UserException
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.fieldvalidator.FieldValidator

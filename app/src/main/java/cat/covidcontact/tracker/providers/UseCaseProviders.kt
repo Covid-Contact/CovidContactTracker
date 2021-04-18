@@ -1,8 +1,11 @@
 package cat.covidcontact.tracker.providers
 
-import cat.covidcontact.data.user.UserRepository
+import cat.covidcontact.data.repositories.contactnetworks.ContactNetworkRepository
+import cat.covidcontact.data.repositories.user.UserRepository
 import cat.covidcontact.usecases.adduserdata.AddUserData
 import cat.covidcontact.usecases.adduserdata.AddUserDataImpl
+import cat.covidcontact.usecases.createContactNetwork.CreateContactNetwork
+import cat.covidcontact.usecases.createContactNetwork.CreateContactNetworkImpl
 import cat.covidcontact.usecases.getuserdata.GetUserData
 import cat.covidcontact.usecases.getuserdata.GetUserDataImpl
 import cat.covidcontact.usecases.login.MakeLogIn
@@ -37,7 +40,8 @@ class UseCaseProviders {
     @Singleton
     fun provideGetUserData(
         userRepository: UserRepository,
-    ): GetUserData = GetUserDataImpl(userRepository)
+        contactNetworkRepository: ContactNetworkRepository
+    ): GetUserData = GetUserDataImpl(userRepository, contactNetworkRepository)
 
     @Provides
     @Singleton
@@ -50,4 +54,10 @@ class UseCaseProviders {
     fun provideRegisterDevice(
         userRepository: UserRepository
     ): RegisterDevice = RegisterDeviceImpl(userRepository)
+
+    @Provides
+    @Singleton
+    fun provideCreateContactNetwork(
+        contactNetworkRepository: ContactNetworkRepository
+    ): CreateContactNetwork = CreateContactNetworkImpl(contactNetworkRepository)
 }

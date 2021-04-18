@@ -2,8 +2,8 @@ package cat.covidcontact.usecases.signup
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import cat.covidcontact.data.CommonException
-import cat.covidcontact.data.user.UserException
-import cat.covidcontact.data.user.UserRepository
+import cat.covidcontact.data.repositories.user.UserException
+import cat.covidcontact.data.repositories.user.UserRepository
 import cat.covidcontact.usecases.MainCoroutineRule
 import cat.covidcontact.usecases.UseCaseResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi

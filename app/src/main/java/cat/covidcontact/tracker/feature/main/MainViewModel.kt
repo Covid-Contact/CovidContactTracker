@@ -1,12 +1,16 @@
 package cat.covidcontact.tracker.feature.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import cat.covidcontact.data.user.UserException
+import cat.covidcontact.data.repositories.user.UserException
+import cat.covidcontact.model.ContactNetwork
 import cat.covidcontact.model.Device
 import cat.covidcontact.model.UserDevice
 import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
+import cat.covidcontact.tracker.common.extensions.notify
 import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler
 import cat.covidcontact.usecases.getuserdata.GetUserData
 import cat.covidcontact.usecases.registerDevice.RegisterDevice
@@ -19,7 +23,9 @@ class MainViewModel @Inject constructor(
     private val getUserData: GetUserData,
     private val registerDevice: RegisterDevice
 ) : BaseViewModel() {
-    private lateinit var userDevice: UserDevice
+    private val _userDevice = MutableLiveData<UserDevice>()
+    val userDevice: LiveData<UserDevice>
+        get() = _userDevice
 
     private val getUserDataHandler = UseCaseResultHandler<GetUserData.Response>(
         onSuccess = { MainState.UserInfoFound(it.user) },
@@ -33,7 +39,7 @@ class MainViewModel @Inject constructor(
 
     private val registerDeviceHandler = UseCaseResultHandler<RegisterDevice.Response>(
         onSuccess = {
-            userDevice = it.userDevice
+            _userDevice.value = it.userDevice
             MainState.DeviceRegistered
         },
         onFailure = { ScreenState.Nothing }
@@ -53,5 +59,10 @@ class MainViewModel @Inject constructor(
                 RegisterDevice.Request(user, device)
             }
         }
+    }
+
+    fun onAddContactNetwork(contactNetwork: ContactNetwork) {
+        _userDevice.value?.user?.addContactNetwork(contactNetwork)
+        _userDevice.notify()
     }
 }

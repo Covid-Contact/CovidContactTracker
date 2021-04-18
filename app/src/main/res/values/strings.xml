@@ -17,6 +17,8 @@
         There has been an unexpected error.
         Please contact the support service
     </string>
+    <string name="optional">Optional</string>
+    <string name="close">Close</string>
 
     <!-- Authentication -->
     <string name="email">Email</string>
@@ -79,9 +81,33 @@
     <string name="being_positive">Have you been positive?</string>
     <string name="being_vaccinated">Have you been vaccinated?</string>
 
-    <!-- Main fragment -->
-    <string name="contact_networks_bottom_nav">Contact Networks</string>
-    <string name="search_contact_networks_bottom_nav">Search</string>
-    <string name="profile_bottom_nav">Profile</string>
+    <!-- Fragment names -->
+    <string name="contact_networks_fragment">Contact Networks</string>
+    <string name="search_contact_networks_fragment">Search</string>
+    <string name="profile_bottom_fragments">Profile</string>
+    <string name="create_contact_network_fragment">Create Contact Network</string>
+
+    <!-- Contact networks -->
+    <string name="quit">Quit</string>
+    <string name="owner_info">Created by %s</string>
+    <string name="network_normal">Normal</string>
+    <string name="network_almost_limit">Almost limit</string>
+    <string name="network_limit">Limit</string>
+    <string name="network_over_limit">Over limit</string>
+    <string name="network_positive_detected">Positive detected</string>
+
+    <!-- Create Contact Network fragment -->
+    <string name="create_contact_network_title">Create contact network</string>
+    <string name="create_contact_network_content_description">
+        @string/create_contact_network_title
+    </string>
+    <string name="contact_network_name">Name</string>
+    <string name="contact_network_password">Password</string>
+    <string name="contact_network_name_cannot_be_empty">The name cannot be empty</string>
+    <string name="contact_network_existing_title">Existing name</string>
+    <string name="contact_network_existing_message">
+        You already have a contact network with that name, please choose another one.
+    </string>
+    <string name="create">Create</string>
 
 </resources>
