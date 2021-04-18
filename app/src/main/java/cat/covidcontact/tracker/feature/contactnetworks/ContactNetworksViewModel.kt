@@ -24,4 +24,8 @@ class ContactNetworksViewModel @Inject constructor(
     fun onLoadContactNetworks(user: User) {
         _contactNetworks.value = user.contactNetworks
     }
+
+    fun onShowContactNetworkSettings(contactNetwork: ContactNetwork) {
+        loadState(ContactNetworksState.ShowContactNetworkSettings(contactNetwork))
+    }
 }

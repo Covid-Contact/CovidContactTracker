@@ -12,6 +12,10 @@
         <action
             android:id="@+id/action_contactNetworksFragment_to_createContactNetworkFragment"
             app:destination="@id/createContactNetworkFragment" />
+        <action
+            android:id="@+id/action_contactNetworksFragment_to_contactNetworkSettingsFragment"
+            app:destination="@id/contactNetworkSettingsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -28,4 +32,16 @@
         android:name="cat.covidcontact.tracker.feature.createcontactnetwork.CreateContactNetworkFragment"
         android:label="@string/create_contact_network_fragment"
         tools:layout="@layout/fragment_create_contact_network" />
+    <fragment
+        android:id="@+id/contactNetworkSettingsFragment"
+        android:name="cat.covidcontact.tracker.feature.contactnetworksettings.ContactNetworkSettingsFragment"
+        android:label="{name}"
+        tools:layout="@layout/fragment_contact_network_settings">
+        <argument
+            android:name="contactNetwork"
+            app:argType="cat.covidcontact.model.ContactNetwork" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
 </navigation>

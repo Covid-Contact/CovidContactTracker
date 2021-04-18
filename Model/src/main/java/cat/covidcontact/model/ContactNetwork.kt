@@ -2,6 +2,7 @@ package cat.covidcontact.model
 
 import cat.covidcontact.model.post.PostContactNetwork
 import cat.covidcontact.model.user.User
+import java.io.Serializable
 
 class ContactNetwork(
     val name: String,
@@ -10,7 +11,7 @@ class ContactNetwork(
     val isVisible: Boolean = true,
     val isPasswordProtected: Boolean = false,
     val networkState: NetworkState = NetworkState.Normal
-) {
+) : Serializable {
 
     fun createPost(): PostContactNetwork {
         return PostContactNetwork(

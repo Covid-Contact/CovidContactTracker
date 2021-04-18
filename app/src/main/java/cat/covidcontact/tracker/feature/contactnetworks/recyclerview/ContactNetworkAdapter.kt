@@ -23,7 +23,7 @@ class ContactNetworkAdapter(
     private val currentUsername: String,
     private val colorManager: ColorManager<NetworkState>,
     private val textManager: TextManager<NetworkState>,
-    private val onSettingsClick: () -> Unit = {}
+    private val onSettingsClick: (ContactNetwork) -> Unit = {}
 ) : ListAdapter<ContactNetwork, ContactNetworkAdapter.ContactNetworkViewHolder>(
     ContactNetworkDiff
 ), ColorManager<NetworkState> by colorManager, TextManager<NetworkState> by textManager {
@@ -53,7 +53,7 @@ class ContactNetworkAdapter(
             contactNetworkBorder.setBackgroundColor(cardColor)
             contactNetworkConfiguration.visibility =
                 if (isCurrentUserOwner) View.VISIBLE else View.GONE
-            contactNetworkConfiguration.setOnClickListener { onSettingsClick() }
+            contactNetworkConfiguration.setOnClickListener { onSettingsClick(contactNetwork) }
             contactNetworkQuit.visibility =
                 if (!isCurrentUserOwner) View.VISIBLE else View.GONE
 

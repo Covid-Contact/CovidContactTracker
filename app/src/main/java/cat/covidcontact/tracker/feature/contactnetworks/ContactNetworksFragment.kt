@@ -31,6 +31,14 @@ class ContactNetworksFragment : BaseFragment() {
                     .actionContactNetworksFragmentToCreateContactNetworkFragment()
                 navigate(action)
             }
+            is ContactNetworksState.ShowContactNetworkSettings -> {
+                val action = ContactNetworksFragmentDirections
+                    .actionContactNetworksFragmentToContactNetworkSettingsFragment(
+                        state.contactNetwork,
+                        state.contactNetwork.name
+                    )
+                navigate(action)
+            }
         }
     }
 
@@ -63,16 +71,17 @@ class ContactNetworksFragment : BaseFragment() {
     }
 
     private fun MainViewModel.observe() {
-        userDevice.observe(viewLifecycleOwner) {
+        userDevice.observe(viewLifecycleOwner) { userDevice ->
             adapter = ContactNetworkAdapter(
                 requireContext(),
-                it.user.username,
+                userDevice.user.username,
                 NetworkCardStateColor(),
-                NetworkCardStateText()
+                NetworkCardStateText(),
+                onSettingsClick = { viewModel.onShowContactNetworkSettings(it) }
             )
             binding.contactNetworkList.adapter = adapter
             binding.contactNetworkList.layoutManager = LinearLayoutManager(requireContext())
-            viewModel.onLoadContactNetworks(it.user)
+            viewModel.onLoadContactNetworks(userDevice.user)
         }
     }
 
