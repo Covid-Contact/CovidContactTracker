@@ -7,7 +7,8 @@ class ContactNetwork(
     val name: String,
     val password: String? = null,
     val owner: User,
-    val networkState: NetworkState = NetworkState.PositiveDetected
+    val isVisible: Boolean = true,
+    val networkState: NetworkState = NetworkState.Normal
 ) {
 
     fun createPost(): PostContactNetwork {

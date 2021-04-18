@@ -13,6 +13,7 @@ class CreateContactNetworkImpl @Inject constructor(
             contactNetworkRepository.createContactNetwork(name, password, owner)
         }
 
+        request.owner.addContactNetwork(contactNetwork)
         CreateContactNetwork.Response(contactNetwork)
     }
 }

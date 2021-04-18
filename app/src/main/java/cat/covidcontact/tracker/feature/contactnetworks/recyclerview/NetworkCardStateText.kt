@@ -8,8 +8,7 @@ class NetworkCardStateText : TextManager<NetworkState> {
 
     override fun getTextFromValue(value: NetworkState): Int {
         return when (value) {
-            NetworkState.Visible -> R.string.network_visible
-            NetworkState.Invisible -> R.string.network_invisible
+            NetworkState.Normal -> R.string.network_normal
             NetworkState.AlmostLimit -> R.string.network_almost_limit
             NetworkState.Limit -> R.string.network_limit
             NetworkState.OverLimit -> R.string.network_over_limit

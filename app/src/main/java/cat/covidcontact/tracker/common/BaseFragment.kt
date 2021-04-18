@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import cat.covidcontact.tracker.common.extensions.observeScreenState
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 
@@ -28,6 +31,19 @@ abstract class BaseFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
+        viewModel.onLoadNothing()
+    }
+
+    protected fun navigate(
+        action: NavDirections,
+        navController: NavController = findNavController()
+    ) {
+        navController.navigate(action)
+        viewModel.onLoadNothing()
+    }
+
+    protected fun navigateUp(navController: NavController = findNavController()) {
+        navController.navigateUp()
         viewModel.onLoadNothing()
     }
 }

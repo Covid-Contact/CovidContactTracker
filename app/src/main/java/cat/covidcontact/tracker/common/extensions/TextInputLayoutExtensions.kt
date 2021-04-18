@@ -6,6 +6,9 @@ import android.widget.AutoCompleteTextView
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import cat.covidcontact.tracker.R
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
@@ -89,4 +92,20 @@ fun TextInputLayout.setText(text: String) {
 
 fun TextInputLayout.setText(@StringRes textId: Int) {
     editText?.setText(textId)
+}
+
+fun TextInputLayout.observeText(liveData: MutableLiveData<String>) {
+    editText?.addTextChangedListener(
+        onTextChanged = { text, _, _, _ -> liveData.value = text.toString() }
+    )
+}
+
+fun TextInputLayout.observeError(
+    lifecycleOwner: LifecycleOwner,
+    errorMsg: String,
+    liveData: LiveData<Boolean>
+) {
+    liveData.observe(lifecycleOwner) {
+        showErrorIf(it, errorMsg)
+    }
 }
