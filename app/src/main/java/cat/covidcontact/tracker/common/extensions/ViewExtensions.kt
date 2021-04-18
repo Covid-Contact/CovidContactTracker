@@ -9,3 +9,9 @@ fun View.observeEnabled(lifecycleOwner: LifecycleOwner, liveData: LiveData<Boole
         isEnabled = it
     }
 }
+
+fun View.observeVisible(lifecycleOwner: LifecycleOwner, liveData: LiveData<Boolean>) {
+    liveData.observe(lifecycleOwner) { isVisible ->
+        visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+}

@@ -8,6 +8,7 @@ class ContactNetwork(
     val password: String? = null,
     val owner: User,
     val isVisible: Boolean = true,
+    val isPasswordProtected: Boolean = false,
     val networkState: NetworkState = NetworkState.Normal
 ) {
 
@@ -45,7 +46,13 @@ class ContactNetwork(
         @JvmStatic
         fun fromPost(postContactNetwork: PostContactNetwork): ContactNetwork {
             return with(postContactNetwork) {
-                ContactNetwork(name, password, User(ownerUsername))
+                ContactNetwork(
+                    name = name,
+                    password = password,
+                    owner = User(ownerUsername),
+                    isVisible = isVisible,
+                    isPasswordProtected = isPasswordProtected
+                )
             }
         }
     }
