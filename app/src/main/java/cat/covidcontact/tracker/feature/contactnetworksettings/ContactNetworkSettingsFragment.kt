@@ -8,12 +8,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
-import cat.covidcontact.tracker.databinding.FragmentContactNetworksBinding
+import cat.covidcontact.tracker.databinding.FragmentContactNetworkSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ContactNetworkSettingsFragment : BaseFragment() {
-    private lateinit var binding: FragmentContactNetworksBinding
+    private lateinit var binding: FragmentContactNetworkSettingsBinding
     private val args: ContactNetworkSettingsFragmentArgs by navArgs()
 
     override val viewModel: ContactNetworkSettingsViewModel by viewModels()
@@ -27,7 +27,7 @@ class ContactNetworkSettingsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding = FragmentContactNetworksBinding.inflate(inflater, container, false)
+        binding = FragmentContactNetworkSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 

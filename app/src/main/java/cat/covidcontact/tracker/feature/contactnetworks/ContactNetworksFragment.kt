@@ -53,7 +53,14 @@ class ContactNetworksFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
+
         refreshContactNetworkList()
+        showFloatingActionButton()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideFloatingActionButton()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,7 +70,7 @@ class ContactNetworksFragment : BaseFragment() {
     }
 
     private fun FragmentContactNetworksBinding.bind() {
-        btnCreateContactNetwork.setOnClickListener {
+        flBtnCreateContactNetwork.setOnClickListener {
             viewModel.onCreateContactNetworkDialog()
         }
 
@@ -89,5 +96,13 @@ class ContactNetworksFragment : BaseFragment() {
         mainViewModel.userDevice.value?.let {
             viewModel.onLoadContactNetworks(it.user)
         }
+    }
+
+    private fun showFloatingActionButton() {
+        binding.flBtnCreateContactNetwork.show()
+    }
+
+    private fun hideFloatingActionButton() {
+        binding.flBtnCreateContactNetwork.hide()
     }
 }
