@@ -70,6 +70,7 @@ class ContactNetworksFragment : BaseFragment() {
     }
 
     private fun FragmentContactNetworksBinding.bind() {
+        flBtnCreateContactNetwork.hide()
         flBtnCreateContactNetwork.setOnClickListener {
             viewModel.onCreateContactNetworkDialog()
         }
@@ -79,6 +80,8 @@ class ContactNetworksFragment : BaseFragment() {
 
     private fun MainViewModel.observe() {
         userDevice.observe(viewLifecycleOwner) { userDevice ->
+            binding.flBtnCreateContactNetwork.show()
+
             adapter = ContactNetworkAdapter(
                 requireContext(),
                 userDevice.user.username,

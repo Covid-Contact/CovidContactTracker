@@ -19,6 +19,7 @@ class ContactNetworkControllerImpl : ContactNetworkController() {
         contactNetworkName: String,
         isEnabled: Boolean
     ): ServerResponse {
-        return put("$url/$contactNetworkName", listOf("isEnabled" to isEnabled))
+        val name = contactNetworkName.replace(" ", "%20").replace("#", "%23")
+        return put("$url/$name", listOf("isEnabled" to isEnabled))
     }
 }
