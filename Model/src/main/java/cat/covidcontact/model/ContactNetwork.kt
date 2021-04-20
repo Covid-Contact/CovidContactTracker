@@ -2,14 +2,16 @@ package cat.covidcontact.model
 
 import cat.covidcontact.model.post.PostContactNetwork
 import cat.covidcontact.model.user.User
+import java.io.Serializable
 
 class ContactNetwork(
     val name: String,
     val password: String? = null,
     val owner: User,
-    val isVisible: Boolean = true,
+    var isVisible: Boolean = false,
+    val isPasswordProtected: Boolean = false,
     val networkState: NetworkState = NetworkState.Normal
-) {
+) : Serializable {
 
     fun createPost(): PostContactNetwork {
         return PostContactNetwork(
@@ -45,7 +47,13 @@ class ContactNetwork(
         @JvmStatic
         fun fromPost(postContactNetwork: PostContactNetwork): ContactNetwork {
             return with(postContactNetwork) {
-                ContactNetwork(name, password, User(ownerUsername))
+                ContactNetwork(
+                    name = name,
+                    password = password,
+                    owner = User(ownerUsername),
+                    isVisible = isVisible,
+                    isPasswordProtected = isPasswordProtected
+                )
             }
         }
     }

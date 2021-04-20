@@ -14,13 +14,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/contactNetworkList"
             android:layout_width="match_parent"
-            android:layout_height="500dp" />
+            android:layout_height="match_parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnCreateContactNetwork"
+            android:id="@+id/flBtnCreateContactNetwork"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/app_padding_half"
+            android:layout_marginBottom="@dimen/app_padding_half"
             android:contentDescription="@string/create_contact_network_content_description"
             app:backgroundTint="@color/primaryColor"
             app:srcCompat="@drawable/ic_add"

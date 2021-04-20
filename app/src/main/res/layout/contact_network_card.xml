@@ -38,7 +38,7 @@
 
                 <TextView
                     android:id="@+id/contactNetworkCode"
-                    style="@style/card_secondary_text"
+                    style="@style/card_secondary_text_weight"
                     tools:text="#1234" />
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -59,7 +59,7 @@
 
                 <TextView
                     android:id="@+id/contactNetworkState"
-                    style="@style/card_secondary_text"
+                    style="@style/card_secondary_text_weight"
                     android:layout_width="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/roboto_medium"
@@ -88,7 +88,7 @@
 
                 <TextView
                     android:id="@+id/contactNetworkOwner"
-                    style="@style/card_secondary_text"
+                    style="@style/card_secondary_text_weight"
                     android:layout_width="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:textColor="@android:color/black"
@@ -98,13 +98,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:gravity="end"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/txtCancelContactNetworkCreation"
+                        android:id="@+id/contactNetworkQuit"
                         style="@style/card_secondary_text"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="center_horizontal|start"
+                        android:layout_width="wrap_content"
                         android:text="@string/quit"
                         android:textAllCaps="true"
                         android:textColor="@color/red"

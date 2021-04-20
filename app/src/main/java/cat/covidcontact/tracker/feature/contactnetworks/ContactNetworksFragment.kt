@@ -31,6 +31,14 @@ class ContactNetworksFragment : BaseFragment() {
                     .actionContactNetworksFragmentToCreateContactNetworkFragment()
                 navigate(action)
             }
+            is ContactNetworksState.ShowContactNetworkSettings -> {
+                val action = ContactNetworksFragmentDirections
+                    .actionContactNetworksFragmentToContactNetworkSettingsFragment(
+                        state.contactNetwork,
+                        state.contactNetwork.name
+                    )
+                navigate(action)
+            }
         }
     }
 
@@ -45,7 +53,14 @@ class ContactNetworksFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
+
         refreshContactNetworkList()
+        showFloatingActionButton()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideFloatingActionButton()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +70,8 @@ class ContactNetworksFragment : BaseFragment() {
     }
 
     private fun FragmentContactNetworksBinding.bind() {
-        btnCreateContactNetwork.setOnClickListener {
+        flBtnCreateContactNetwork.hide()
+        flBtnCreateContactNetwork.setOnClickListener {
             viewModel.onCreateContactNetworkDialog()
         }
 
@@ -63,16 +79,19 @@ class ContactNetworksFragment : BaseFragment() {
     }
 
     private fun MainViewModel.observe() {
-        userDevice.observe(viewLifecycleOwner) {
+        userDevice.observe(viewLifecycleOwner) { userDevice ->
+            binding.flBtnCreateContactNetwork.show()
+
             adapter = ContactNetworkAdapter(
                 requireContext(),
-                it.user.username,
+                userDevice.user.username,
                 NetworkCardStateColor(),
-                NetworkCardStateText()
+                NetworkCardStateText(),
+                onSettingsClick = { viewModel.onShowContactNetworkSettings(it) }
             )
             binding.contactNetworkList.adapter = adapter
             binding.contactNetworkList.layoutManager = LinearLayoutManager(requireContext())
-            viewModel.onLoadContactNetworks(it.user)
+            viewModel.onLoadContactNetworks(userDevice.user)
         }
     }
 
@@ -80,5 +99,13 @@ class ContactNetworksFragment : BaseFragment() {
         mainViewModel.userDevice.value?.let {
             viewModel.onLoadContactNetworks(it.user)
         }
+    }
+
+    private fun showFloatingActionButton() {
+        binding.flBtnCreateContactNetwork.show()
+    }
+
+    private fun hideFloatingActionButton() {
+        binding.flBtnCreateContactNetwork.hide()
     }
 }

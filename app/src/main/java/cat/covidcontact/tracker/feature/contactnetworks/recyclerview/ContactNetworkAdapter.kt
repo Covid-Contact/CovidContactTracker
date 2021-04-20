@@ -23,7 +23,7 @@ class ContactNetworkAdapter(
     private val currentUsername: String,
     private val colorManager: ColorManager<NetworkState>,
     private val textManager: TextManager<NetworkState>,
-    private val onSettingsClick: () -> Unit = {}
+    private val onSettingsClick: (ContactNetwork) -> Unit = {}
 ) : ListAdapter<ContactNetwork, ContactNetworkAdapter.ContactNetworkViewHolder>(
     ContactNetworkDiff
 ), ColorManager<NetworkState> by colorManager, TextManager<NetworkState> by textManager {
@@ -42,17 +42,20 @@ class ContactNetworkAdapter(
             val displayOwner = context.getString(R.string.owner_info, contactNetwork.owner.username)
             val cardColor = context.getColor(getColorFromValue(contactNetwork.networkState))
             val cardNetworkState = context.getString(getTextFromValue(contactNetwork.networkState))
+            val isCurrentUserOwner = contactNetwork.owner.username == currentUsername
 
             contactNetworkName.text = name
             contactNetworkCode.text = displayCode
             contactNetworkWithPassword.visibility =
-                if (contactNetwork.password == null) View.GONE else View.VISIBLE
+                if (contactNetwork.isPasswordProtected) View.VISIBLE else View.GONE
             contactNetworkOwner.text = displayOwner
             contactNetworkState.text = cardNetworkState
             contactNetworkBorder.setBackgroundColor(cardColor)
             contactNetworkConfiguration.visibility =
-                if (contactNetwork.owner.username == currentUsername) View.VISIBLE else View.GONE
-            contactNetworkConfiguration.setOnClickListener { onSettingsClick() }
+                if (isCurrentUserOwner) View.VISIBLE else View.GONE
+            contactNetworkConfiguration.setOnClickListener { onSettingsClick(contactNetwork) }
+            contactNetworkQuit.visibility =
+                if (!isCurrentUserOwner) View.VISIBLE else View.GONE
 
             binding.root.setOnClickListener {
                 TransitionManager.beginDelayedTransition(binding.root, AutoTransition())
