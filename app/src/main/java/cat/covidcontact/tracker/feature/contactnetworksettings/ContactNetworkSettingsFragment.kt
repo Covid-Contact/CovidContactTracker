@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.observeChecked
+import cat.covidcontact.tracker.common.extensions.observeEnabled
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentContactNetworkSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,5 +45,8 @@ class ContactNetworkSettingsFragment : BaseFragment() {
         swEnableUserAddition.setOnCheckedChangeListener { view, isChecked ->
             viewModel.onEnableUsersAddition(isChecked)
         }
+
+        swEnablePasswordAddition.observeEnabled(viewLifecycleOwner, viewModel.isPasswordEnabled)
+        swEnablePasswordAddition.observeChecked(viewLifecycleOwner, viewModel.isPasswordChecked)
     }
 }

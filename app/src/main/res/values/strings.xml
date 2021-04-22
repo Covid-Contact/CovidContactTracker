@@ -113,5 +113,6 @@
     <!-- Contact Network Settings fragment -->
     <string name="visibility_configuration">Visibility configuration</string>
     <string name="enable_users_addition">Allow users to join</string>
+    <string name="enable_password_user_addition">Request password to join</string>
 
 </resources>

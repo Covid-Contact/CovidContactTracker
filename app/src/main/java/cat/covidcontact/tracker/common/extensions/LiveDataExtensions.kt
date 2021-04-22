@@ -3,6 +3,7 @@ package cat.covidcontact.tracker.common.extensions
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import cat.covidcontact.tracker.ScreenState
+import cat.covidcontact.tracker.common.CombinedLiveData
 import cat.covidcontact.tracker.common.handlers.InvalidFieldHandler
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import com.google.android.material.button.MaterialButton
@@ -39,3 +40,6 @@ fun LiveData<Boolean>.observerButtonEnabled(
         button.isEnabled = isEnabled
     }
 }
+
+fun <T, K, S> LiveData<T>.combine(liveData: LiveData<K>, combine: (T?, K?) -> S) =
+    CombinedLiveData(this, liveData, combine)

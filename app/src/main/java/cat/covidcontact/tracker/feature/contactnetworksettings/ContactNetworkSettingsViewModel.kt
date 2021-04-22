@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import cat.covidcontact.model.ContactNetwork
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
+import cat.covidcontact.tracker.common.extensions.combine
 import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAddition
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,12 @@ class ContactNetworkSettingsViewModel @Inject constructor(
 ) : BaseViewModel() {
     val contactNetwork = MutableLiveData<ContactNetwork>()
     val isVisibleChecked = contactNetwork.map { it.isVisible }
+    val isPasswordEnabled = isVisibleChecked.combine(contactNetwork) { isVisible, network ->
+        isVisible != null && isVisible && !network?.password.isNullOrEmpty()
+    }
+    val isPasswordChecked = isPasswordEnabled.combine(contactNetwork) { isEnabled, network ->
+        isEnabled != null && network != null && isEnabled && network.isPasswordProtected
+    }
 
     private val enableUserAdditionHandler = UseCaseResultHandler<EnableUserAddition.Response>(
         onSuccess = { ScreenState.Nothing },
