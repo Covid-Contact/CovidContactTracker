@@ -9,6 +9,7 @@ import cat.covidcontact.model.ContactNetwork
 import cat.covidcontact.model.post.PostContactNetwork
 import cat.covidcontact.model.user.User
 import com.google.gson.Gson
+import java.security.MessageDigest
 import javax.inject.Inject
 
 class ContactNetworkRepositoryImpl @Inject constructor(
@@ -23,7 +24,7 @@ class ContactNetworkRepositoryImpl @Inject constructor(
         val serverResponse = contactNetworkController.createContactNetwork(
             PostContactNetwork(
                 name = name,
-                password = password,
+                password = password?.hashPassword(),
                 ownerEmail = owner.email,
                 ownerUsername = owner.username
             )
@@ -78,5 +79,11 @@ class ContactNetworkRepositoryImpl @Inject constructor(
                 else -> throw CommonException.OtherError
             }
         }
+    }
+
+    private fun String.hashPassword(): String {
+        return MessageDigest.getInstance("SHA-256")
+            .digest(toByteArray())
+            .fold("", { str, it -> str + "%02x".format(it) })
     }
 }

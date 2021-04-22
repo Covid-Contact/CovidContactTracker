@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/app_padding"
     tools:context=".feature.contactnetworksettings.ContactNetworkSettingsFragment">
 
@@ -23,6 +24,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/enable_users_addition" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/swEnablePasswordAddition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enable_password_user_addition" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtJoinPassword"
+            style="@style/fullWidthTextInputLayout"
+            android:hint="@string/contact_network_password"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
