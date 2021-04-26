@@ -3,6 +3,7 @@
     <dimen name="app_padding">20dp</dimen>
     <dimen name="app_padding_half">10dp</dimen>
     <dimen name="space">20dp</dimen>
+    <dimen name="space_more">30dp</dimen>
     <dimen name="auth_text">16sp</dimen>
     <dimen name="button_bottom_margin">32dp</dimen>
     <dimen name="user_info_title_margin">64dp</dimen>

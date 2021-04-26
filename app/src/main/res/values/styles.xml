@@ -156,6 +156,10 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
+    <style name="access_code" parent="section_title">
+        <item name="android:letterSpacing">1</item>
+    </style>
+
     <style name="divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
