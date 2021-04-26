@@ -81,6 +81,20 @@ class ContactNetworkRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun generateAccessCode(email: String, contactNetworkName: String): String {
+        val serverResponse = contactNetworkController.generateAccessCode(email, contactNetworkName)
+
+        serverResponse.response.statusCode.run {
+            when (this) {
+                CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
+                HttpStatus.OK -> return@run
+                else -> CommonException.OtherError
+            }
+        }
+
+        return serverResponse.result.get()
+    }
+
     private fun String.hashPassword(): String {
         return MessageDigest.getInstance("SHA-256")
             .digest(toByteArray())

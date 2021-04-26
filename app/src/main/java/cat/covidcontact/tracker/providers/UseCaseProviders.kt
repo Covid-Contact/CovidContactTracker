@@ -8,6 +8,8 @@ import cat.covidcontact.usecases.createContactNetwork.CreateContactNetwork
 import cat.covidcontact.usecases.createContactNetwork.CreateContactNetworkImpl
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAddition
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAdditionImpl
+import cat.covidcontact.usecases.generateAccessCode.GenerateAccessCode
+import cat.covidcontact.usecases.generateAccessCode.GenerateAccessCodeImpl
 import cat.covidcontact.usecases.getuserdata.GetUserData
 import cat.covidcontact.usecases.getuserdata.GetUserDataImpl
 import cat.covidcontact.usecases.login.MakeLogIn
@@ -68,4 +70,10 @@ class UseCaseProviders {
     fun provideEnableUserAddition(
         contactNetworkRepository: ContactNetworkRepository
     ): EnableUserAddition = EnableUserAdditionImpl(contactNetworkRepository)
+
+    @Provides
+    @Singleton
+    fun provideGenerateAccessCode(
+        contactNetworkRepository: ContactNetworkRepository
+    ): GenerateAccessCode = GenerateAccessCodeImpl(contactNetworkRepository)
 }

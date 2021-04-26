@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.observeChecked
 import cat.covidcontact.tracker.common.extensions.observeEnabled
+import cat.covidcontact.tracker.common.extensions.observeVisible
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentContactNetworkSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,5 +49,11 @@ class ContactNetworkSettingsFragment : BaseFragment() {
 
         swEnablePasswordAddition.observeEnabled(viewLifecycleOwner, viewModel.isPasswordEnabled)
         swEnablePasswordAddition.observeChecked(viewLifecycleOwner, viewModel.isPasswordChecked)
+
+        txtAccessCode.observeVisible(viewLifecycleOwner, viewModel.isAccessCodeGenerated)
+
+        btnGenerateAccessCode.setOnClickListener {
+            viewModel.onGenerateAccessCode()
+        }
     }
 }

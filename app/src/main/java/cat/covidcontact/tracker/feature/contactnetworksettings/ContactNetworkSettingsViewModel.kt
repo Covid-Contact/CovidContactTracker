@@ -9,13 +9,15 @@ import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.extensions.combine
 import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAddition
+import cat.covidcontact.usecases.generateAccessCode.GenerateAccessCode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ContactNetworkSettingsViewModel @Inject constructor(
-    private val enableUserAddition: EnableUserAddition
+    private val enableUserAddition: EnableUserAddition,
+    private val generateAccessCode: GenerateAccessCode
 ) : BaseViewModel() {
     val contactNetwork = MutableLiveData<ContactNetwork>()
     val isVisibleChecked = contactNetwork.map { it.isVisible }
@@ -25,6 +27,8 @@ class ContactNetworkSettingsViewModel @Inject constructor(
     val isPasswordChecked = isPasswordEnabled.combine(contactNetwork) { isEnabled, network ->
         isEnabled != null && network != null && isEnabled && network.isPasswordProtected
     }
+
+    val isAccessCodeGenerated = contactNetwork.map { it.accessCode != null }
 
     private val enableUserAdditionHandler = UseCaseResultHandler<EnableUserAddition.Response>(
         onSuccess = { ScreenState.Nothing },
@@ -39,5 +43,9 @@ class ContactNetworkSettingsViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun onGenerateAccessCode() {
+
     }
 }

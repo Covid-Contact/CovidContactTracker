@@ -19,4 +19,9 @@ abstract class ContactNetworkController : CovidContactBaseController() {
         contactNetworkName: String,
         isEnabled: Boolean
     ): ServerResponse
+
+    abstract suspend fun generateAccessCode(
+        email: String,
+        contactNetworkName: String
+    ): ServerResponse
 }
