@@ -117,4 +117,7 @@
     <string name="access_code">Access code</string>
     <string name="access_code_generation">Generate access code</string>
 
+    <!-- Search -->
+    <string name="access_code_search">Access code</string>
+
 </resources>
