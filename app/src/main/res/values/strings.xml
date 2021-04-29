@@ -114,5 +114,7 @@
     <string name="visibility_configuration">Visibility configuration</string>
     <string name="enable_users_addition">Allow users to join</string>
     <string name="enable_password_user_addition">Request password to join</string>
+    <string name="access_code">Access code</string>
+    <string name="access_code_generation">Generate access code</string>
 
 </resources>

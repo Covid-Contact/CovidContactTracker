@@ -9,13 +9,15 @@ import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.extensions.combine
 import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAddition
+import cat.covidcontact.usecases.generateAccessCode.GenerateAccessCode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ContactNetworkSettingsViewModel @Inject constructor(
-    private val enableUserAddition: EnableUserAddition
+    private val enableUserAddition: EnableUserAddition,
+    private val generateAccessCode: GenerateAccessCode
 ) : BaseViewModel() {
     val contactNetwork = MutableLiveData<ContactNetwork>()
     val isVisibleChecked = contactNetwork.map { it.isVisible }
@@ -26,8 +28,19 @@ class ContactNetworkSettingsViewModel @Inject constructor(
         isEnabled != null && network != null && isEnabled && network.isPasswordProtected
     }
 
+    val isAccessCodeGenerated = contactNetwork.map { it.accessCode != null }
+
     private val enableUserAdditionHandler = UseCaseResultHandler<EnableUserAddition.Response>(
         onSuccess = { ScreenState.Nothing },
+        onFailure = { ScreenState.Nothing }
+    )
+
+    private val generateAccessCodeHandler = UseCaseResultHandler<GenerateAccessCode.Response>(
+        onSuccess = {
+            val accessCode = it.accessCode
+            contactNetwork.value?.accessCode = accessCode
+            ContactNetworkSettingsState.AccessCodeGenerated(accessCode)
+        },
         onFailure = { ScreenState.Nothing }
     )
 
@@ -36,6 +49,16 @@ class ContactNetworkSettingsViewModel @Inject constructor(
             contactNetwork.value?.let { contactNetwork ->
                 executeUseCase(enableUserAddition, enableUserAdditionHandler, false) {
                     EnableUserAddition.Request(contactNetwork, isEnabled)
+                }
+            }
+        }
+    }
+
+    fun onGenerateAccessCode(email: String) {
+        viewModelScope.launch {
+            contactNetwork.value?.let { contactNetwork ->
+                executeUseCase(generateAccessCode, generateAccessCodeHandler) {
+                    GenerateAccessCode.Request(email, contactNetwork.name)
                 }
             }
         }

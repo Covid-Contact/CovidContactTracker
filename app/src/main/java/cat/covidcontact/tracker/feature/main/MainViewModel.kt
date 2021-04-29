@@ -65,4 +65,6 @@ class MainViewModel @Inject constructor(
         _userDevice.value?.user?.addContactNetwork(contactNetwork)
         _userDevice.notify()
     }
+
+    fun requireUserDevice(): UserDevice = userDevice.value ?: throw Exception("UserDevice not set")
 }
