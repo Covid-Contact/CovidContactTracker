@@ -19,9 +19,9 @@ data class PostContactNetwork(
     @SerializedName("visible")
     val isVisible: Boolean = false,
 
-    @SerializedName("access_code")
-    val accessCode: String? = null,
-
     @SerializedName("passwordprotected")
-    val isPasswordProtected: Boolean = false
+    val isPasswordProtected: Boolean = false,
+
+    @SerializedName("access_code")
+    val accessCode: String? = null
 ) : Serializable

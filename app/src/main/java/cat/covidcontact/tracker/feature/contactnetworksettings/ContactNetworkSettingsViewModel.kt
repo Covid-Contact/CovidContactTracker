@@ -35,6 +35,15 @@ class ContactNetworkSettingsViewModel @Inject constructor(
         onFailure = { ScreenState.Nothing }
     )
 
+    private val generateAccessCodeHandler = UseCaseResultHandler<GenerateAccessCode.Response>(
+        onSuccess = {
+            val accessCode = it.accessCode
+            contactNetwork.value?.accessCode = accessCode
+            ContactNetworkSettingsState.AccessCodeGenerated(accessCode)
+        },
+        onFailure = { ScreenState.Nothing }
+    )
+
     fun onEnableUsersAddition(isEnabled: Boolean) {
         viewModelScope.launch {
             contactNetwork.value?.let { contactNetwork ->
@@ -45,7 +54,13 @@ class ContactNetworkSettingsViewModel @Inject constructor(
         }
     }
 
-    fun onGenerateAccessCode() {
-
+    fun onGenerateAccessCode(email: String) {
+        viewModelScope.launch {
+            contactNetwork.value?.let { contactNetwork ->
+                executeUseCase(generateAccessCode, generateAccessCodeHandler) {
+                    GenerateAccessCode.Request(email, contactNetwork.name)
+                }
+            }
+        }
     }
 }

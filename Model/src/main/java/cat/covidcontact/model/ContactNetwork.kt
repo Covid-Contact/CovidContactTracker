@@ -10,7 +10,7 @@ class ContactNetwork(
     val owner: User,
     var isVisible: Boolean = false,
     val isPasswordProtected: Boolean = false,
-    val accessCode: String? = null,
+    var accessCode: String? = null,
     val networkState: NetworkState = NetworkState.Normal
 ) : Serializable {
 
