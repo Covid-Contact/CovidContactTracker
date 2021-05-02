@@ -42,7 +42,7 @@ class SearchFragment : BaseFragment() {
                 context.showDialog(
                     title = context.getString(R.string.contact_network_already_joined_title),
                     message = context.getString(
-                        R.string.contact_network_joined_message,
+                        R.string.contact_network_already_joined_message,
                         state.contactNetworkName
                     )
                 )
