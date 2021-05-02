@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import cat.covidcontact.tracker.common.extensions.observeScreenState
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.feature.main.contracts.RequestBluetoothEnableContract
+import javax.inject.Inject
 
 abstract class BaseFragment : Fragment() {
     abstract val screenStateHandler: ScreenStateHandler<*>
@@ -29,7 +30,8 @@ abstract class BaseFragment : Fragment() {
     private lateinit var enableBluetooth: ActivityResultLauncher<Unit>
     private var onBluetoothGranted: () -> Unit = {}
 
-    protected val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+    @Inject
+    lateinit var bluetoothAdapter: BluetoothAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,

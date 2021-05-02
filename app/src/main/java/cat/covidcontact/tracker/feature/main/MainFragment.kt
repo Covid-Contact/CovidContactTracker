@@ -27,6 +27,7 @@ import cat.covidcontact.tracker.databinding.FragmentMainBinding
 import cat.covidcontact.tracker.workers.TestWorker
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 @SuppressLint("HardwareIds")
 @AndroidEntryPoint
@@ -35,8 +36,8 @@ class MainFragment : BaseFragment() {
     private lateinit var navController: NavController
     private val args: MainFragmentArgs by navArgs()
 
-    /*@Inject
-    lateinit var workManager: WorkManager*/
+    @Inject
+    lateinit var workManager: WorkManager
 
     override val viewModel: MainViewModel by activityViewModels()
     override val screenStateHandler = ScreenStateHandler<MainState> { context, state ->
@@ -116,7 +117,7 @@ class MainFragment : BaseFragment() {
             .setInitialDelay(5, TimeUnit.SECONDS)
             .build()
 
-        val workManager = WorkManager.getInstance(requireActivity().application)
+        //val workManager = WorkManager.getInstance(requireActivity().application)
         workManager.enqueueUniqueWork("test", ExistingWorkPolicy.REPLACE, testRequest)
     }
 }

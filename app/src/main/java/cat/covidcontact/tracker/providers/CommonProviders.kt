@@ -1,5 +1,6 @@
 package cat.covidcontact.tracker.providers
 
+import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import androidx.work.WorkManager
 import cat.covidcontact.tracker.common.fieldvalidator.FieldValidator
@@ -24,4 +25,8 @@ class CommonProviders {
     fun provideWorkManager(
         @ApplicationContext context: Context
     ): WorkManager = WorkManager.getInstance(context)
+
+    @Provides
+    @Singleton
+    fun provideBluetoothAdapter(): BluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 }
