@@ -5,12 +5,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.AutoTransition
-import androidx.transition.TransitionManager
 import cat.covidcontact.model.ContactNetwork
 import cat.covidcontact.model.NetworkState
 import cat.covidcontact.tracker.R
@@ -53,23 +50,12 @@ class ContactNetworkAdapter(
             contactNetworkBorder.setBackgroundColor(cardColor)
             contactNetworkConfiguration.visibility =
                 if (isCurrentUserOwner) View.VISIBLE else View.GONE
-            contactNetworkConfiguration.setOnClickListener { onSettingsClick(contactNetwork) }
             contactNetworkQuit.visibility =
                 if (!isCurrentUserOwner) View.VISIBLE else View.GONE
 
             binding.root.setOnClickListener {
-                TransitionManager.beginDelayedTransition(binding.root, AutoTransition())
-
-                if (contactNetworkExpandable.visibility == View.GONE) {
-                    contactNetworkExpandable.visibility = View.VISIBLE
-                    contactNetworkExpandIcon.setImageDrawable(
-                        ContextCompat.getDrawable(context, R.drawable.ic_expand)
-                    )
-                } else {
-                    contactNetworkExpandable.visibility = View.GONE
-                    contactNetworkExpandIcon.setImageDrawable(
-                        ContextCompat.getDrawable(context, R.drawable.ic_collapse)
-                    )
+                if (isCurrentUserOwner) {
+                    onSettingsClick(contactNetwork)
                 }
             }
         }
