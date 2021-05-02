@@ -1,14 +1,10 @@
 package cat.covidcontact.tracker.feature.main
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
@@ -25,7 +21,6 @@ import cat.covidcontact.tracker.common.extensions.generateDeviceId
 import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentMainBinding
-import cat.covidcontact.tracker.feature.main.contracts.RequestBluetoothEnableContract
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("HardwareIds")
@@ -34,17 +29,6 @@ class MainFragment : BaseFragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var navController: NavController
     private val args: MainFragmentArgs by navArgs()
-
-    private val permissions = arrayOf(
-        Manifest.permission.BLUETOOTH,
-        Manifest.permission.BLUETOOTH_ADMIN
-    )
-
-    private lateinit var bluetoothPermission: ActivityResultLauncher<Array<String>>
-    private lateinit var enableBluetooth: ActivityResultLauncher<Unit>
-    private var onBluetoothGranted: () -> Unit = {}
-
-    private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
     override val viewModel: MainViewModel by activityViewModels()
     override val screenStateHandler = ScreenStateHandler<MainState> { context, state ->
@@ -68,7 +52,7 @@ class MainFragment : BaseFragment() {
                     title = R.string.bluetooth_info_title,
                     message = R.string.bluetooth_info_message,
                     positiveButtonText = R.string.enable_bluetooth_yes,
-                    positiveButtonAction = { _, _ -> requestBluetoothPermissions() },
+                    positiveButtonAction = { _, _ -> restartBluetoothAction() },
                     negativeButtonText = R.string.enable_bluetooth_no,
                     isCancelable = false
                 )
@@ -87,9 +71,12 @@ class MainFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setUpBluetooth()
         startBluetoothDiscovery()
+    }
+
+    override fun showBluetoothInfo() {
+        super.showBluetoothInfo()
+        viewModel.onLoadBluetoothInfo()
     }
 
     private fun FragmentMainBinding.bind() {
@@ -116,48 +103,7 @@ class MainFragment : BaseFragment() {
         }
     }
 
-    private fun setUpBluetooth() {
-        enableBluetooth = registerForActivityResult(
-            RequestBluetoothEnableContract()
-        ) { isEnabled ->
-            if (isEnabled) {
-                requestBluetoothPermissions()
-            } else {
-                showBluetoothInfo()
-            }
-        }
-
-        bluetoothPermission = registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { grantedResult ->
-            val isGranted = grantedResult.values.all { it }
-
-            if (isGranted) {
-                if (bluetoothAdapter.isEnabled) {
-                    onBluetoothGranted()
-                } else {
-                    enableBluetooth.launch(Unit)
-                }
-            } else {
-                showBluetoothInfo()
-            }
-        }
-    }
-
     private fun startBluetoothDiscovery() = runWithBluetoothPermission {
 
-    }
-
-    private fun runWithBluetoothPermission(action: () -> Unit) {
-        onBluetoothGranted = action
-        requestBluetoothPermissions()
-    }
-
-    private fun requestBluetoothPermissions() {
-        bluetoothPermission.launch(permissions)
-    }
-
-    private fun showBluetoothInfo() {
-        viewModel.onLoadBluetoothInfo()
     }
 }
