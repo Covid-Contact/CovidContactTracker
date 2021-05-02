@@ -66,5 +66,9 @@ class MainViewModel @Inject constructor(
         _userDevice.notify()
     }
 
+    fun onLoadBluetoothInfo() {
+        loadState(MainState.BluetoothInfo)
+    }
+
     fun requireUserDevice(): UserDevice = userDevice.value ?: throw Exception("UserDevice not set")
 }

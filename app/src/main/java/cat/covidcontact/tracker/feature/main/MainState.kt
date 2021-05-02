@@ -7,4 +7,5 @@ sealed class MainState : ScreenState() {
     class UserInfoNotFound(val email: String) : MainState()
     class UserInfoFound(val user: User) : MainState()
     object DeviceRegistered : MainState()
+    object BluetoothInfo : MainState()
 }
