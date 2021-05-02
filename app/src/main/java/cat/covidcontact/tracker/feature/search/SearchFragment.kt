@@ -37,6 +37,16 @@ class SearchFragment : BaseFragment() {
                     )
                 )
             }
+            is SearchState.AlreadyJoined -> {
+                binding.txtInputAccessCode.clear()
+                context.showDialog(
+                    title = context.getString(R.string.contact_network_already_joined_title),
+                    message = context.getString(
+                        R.string.contact_network_joined_message,
+                        state.contactNetworkName
+                    )
+                )
+            }
         }
     }
 

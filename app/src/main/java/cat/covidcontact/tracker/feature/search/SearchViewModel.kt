@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import cat.covidcontact.data.repositories.contactnetworks.ContactNetworkException
 import cat.covidcontact.model.ContactNetwork
 import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.ScreenState
@@ -38,8 +39,19 @@ class SearchViewModel @Inject constructor(
         )
 
     private val joinContactNetworkHandler = UseCaseResultHandler<JoinContactNetwork.Response>(
-        onSuccess = { SearchState.ContactNetworkJoined(it.contactNetworkName) },
-        onFailure = { ScreenState.Nothing }
+        onSuccess = {
+            _contactNetworks.value = emptyList()
+            SearchState.ContactNetworkJoined(it.contactNetworkName)
+        },
+        onFailure = { exception ->
+            when (exception) {
+                is ContactNetworkException.AlreadyJoined -> {
+                    _contactNetworks.value = emptyList()
+                    SearchState.AlreadyJoined(exception.contactNetworkName)
+                }
+                else -> ScreenState.Nothing
+            }
+        }
     )
 
     fun onGetContactNetworkByAccessCode() {

@@ -123,5 +123,9 @@
     <string name="contact_network_joined_message">
         You have successfully joined %s.
     </string>
+    <string name="contact_network_already_joined_title">Already joined</string>
+    <string name="contact_network_already_joined_message">
+        You have already joined %s.
+    </string>
 
 </resources>

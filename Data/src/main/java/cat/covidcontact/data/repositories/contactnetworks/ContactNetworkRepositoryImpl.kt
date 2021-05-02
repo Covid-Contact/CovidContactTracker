@@ -118,6 +118,9 @@ class ContactNetworkRepositoryImpl @Inject constructor(
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
                 HttpStatus.NO_CONTENT -> return@run
+                HttpStatus.BAD_REQUEST -> throw ContactNetworkException.AlreadyJoined(
+                    contactNetworkName
+                )
                 else -> throw CommonException.OtherError
             }
         }

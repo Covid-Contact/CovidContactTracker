@@ -9,7 +9,7 @@ sealed class ContactNetworkException(msg: String) : RuntimeException(msg) {
         "The contact network does not exist"
     )
 
-    object InvalidAccessCode : ContactNetworkException(
-        "The access code does not belong to any contact network"
+    class AlreadyJoined(val contactNetworkName: String) : ContactNetworkException(
+        "The user has already joined $contactNetworkName"
     )
 }

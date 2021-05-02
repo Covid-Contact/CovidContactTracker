@@ -28,6 +28,6 @@ class UserControllerImpl : UserController() {
     }
 
     override suspend fun registerUserDevice(email: String, device: PostDevice): ServerResponse {
-        return post("$url/userdevice", device, listOf("email" to email))
+        return post("$url/device", device, listOf("email" to email))
     }
 }
