@@ -94,6 +94,10 @@ fun TextInputLayout.setText(@StringRes textId: Int) {
     editText?.setText(textId)
 }
 
+fun TextInputLayout.clear() {
+    setText("")
+}
+
 fun TextInputLayout.observeText(liveData: MutableLiveData<String>) {
     editText?.addTextChangedListener(
         onTextChanged = { text, _, _, _ -> liveData.value = text.toString() }
@@ -107,5 +111,14 @@ fun TextInputLayout.observeError(
 ) {
     liveData.observe(lifecycleOwner) {
         showErrorIf(it, errorMsg)
+    }
+}
+
+fun TextInputLayout.observeEndIconActivated(
+    lifecycleOwner: LifecycleOwner,
+    liveData: LiveData<Boolean>
+) {
+    liveData.observe(lifecycleOwner) {
+        setEndIconActivated(it)
     }
 }

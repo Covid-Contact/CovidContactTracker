@@ -8,4 +8,6 @@ interface ContactNetworkRepository {
     suspend fun getContactNetworks(email: String): List<ContactNetwork>
     suspend fun enableUserAddition(contactNetworkName: String, isEnabled: Boolean)
     suspend fun generateAccessCode(email: String, contactNetworkName: String): String
+    suspend fun getContactNetworkByAccessCode(accessCode: String): ContactNetwork
+    suspend fun joinContactNetwork(email: String, contactNetworkName: String)
 }

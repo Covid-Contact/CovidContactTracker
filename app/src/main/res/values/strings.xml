@@ -119,5 +119,9 @@
 
     <!-- Search -->
     <string name="access_code_search">Access code</string>
+    <string name="contact_network_joined_title">Joined contact network</string>
+    <string name="contact_network_joined_message">
+        You have successfully joined %s.
+    </string>
 
 </resources>

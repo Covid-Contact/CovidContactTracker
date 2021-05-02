@@ -8,4 +8,8 @@ sealed class ContactNetworkException(msg: String) : RuntimeException(msg) {
     object ContactNetworkNotExisting : ContactNetworkException(
         "The contact network does not exist"
     )
+
+    object InvalidAccessCode : ContactNetworkException(
+        "The access code does not belong to any contact network"
+    )
 }
