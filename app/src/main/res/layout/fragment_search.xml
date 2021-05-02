@@ -3,6 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/app_padding_half"
     tools:context=".feature.search.SearchFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtInputAccessCode"
+            style="@style/fullWidthTextInputLayout"
+            android:hint="@string/access_code_search"
+            app:endIconDrawable="@drawable/ic_search"
+            app:endIconMode="custom">
+
+            <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/contactNetworkSearchList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </FrameLayout>

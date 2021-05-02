@@ -19,7 +19,7 @@ class ContactNetworkControllerImpl : ContactNetworkController() {
         contactNetworkName: String,
         isEnabled: Boolean
     ): ServerResponse {
-        val name = modifyInvalidCharacters(contactNetworkName)
+        val name = contactNetworkName.modifyInvalidCharacters()
         return put("$url/$name", listOf("isEnabled" to isEnabled))
     }
 
@@ -27,10 +27,21 @@ class ContactNetworkControllerImpl : ContactNetworkController() {
         email: String,
         contactNetworkName: String
     ): ServerResponse {
-        val name = modifyInvalidCharacters(contactNetworkName)
+        val name = contactNetworkName.modifyInvalidCharacters()
         return put("$url/$name/generateAccessCode")
     }
 
-    private fun modifyInvalidCharacters(contactNetworkName: String) =
-        contactNetworkName.replace(" ", "%20").replace("#", "%23")
+    override suspend fun getContactNetworkByAccessCode(accessCode: String): ServerResponse {
+        return get("$url/accessCode", listOf("code" to accessCode))
+    }
+
+    override suspend fun joinContactNetwork(
+        email: String,
+        contactNetworkName: String
+    ): ServerResponse {
+        val name = contactNetworkName.modifyInvalidCharacters()
+        return put("$url/$name/join", listOf("email" to email))
+    }
+
+    private fun String.modifyInvalidCharacters() = replace(" ", "%20").replace("#", "%23")
 }

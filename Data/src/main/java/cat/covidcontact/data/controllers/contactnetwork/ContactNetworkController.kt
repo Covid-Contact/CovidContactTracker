@@ -24,4 +24,11 @@ abstract class ContactNetworkController : CovidContactBaseController() {
         email: String,
         contactNetworkName: String
     ): ServerResponse
+
+    abstract suspend fun getContactNetworkByAccessCode(accessCode: String): ServerResponse
+
+    abstract suspend fun joinContactNetwork(
+        email: String,
+        contactNetworkName: String
+    ): ServerResponse
 }

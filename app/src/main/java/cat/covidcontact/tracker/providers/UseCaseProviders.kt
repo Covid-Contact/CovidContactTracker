@@ -10,8 +10,12 @@ import cat.covidcontact.usecases.enableUserAddition.EnableUserAddition
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAdditionImpl
 import cat.covidcontact.usecases.generateAccessCode.GenerateAccessCode
 import cat.covidcontact.usecases.generateAccessCode.GenerateAccessCodeImpl
+import cat.covidcontact.usecases.getContactNetworkByAccessCode.GetContactNetworkByAccessCode
+import cat.covidcontact.usecases.getContactNetworkByAccessCode.GetContactNetworkByAccessCodeImpl
 import cat.covidcontact.usecases.getuserdata.GetUserData
 import cat.covidcontact.usecases.getuserdata.GetUserDataImpl
+import cat.covidcontact.usecases.joinContactNetwork.JoinContactNetwork
+import cat.covidcontact.usecases.joinContactNetwork.JoinContactNetworkImpl
 import cat.covidcontact.usecases.login.MakeLogIn
 import cat.covidcontact.usecases.login.MakeLogInImpl
 import cat.covidcontact.usecases.registerDevice.RegisterDevice
@@ -76,4 +80,16 @@ class UseCaseProviders {
     fun provideGenerateAccessCode(
         contactNetworkRepository: ContactNetworkRepository
     ): GenerateAccessCode = GenerateAccessCodeImpl(contactNetworkRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetContactNetworkByAccessCode(
+        contactNetworkRepository: ContactNetworkRepository
+    ): GetContactNetworkByAccessCode = GetContactNetworkByAccessCodeImpl(contactNetworkRepository)
+
+    @Provides
+    @Singleton
+    fun provideJoinContactNetworkByAccessCode(
+        contactNetworkRepository: ContactNetworkRepository
+    ): JoinContactNetwork = JoinContactNetworkImpl(contactNetworkRepository)
 }

@@ -43,3 +43,5 @@ fun LiveData<Boolean>.observerButtonEnabled(
 
 fun <T, K, S> LiveData<T>.combine(liveData: LiveData<K>, combine: (T?, K?) -> S) =
     CombinedLiveData(this, liveData, combine)
+
+fun <T> LiveData<T>.requireValue(): T = value ?: throw Exception("LiveData value is not set")

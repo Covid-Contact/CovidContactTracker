@@ -56,47 +56,22 @@
                 style="@style/card_secondary_text_weight"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto_medium"
                 android:textAllCaps="true"
                 android:textColor="@android:color/black"
                 tools:text="Invisible" />
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
 
-            <LinearLayout
-                android:id="@+id/contactNetworkExpandable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/contactNetworkOwner"
-                    style="@style/card_secondary_text_weight"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/black"
-                    tools:text="Created by AlbertPG" />
-
-                <TextView
-                    android:id="@+id/contactNetworkQuit"
-                    style="@style/card_secondary_text"
-                    android:layout_width="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center_horizontal|start"
-                    android:text="@string/quit"
-                    android:textAllCaps="true"
-                    android:textColor="@color/red"
-                    android:textSize="14sp" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/contactNetworkConfiguration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/ic_settings" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/contactNetworkOwner"
+                style="@style/card_secondary_text_weight"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/black"
+                tools:text="Created by AlbertPG" />
 
         </LinearLayout>
 

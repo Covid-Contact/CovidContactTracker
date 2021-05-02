@@ -95,6 +95,37 @@ class ContactNetworkRepositoryImpl @Inject constructor(
         return serverResponse.result.get()
     }
 
+    override suspend fun getContactNetworkByAccessCode(accessCode: String): ContactNetwork {
+        val serverResponse = contactNetworkController.getContactNetworkByAccessCode(accessCode)
+        serverResponse.response.statusCode.run {
+            when (this) {
+                CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
+                HttpStatus.OK -> return@run
+                HttpStatus.NOT_FOUND -> throw ContactNetworkException.ContactNetworkNotExisting
+                else -> throw CommonException.OtherError
+            }
+        }
+
+        val contactNetwork = Gson().fromJson<PostContactNetwork>(
+            serverResponse.result.get()
+        )
+        return ContactNetwork.fromPost(contactNetwork)
+    }
+
+    override suspend fun joinContactNetwork(email: String, contactNetworkName: String) {
+        val serverResponse = contactNetworkController.joinContactNetwork(email, contactNetworkName)
+        serverResponse.response.statusCode.run {
+            when (this) {
+                CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
+                HttpStatus.NO_CONTENT -> return@run
+                HttpStatus.BAD_REQUEST -> throw ContactNetworkException.AlreadyJoined(
+                    contactNetworkName
+                )
+                else -> throw CommonException.OtherError
+            }
+        }
+    }
+
     private fun String.hashPassword(): String {
         return MessageDigest.getInstance("SHA-256")
             .digest(toByteArray())

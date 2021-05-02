@@ -117,4 +117,15 @@
     <string name="access_code">Access code</string>
     <string name="access_code_generation">Generate access code</string>
 
+    <!-- Search -->
+    <string name="access_code_search">Access code</string>
+    <string name="contact_network_joined_title">Joined contact network</string>
+    <string name="contact_network_joined_message">
+        You have successfully joined %s.
+    </string>
+    <string name="contact_network_already_joined_title">Already joined</string>
+    <string name="contact_network_already_joined_message">
+        You have already joined %s.
+    </string>
+
 </resources>
