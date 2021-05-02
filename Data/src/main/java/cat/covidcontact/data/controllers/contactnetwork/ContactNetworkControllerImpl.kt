@@ -32,7 +32,7 @@ class ContactNetworkControllerImpl : ContactNetworkController() {
     }
 
     override suspend fun getContactNetworkByAccessCode(accessCode: String): ServerResponse {
-        return get("$url/", listOf("accessCode" to accessCode))
+        return get("$url/accessCode", listOf("code" to accessCode))
     }
 
     override suspend fun joinContactNetwork(
@@ -40,7 +40,7 @@ class ContactNetworkControllerImpl : ContactNetworkController() {
         contactNetworkName: String
     ): ServerResponse {
         val name = contactNetworkName.modifyInvalidCharacters()
-        return put("$url/$name", listOf("email" to email))
+        return put("$url/$name/join", listOf("email" to email))
     }
 
     private fun String.modifyInvalidCharacters() = replace(" ", "%20").replace("#", "%23")

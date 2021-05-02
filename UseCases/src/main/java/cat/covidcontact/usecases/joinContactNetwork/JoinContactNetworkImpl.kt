@@ -14,6 +14,6 @@ class JoinContactNetworkImpl @Inject constructor(
         contactNetworkRepository.joinContactNetwork(user.email, contactNetwork.name)
         user.addContactNetwork(contactNetwork)
 
-        JoinContactNetwork.Response()
+        JoinContactNetwork.Response(contactNetwork.name)
     }
 }

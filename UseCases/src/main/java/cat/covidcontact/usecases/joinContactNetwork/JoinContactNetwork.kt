@@ -11,5 +11,7 @@ interface JoinContactNetwork : UseCase<JoinContactNetwork.Request, JoinContactNe
         val contactNetwork: ContactNetwork
     ) : UseCase.UseCaseRequest
 
-    class Response : UseCase.UseCaseResponse
+    data class Response(
+        val contactNetworkName: String
+    ) : UseCase.UseCaseResponse
 }

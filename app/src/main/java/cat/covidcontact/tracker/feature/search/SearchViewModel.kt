@@ -38,7 +38,7 @@ class SearchViewModel @Inject constructor(
         )
 
     private val joinContactNetworkHandler = UseCaseResultHandler<JoinContactNetwork.Response>(
-        onSuccess = { ScreenState.Nothing },
+        onSuccess = { SearchState.ContactNetworkJoined(it.contactNetworkName) },
         onFailure = { ScreenState.Nothing }
     )
 
