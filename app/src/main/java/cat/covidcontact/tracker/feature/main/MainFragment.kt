@@ -14,6 +14,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import cat.covidcontact.model.Device
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
@@ -21,7 +24,9 @@ import cat.covidcontact.tracker.common.extensions.generateDeviceId
 import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentMainBinding
+import cat.covidcontact.tracker.workers.TestWorker
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 @SuppressLint("HardwareIds")
 @AndroidEntryPoint
@@ -29,6 +34,9 @@ class MainFragment : BaseFragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var navController: NavController
     private val args: MainFragmentArgs by navArgs()
+
+    /*@Inject
+    lateinit var workManager: WorkManager*/
 
     override val viewModel: MainViewModel by activityViewModels()
     override val screenStateHandler = ScreenStateHandler<MainState> { context, state ->
@@ -104,6 +112,11 @@ class MainFragment : BaseFragment() {
     }
 
     private fun startBluetoothDiscovery() = runWithBluetoothPermission {
+        val testRequest = OneTimeWorkRequestBuilder<TestWorker>()
+            .setInitialDelay(5, TimeUnit.SECONDS)
+            .build()
 
+        val workManager = WorkManager.getInstance(requireActivity().application)
+        workManager.enqueueUniqueWork("test", ExistingWorkPolicy.REPLACE, testRequest)
     }
 }

@@ -1,0 +1,22 @@
+package cat.covidcontact.tracker.workers
+
+import android.content.Context
+import android.util.Log
+import androidx.hilt.work.HiltWorker
+import androidx.work.CoroutineWorker
+import androidx.work.WorkerParameters
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
+import kotlinx.coroutines.coroutineScope
+
+@HiltWorker
+class TestWorker @AssistedInject constructor(
+    @Assisted appContext: Context,
+    @Assisted workerParams: WorkerParameters
+) : CoroutineWorker(appContext, workerParams) {
+
+    override suspend fun doWork(): Result = coroutineScope {
+        Log.i("Test", "doWork: HERE")
+        Result.success()
+    }
+}
