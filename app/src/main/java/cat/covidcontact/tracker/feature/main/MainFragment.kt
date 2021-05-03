@@ -2,6 +2,7 @@ package cat.covidcontact.tracker.feature.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +15,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import cat.covidcontact.model.Device
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
@@ -24,10 +22,7 @@ import cat.covidcontact.tracker.common.extensions.generateDeviceId
 import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentMainBinding
-import cat.covidcontact.tracker.workers.TestWorker
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 @SuppressLint("HardwareIds")
 @AndroidEntryPoint
@@ -35,9 +30,6 @@ class MainFragment : BaseFragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var navController: NavController
     private val args: MainFragmentArgs by navArgs()
-
-    @Inject
-    lateinit var workManager: WorkManager
 
     override val viewModel: MainViewModel by activityViewModels()
     override val screenStateHandler = ScreenStateHandler<MainState> { context, state ->
@@ -47,14 +39,16 @@ class MainFragment : BaseFragment() {
                 navigate(action)
             }
             is MainState.UserInfoFound -> {
+                val address = getCurrentAddress()
                 val device = Device(
-                    bluetoothAdapter.address.generateDeviceId(),
+                    address.generateDeviceId(),
                     bluetoothAdapter.name
                 )
                 viewModel.onRegisterDevice(state.user, device)
             }
             MainState.DeviceRegistered -> {
                 binding.bind()
+                startBluetoothDiscovery()
             }
             MainState.BluetoothInfo -> {
                 context.showDialog(
@@ -80,7 +74,6 @@ class MainFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        startBluetoothDiscovery()
     }
 
     override fun showBluetoothInfo() {
@@ -112,12 +105,46 @@ class MainFragment : BaseFragment() {
         }
     }
 
+    private fun getCurrentAddress(): String {
+        val contentResolver = requireContext().contentResolver
+        return Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+    }
+
     private fun startBluetoothDiscovery() = runWithBluetoothPermission {
-        val testRequest = OneTimeWorkRequestBuilder<TestWorker>()
+        viewModel.onConfigureMessageClient()
+
+        /*val messageListener = object : MessageListener() {
+            override fun onFound(message: Message) {
+                Log.i("Test", "onFound: ${String(message.content)}")
+            }
+        }
+
+        messagesClient.subscribe(messageListener).addOnSuccessListener {
+            Log.i("Test", "startBluetoothDiscovery: Subscribe success")
+        }.addOnFailureListener {
+            Log.i("Test", "startBluetoothDiscovery: Subscribe failure")
+            it.printStackTrace()
+        }
+
+        binding.btnPublish.setOnClickListener {
+            val message = Message("Hello".toByteArray())
+            messagesClient.publish(message).addOnSuccessListener {
+                Log.i("Test", "startBluetoothDiscovery: Publish success")
+            }.addOnFailureListener {
+                Log.i("Test", "startBluetoothDiscovery: Publish failure")
+                it.printStackTrace()
+            }.addOnCompleteListener {
+                Log.i("Test", "startBluetoothDiscovery: Publish completed")
+            }
+        }*/
+
+        /*val bluetoothWork = OneTimeWorkRequestBuilder<DetectUsersWorker>().build()
+        workManager.enqueueUniqueWork("bluetoothWork", ExistingWorkPolicy.REPLACE, bluetoothWork)*/
+
+        /*val testRequest = OneTimeWorkRequestBuilder<TestWorker>()
             .setInitialDelay(5, TimeUnit.SECONDS)
             .build()
 
-        //val workManager = WorkManager.getInstance(requireActivity().application)
-        workManager.enqueueUniqueWork("test", ExistingWorkPolicy.REPLACE, testRequest)
+        workManager.enqueueUniqueWork("test", ExistingWorkPolicy.REPLACE, testRequest)*/
     }
 }

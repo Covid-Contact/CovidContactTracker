@@ -1,4 +1,4 @@
-package cat.covidcontact.tracker.workers
+package cat.covidcontact.tracker.messages
 
 import android.content.Context
 import android.util.Log

@@ -1,6 +1,7 @@
 package cat.covidcontact.tracker.common
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,7 +24,9 @@ abstract class BaseFragment : Fragment() {
 
     private val permissions = arrayOf(
         Manifest.permission.BLUETOOTH,
-        Manifest.permission.BLUETOOTH_ADMIN
+        Manifest.permission.BLUETOOTH_ADMIN,
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION
     )
 
     private lateinit var bluetoothPermission: ActivityResultLauncher<Array<String>>
@@ -78,6 +81,7 @@ abstract class BaseFragment : Fragment() {
 
     protected open fun showBluetoothInfo() {}
 
+    @SuppressLint("MissingPermission")
     private fun setUpBluetooth() {
         enableBluetooth = registerForActivityResult(
             RequestBluetoothEnableContract()

@@ -54,7 +54,7 @@ ext {
     mockitoVersion = "3.5.5"
     mockkVersion = "1.11.0"
     moshiVersion = "1.11.0"
-    playServicesAuthVersion = "18.1.0"
+    playServicesNearby = "17.0.0"
     recyclerViewVersion = "1.1.0"
     resultVersion = "4.0.0"
     retrofit2Version = "2.1.0"
@@ -110,6 +110,9 @@ ext {
 
         // Work manager
         work                  : "androidx.work:work-runtime-ktx:$workVersion",
+
+        // Play Services
+        nearby                : "com.google.android.gms:play-services-nearby:$playServicesNearby",
 
         // Unit testing
         junit                 : "junit:junit:$junitVersion",
