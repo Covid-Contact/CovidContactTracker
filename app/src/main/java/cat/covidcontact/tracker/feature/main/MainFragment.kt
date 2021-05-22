@@ -81,6 +81,11 @@ class MainFragment : BaseFragment() {
         viewModel.onLoadBluetoothInfo()
     }
 
+    override fun onStop() {
+        super.onStop()
+        viewModel.onFinishInteraction()
+    }
+
     private fun FragmentMainBinding.bind() {
         val navHostFragment = childFragmentManager.findFragmentById(R.id.mainFragmentNavGraph)
             as NavHostFragment

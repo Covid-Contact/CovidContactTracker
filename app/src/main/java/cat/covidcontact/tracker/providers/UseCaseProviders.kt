@@ -1,6 +1,7 @@
 package cat.covidcontact.tracker.providers
 
 import cat.covidcontact.data.repositories.contactnetworks.ContactNetworkRepository
+import cat.covidcontact.data.repositories.interaction.InteractionRepository
 import cat.covidcontact.data.repositories.user.UserRepository
 import cat.covidcontact.usecases.adduserdata.AddUserData
 import cat.covidcontact.usecases.adduserdata.AddUserDataImpl
@@ -98,6 +99,6 @@ class UseCaseProviders {
     @Provides
     @Singleton
     fun provideSendRead(
-        contactNetworkRepository: ContactNetworkRepository
-    ): SendRead = SendReadImpl(contactNetworkRepository)
+        interactionRepository: InteractionRepository
+    ): SendRead = SendReadImpl(interactionRepository)
 }

@@ -15,6 +15,4 @@ interface ContactNetworkRepository {
     suspend fun getContactNetworkByAccessCode(accessCode: String): ContactNetwork
 
     suspend fun joinContactNetwork(email: String, contactNetworkName: String)
-
-    suspend fun registerRead(deviceIds: Set<String>, time: Long)
 }

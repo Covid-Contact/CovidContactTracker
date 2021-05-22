@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import cat.covidcontact.data.repositories.user.UserException
 import cat.covidcontact.model.ContactNetwork
 import cat.covidcontact.model.Device
@@ -15,9 +13,10 @@ import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.extensions.notify
+import cat.covidcontact.tracker.common.extensions.requireValue
 import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler
+import cat.covidcontact.tracker.messages.FinishInteractionWorker
 import cat.covidcontact.tracker.messages.PublishCodeWorker
-import cat.covidcontact.tracker.messages.SendCodeWorker
 import cat.covidcontact.usecases.getuserdata.GetUserData
 import cat.covidcontact.usecases.registerDevice.RegisterDevice
 import cat.covidcontact.usecases.sendread.SendRead
@@ -42,7 +41,8 @@ class MainViewModel @Inject constructor(
     val userDevice: LiveData<UserDevice>
         get() = _userDevice
 
-    private val idList: MutableSet<String> = mutableSetOf()
+    private val idList: MutableLiveData<MutableSet<String>> = MutableLiveData(mutableSetOf())
+    private val finishInteraction = OneTimeWorkRequestBuilder<FinishInteractionWorker>().build()
 
     private val getUserDataHandler = UseCaseResultHandler<GetUserData.Response>(
         onSuccess = { MainState.UserInfoFound(it.user) },
@@ -64,8 +64,15 @@ class MainViewModel @Inject constructor(
     )
 
     private val sendReadHandler = UseCaseResultHandler<SendRead.Response>(
-        onSuccess = {
-            idList.clear()
+        onSuccess = { response ->
+            //idList.value?.clear()
+            if (!response.isEnded) {
+                workManager.enqueueUniqueWork(
+                    FINISH_INTERACTION_NAME,
+                    ExistingWorkPolicy.REPLACE,
+                    finishInteraction
+                )
+            }
             ScreenState.Nothing
         },
         onFailure = { ScreenState.Nothing }
@@ -109,9 +116,19 @@ class MainViewModel @Inject constructor(
         val messageListener = object : MessageListener() {
             override fun onFound(message: Message) {
                 val strMessage = String(message.content)
-                Log.i("Test", "onFound: $strMessage")
+                Log.i("Read", "onFound: $strMessage")
 
-                idList.add(strMessage)
+                //idList.value?.add(strMessage)
+                viewModelScope.launch {
+                    workManager.cancelUniqueWork(FINISH_INTERACTION_NAME)
+                    executeUseCase(sendRead, sendReadHandler, isExecutingUseCaseStateLoad = false) {
+                        SendRead.Request(
+                            currentDeviceId = userDevice.requireValue().device.id,
+                            deviceIds = setOf(strMessage),
+                            time = System.currentTimeMillis()
+                        )
+                    }
+                }
             }
         }
 
@@ -123,18 +140,14 @@ class MainViewModel @Inject constructor(
     }
 
     private fun setUpWorkManager() {
-        SendCodeWorker.onSend = {
+        FinishInteractionWorker.onSend = {
             viewModelScope.launch {
-                executeUseCase(sendRead, sendReadHandler, isExecutingUseCaseStateLoad = false) {
-                    SendRead.Request(idList, System.currentTimeMillis())
-                }
+                Log.i("Read", "Send empty interaction")
+                onFinishInteraction()
             }
         }
 
         val publishWork = PeriodicWorkRequestBuilder<PublishCodeWorker>(PERIOD, TimeUnit.MINUTES)
-            .build()
-        val sendWork = PeriodicWorkRequestBuilder<SendCodeWorker>(2 * PERIOD, TimeUnit.MINUTES)
-            .setInitialDelay(PERIOD, TimeUnit.MINUTES)
             .build()
 
         workManager.enqueueUniquePeriodicWork(
@@ -142,12 +155,18 @@ class MainViewModel @Inject constructor(
             ExistingPeriodicWorkPolicy.REPLACE,
             publishWork
         )
+    }
 
-        workManager.enqueueUniquePeriodicWork(
-            SEND_WORK_NAME,
-            ExistingPeriodicWorkPolicy.REPLACE,
-            sendWork
-        )
+    fun onFinishInteraction() {
+        viewModelScope.launch {
+            executeUseCase(sendRead, sendReadHandler, isExecutingUseCaseStateLoad = false) {
+                SendRead.Request(
+                    currentDeviceId = userDevice.requireValue().device.id,
+                    deviceIds = emptySet(),
+                    time = System.currentTimeMillis()
+                )
+            }
+        }
     }
 
     fun requireUserDevice(): UserDevice = userDevice.value ?: throw Exception("UserDevice not set")
@@ -155,6 +174,6 @@ class MainViewModel @Inject constructor(
     companion object {
         private const val PERIOD = 16L
         private const val PUBLISH_WORK_NAME = "publish"
-        private const val SEND_WORK_NAME = "send"
+        private const val FINISH_INTERACTION_NAME = "send"
     }
 }
