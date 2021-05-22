@@ -5,6 +5,7 @@ plugins {
     id 'org.jetbrains.dokka'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.secrets_gradle_plugin' version '0.5'
 }
 
 android {
@@ -98,6 +99,14 @@ dependencies {
     implementation libs.hilt
     kapt libs.hilt_compiler_kapt
     implementation libs.hilt_lifecycle
+    implementation libs.hilt_work
+    kapt libs.hilt_work_kapt
+
+    // Work
+    implementation libs.work
+
+    // Play Services
+    implementation libs.nearby
 
     // Unit testing
     testImplementation libs.junit
@@ -118,4 +127,5 @@ dependencies {
     debugImplementation libs.fragment_debug
     androidTestImplementation libs.hilt_android_test
     kaptAndroidTest libs.hilt_kapt_android_test
+    androidTestImplementation libs.work_android_test
 }

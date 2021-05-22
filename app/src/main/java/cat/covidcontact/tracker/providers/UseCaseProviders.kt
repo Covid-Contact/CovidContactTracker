@@ -1,6 +1,7 @@
 package cat.covidcontact.tracker.providers
 
 import cat.covidcontact.data.repositories.contactnetworks.ContactNetworkRepository
+import cat.covidcontact.data.repositories.interaction.InteractionRepository
 import cat.covidcontact.data.repositories.user.UserRepository
 import cat.covidcontact.usecases.adduserdata.AddUserData
 import cat.covidcontact.usecases.adduserdata.AddUserDataImpl
@@ -20,6 +21,8 @@ import cat.covidcontact.usecases.login.MakeLogIn
 import cat.covidcontact.usecases.login.MakeLogInImpl
 import cat.covidcontact.usecases.registerDevice.RegisterDevice
 import cat.covidcontact.usecases.registerDevice.RegisterDeviceImpl
+import cat.covidcontact.usecases.sendread.SendRead
+import cat.covidcontact.usecases.sendread.SendReadImpl
 import cat.covidcontact.usecases.signup.MakeSignUp
 import cat.covidcontact.usecases.signup.MakeSignUpImpl
 import dagger.Module
@@ -92,4 +95,10 @@ class UseCaseProviders {
     fun provideJoinContactNetworkByAccessCode(
         contactNetworkRepository: ContactNetworkRepository
     ): JoinContactNetwork = JoinContactNetworkImpl(contactNetworkRepository)
+
+    @Provides
+    @Singleton
+    fun provideSendRead(
+        interactionRepository: InteractionRepository
+    ): SendRead = SendReadImpl(interactionRepository)
 }

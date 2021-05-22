@@ -33,22 +33,22 @@ fun Context.showDialog(
 fun Context.showDialog(
     @StringRes title: Int,
     @StringRes message: Int,
-    positiveButtonText: String? = getString(android.R.string.ok),
+    @StringRes positiveButtonText: Int? = android.R.string.ok,
     positiveButtonAction: (DialogInterface, Int) -> Unit = { dialog, _ -> dialog.dismiss() },
-    negativeButtonText: String? = null,
+    @StringRes negativeButtonText: Int? = null,
     negativeButtonAction: (DialogInterface, Int) -> Unit = { dialog, _ -> dialog.dismiss() },
-    neutralButtonText: String? = null,
+    @StringRes neutralButtonText: Int? = null,
     neutralButtonAction: (DialogInterface, Int) -> Unit = { dialog, _ -> dialog.dismiss() },
     isCancelable: Boolean = true
 ) {
     showDialog(
         getString(title),
         getString(message),
-        positiveButtonText,
+        positiveButtonText?.let { positiveText -> getString(positiveText) },
         positiveButtonAction,
-        negativeButtonText,
+        negativeButtonText?.let { negativeText -> getString(negativeText) },
         negativeButtonAction,
-        neutralButtonText,
+        neutralButtonText?.let { neutralText -> getString(neutralText) },
         neutralButtonAction,
         isCancelable
     )

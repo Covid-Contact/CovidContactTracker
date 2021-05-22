@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        instance = this
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -34,5 +36,9 @@ class MainActivity : AppCompatActivity() {
         if (inputMethodManager.isAcceptingText) {
             inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
+    }
+
+    companion object {
+        lateinit var instance: MainActivity
     }
 }

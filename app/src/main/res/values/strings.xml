@@ -128,4 +128,14 @@
         You have already joined %s.
     </string>
 
+    <!-- Main -->
+    <string name="bluetooth_info_title">Bluetooth is required</string>
+    <string name="bluetooth_info_message">
+        In order to detect the other users from your contact networks the bluetooth have to be
+        enabled. Your identity will be private, thus anyone cannot access your phone via Bluetooth
+        and we will not send any information throughout those connections.
+    </string>
+    <string name="enable_bluetooth_yes">Enable Bluetooth</string>
+    <string name="enable_bluetooth_no">Disable Bluetooth</string>
+
 </resources>
