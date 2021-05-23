@@ -106,7 +106,9 @@ dependencies {
     implementation libs.work
 
     // Play Services
+    implementation platform(libs.firebaseBom)
     implementation libs.nearby
+    implementation libs.fcm
 
     // Unit testing
     testImplementation libs.junit

@@ -42,6 +42,7 @@ ext {
     daggerHiltLifecycleVersion = "1.0.0-alpha03"
     daggerHiltWorkVersion = "1.0.0-beta01"
     espressoVersion = "3.3.0"
+    firebaseBomVersion = "28.0.1"
     fragmentKotlinVersion = "1.3.1"
     fuelVersion = "2.3.1"
     gsonVersion = "2.8.6"
@@ -112,7 +113,9 @@ ext {
         work                  : "androidx.work:work-runtime-ktx:$workVersion",
 
         // Play Services
+        firebaseBom           : "com.google.firebase:firebase-bom:$firebaseBomVersion",
         nearby                : "com.google.android.gms:play-services-nearby:$playServicesNearby",
+        fcm                   : "com.google.firebase:firebase-messaging",
 
         // Unit testing
         junit                 : "junit:junit:$junitVersion",

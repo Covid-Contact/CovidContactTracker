@@ -39,12 +39,6 @@
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/main_fragment_nav_graph" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPublish"
-                style="@style/button"
-                android:layout_gravity="start|bottom"
-                android:text="@string/app_name" />
-
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
