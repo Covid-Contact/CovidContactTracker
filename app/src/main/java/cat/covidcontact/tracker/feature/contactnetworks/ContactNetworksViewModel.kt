@@ -28,4 +28,8 @@ class ContactNetworksViewModel @Inject constructor(
     fun onShowContactNetworkSettings(contactNetwork: ContactNetwork) {
         loadState(ContactNetworksState.ShowContactNetworkSettings(contactNetwork))
     }
+
+    fun onNotifyPositive() {
+
+    }
 }

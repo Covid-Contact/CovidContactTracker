@@ -72,6 +72,7 @@ dependencies {
     implementation libs.constraint_layout
     implementation libs.legacy
     implementation libs.recycler_view
+    implementation libs.support_compat
 
     // Activity and fragment extensions for kotlin
     implementation libs.activity

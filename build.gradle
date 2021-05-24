@@ -55,6 +55,7 @@ ext {
     mockitoVersion = "3.5.5"
     mockkVersion = "1.11.0"
     moshiVersion = "1.11.0"
+    supportCompatVersion = "28.0.0"
     playServicesNearby = "17.0.0"
     recyclerViewVersion = "1.1.0"
     resultVersion = "4.0.0"
@@ -69,6 +70,7 @@ ext {
         constraint_layout     : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
         legacy                : "androidx.legacy:legacy-support-v4:$legacySupportVersion",
         recycler_view         : "androidx.recyclerview:recyclerview:$recyclerViewVersion",
+        support_compat        : "com.android.support:support-compat:$supportCompatVersion",
 
         // Activity and fragment extensions for kotlin
         activity              : "androidx.activity:activity-ktx:$activityKotlinVersion",

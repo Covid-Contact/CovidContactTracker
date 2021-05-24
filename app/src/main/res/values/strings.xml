@@ -95,6 +95,12 @@
     <string name="network_limit">Limit</string>
     <string name="network_over_limit">Over limit</string>
     <string name="network_positive_detected">Positive detected</string>
+    <string name="positive_button">I am positive</string>
+    <string name="positive_dialog_title">Sending positive</string>
+    <string name="positive_dialog_message">
+        Are you sure you want to notify the system that you are positive? Your identity will not be
+        revealed to other users.
+    </string>
 
     <!-- Create Contact Network fragment -->
     <string name="create_contact_network_title">Create contact network</string>
@@ -137,5 +143,16 @@
     </string>
     <string name="enable_bluetooth_yes">Enable Bluetooth</string>
     <string name="enable_bluetooth_no">Disable Bluetooth</string>
+
+    <!-- Notifications -->
+    <string name="notification_quarantine_title">You are a near contact</string>
+    <string name="notification_quarantine_text">
+        A positive has been detected in your Contact Networks and you are a near contact
+    </string>
+    <string name="notification_prevention_title">Take care of yourself</string>
+    <string name="notification_prevention_text">
+        A positive has been detected in your Contact Networks, but you are not a near
+        contact
+    </string>
 
 </resources>

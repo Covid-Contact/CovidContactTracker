@@ -70,12 +70,16 @@ class ContactNetworksFragment : BaseFragment() {
     }
 
     private fun FragmentContactNetworksBinding.bind() {
+        contactNetworkList.observeList(viewLifecycleOwner, viewModel.contactNetworks)
+
         flBtnCreateContactNetwork.hide()
         flBtnCreateContactNetwork.setOnClickListener {
             viewModel.onCreateContactNetworkDialog()
         }
 
-        contactNetworkList.observeList(viewLifecycleOwner, viewModel.contactNetworks)
+        btnPositive.setOnClickListener {
+
+        }
     }
 
     private fun MainViewModel.observe() {

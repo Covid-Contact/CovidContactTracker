@@ -1,9 +1,15 @@
 package cat.covidcontact.tracker.common.extensions
 
 import android.app.Dialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.BitmapFactory
+import android.os.Build
 import androidx.annotation.StringRes
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import cat.covidcontact.tracker.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -70,5 +76,48 @@ fun cancelLoadingDialog() {
         if (it.isShowing) {
             it.dismiss()
         }
+    }
+}
+
+fun Context.showNotification(
+    notificationId: Int,
+    channelId: String,
+    channelName: String,
+    channelDescription: String,
+    icon: Int,
+    title: String,
+    text: String
+) {
+    createNotificationChannel(channelId, channelName, channelDescription)
+
+    val builder = NotificationCompat.Builder(this, channelId)
+        .setSmallIcon(icon)
+        .setLargeIcon(BitmapFactory.decodeResource(resources, icon))
+        .setContentTitle(title)
+        .setContentText(text)
+        .setStyle(NotificationCompat.BigTextStyle().bigText(text))
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
+
+    NotificationManagerCompat.from(this).notify(notificationId, builder.build())
+}
+
+private fun Context.createNotificationChannel(
+    channelId: String,
+    channelName: String,
+    channelDescription: String
+) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val channel = NotificationChannel(
+            channelId,
+            channelName,
+            NotificationManager.IMPORTANCE_HIGH
+        ).apply {
+            description = channelDescription
+        }
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
+            as NotificationManager
+
+        notificationManager.createNotificationChannel(channel)
     }
 }
