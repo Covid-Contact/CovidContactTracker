@@ -12,6 +12,7 @@ import cat.covidcontact.data.repositories.interaction.InteractionRepository
 import cat.covidcontact.data.repositories.interaction.InteractionRepositoryImpl
 import cat.covidcontact.data.repositories.user.UserRepository
 import cat.covidcontact.data.repositories.user.UserRepositoryImpl
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,8 +26,13 @@ class DataProviders {
     @Provides
     @Singleton
     fun provideUserRepository(
-        userController: UserController
-    ): UserRepository = UserRepositoryImpl(userController)
+        userController: UserController,
+        firebaseMessaging: FirebaseMessaging
+    ): UserRepository = UserRepositoryImpl(userController, firebaseMessaging)
+
+    @Provides
+    @Singleton
+    fun provideFirebaseMessaging(): FirebaseMessaging = FirebaseMessaging.getInstance()
 
     @Provides
     @Singleton

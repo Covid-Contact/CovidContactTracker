@@ -19,8 +19,12 @@ import cat.covidcontact.usecases.joinContactNetwork.JoinContactNetwork
 import cat.covidcontact.usecases.joinContactNetwork.JoinContactNetworkImpl
 import cat.covidcontact.usecases.login.MakeLogIn
 import cat.covidcontact.usecases.login.MakeLogInImpl
+import cat.covidcontact.usecases.notifypositive.NotifyPositive
+import cat.covidcontact.usecases.notifypositive.NotifyPositiveImpl
 import cat.covidcontact.usecases.registerDevice.RegisterDevice
 import cat.covidcontact.usecases.registerDevice.RegisterDeviceImpl
+import cat.covidcontact.usecases.sendmessagingtoken.SendMessagingToken
+import cat.covidcontact.usecases.sendmessagingtoken.SendMessagingTokenImpl
 import cat.covidcontact.usecases.sendread.SendRead
 import cat.covidcontact.usecases.sendread.SendReadImpl
 import cat.covidcontact.usecases.signup.MakeSignUp
@@ -101,4 +105,16 @@ class UseCaseProviders {
     fun provideSendRead(
         interactionRepository: InteractionRepository
     ): SendRead = SendReadImpl(interactionRepository)
+
+    @Provides
+    @Singleton
+    fun provideSendMessagingToken(
+        userRepository: UserRepository
+    ): SendMessagingToken = SendMessagingTokenImpl(userRepository)
+
+    @Provides
+    @Singleton
+    fun provideNotifyPositive(
+        interactionRepository: InteractionRepository
+    ): NotifyPositive = NotifyPositiveImpl(interactionRepository)
 }

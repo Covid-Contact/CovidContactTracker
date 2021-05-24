@@ -3,6 +3,7 @@ package cat.covidcontact.model.post
 import cat.covidcontact.model.user.Gender
 import cat.covidcontact.model.user.Marriage
 import cat.covidcontact.model.user.Occupation
+import cat.covidcontact.model.user.UserState
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -38,7 +39,10 @@ class PostUser(
     var hasBeenPositive: Boolean? = null,
 
     @SerializedName("is_vaccinated")
-    var isVaccinated: Boolean? = null
+    var isVaccinated: Boolean? = null,
+
+    @SerializedName("state")
+    var state: UserState? = null
 ) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

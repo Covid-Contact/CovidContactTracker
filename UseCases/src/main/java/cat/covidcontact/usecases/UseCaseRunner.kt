@@ -6,5 +6,6 @@ suspend fun <O : UseCase.UseCaseResponse> runUseCase(
     val result = method()
     UseCaseResult.Success(result)
 } catch (e: Exception) {
+    e.printStackTrace()
     UseCaseResult.Error(e)
 }

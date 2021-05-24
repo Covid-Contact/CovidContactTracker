@@ -4,6 +4,7 @@ import cat.covidcontact.data.controllers.CovidContactBaseController
 import cat.covidcontact.data.controllers.ServerResponse
 import cat.covidcontact.model.ApplicationUser
 import cat.covidcontact.model.post.PostDevice
+import cat.covidcontact.model.post.PostToken
 import cat.covidcontact.model.post.PostUser
 
 abstract class UserController : CovidContactBaseController() {
@@ -15,4 +16,5 @@ abstract class UserController : CovidContactBaseController() {
     abstract suspend fun getUserData(email: String): ServerResponse
     abstract suspend fun addUserData(user: PostUser): ServerResponse
     abstract suspend fun registerUserDevice(email: String, device: PostDevice): ServerResponse
+    abstract suspend fun sendMessagingToken(token: PostToken): ServerResponse
 }

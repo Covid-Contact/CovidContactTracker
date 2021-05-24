@@ -14,7 +14,8 @@ class User(
     var marriage: Marriage? = null,
     var children: Int? = null,
     var hasBeenPositive: Boolean? = null,
-    var isVaccinated: Boolean? = null
+    var isVaccinated: Boolean? = null,
+    var state: UserState = UserState.Normal
 ) {
     private val _contactNetworks: MutableList<ContactNetwork> = mutableListOf()
     val contactNetworks: List<ContactNetwork>
@@ -40,7 +41,8 @@ class User(
             marriage,
             children,
             hasBeenPositive,
-            isVaccinated
+            isVaccinated,
+            state
         )
     }
 
@@ -89,7 +91,8 @@ class User(
                     marriage,
                     children,
                     hasBeenPositive,
-                    isVaccinated
+                    isVaccinated,
+                    state!!
                 )
             }
         }

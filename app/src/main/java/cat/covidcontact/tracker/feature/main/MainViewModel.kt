@@ -19,6 +19,7 @@ import cat.covidcontact.tracker.messages.FinishInteractionWorker
 import cat.covidcontact.tracker.messages.PublishCodeWorker
 import cat.covidcontact.usecases.getuserdata.GetUserData
 import cat.covidcontact.usecases.registerDevice.RegisterDevice
+import cat.covidcontact.usecases.sendmessagingtoken.SendMessagingToken
 import cat.covidcontact.usecases.sendread.SendRead
 import com.google.android.gms.nearby.messages.Message
 import com.google.android.gms.nearby.messages.MessageListener
@@ -35,13 +36,13 @@ class MainViewModel @Inject constructor(
     private val workManager: WorkManager,
     private val getUserData: GetUserData,
     private val registerDevice: RegisterDevice,
-    private val sendRead: SendRead
+    private val sendRead: SendRead,
+    private val sendMessagingToken: SendMessagingToken
 ) : BaseViewModel() {
     private val _userDevice = MutableLiveData<UserDevice>()
     val userDevice: LiveData<UserDevice>
         get() = _userDevice
 
-    private val idList: MutableLiveData<MutableSet<String>> = MutableLiveData(mutableSetOf())
     private val finishInteraction = OneTimeWorkRequestBuilder<FinishInteractionWorker>().build()
 
     private val getUserDataHandler = UseCaseResultHandler<GetUserData.Response>(
@@ -65,7 +66,6 @@ class MainViewModel @Inject constructor(
 
     private val sendReadHandler = UseCaseResultHandler<SendRead.Response>(
         onSuccess = { response ->
-            //idList.value?.clear()
             if (!response.isEnded) {
                 workManager.enqueueUniqueWork(
                     FINISH_INTERACTION_NAME,
@@ -76,6 +76,11 @@ class MainViewModel @Inject constructor(
             ScreenState.Nothing
         },
         onFailure = { ScreenState.Nothing }
+    )
+
+    private val sendMessagingTokenHandler = UseCaseResultHandler<SendMessagingToken.Response>(
+        onSuccess = { MainState.MessagingTokenSent },
+        onFailure = { ScreenState.OtherError }
     )
 
     fun onGetCurrentUser(email: String) {
@@ -118,7 +123,6 @@ class MainViewModel @Inject constructor(
                 val strMessage = String(message.content)
                 Log.i("Read", "onFound: $strMessage")
 
-                //idList.value?.add(strMessage)
                 viewModelScope.launch {
                     workManager.cancelUniqueWork(FINISH_INTERACTION_NAME)
                     executeUseCase(sendRead, sendReadHandler, isExecutingUseCaseStateLoad = false) {
@@ -165,6 +169,14 @@ class MainViewModel @Inject constructor(
                     deviceIds = emptySet(),
                     time = System.currentTimeMillis()
                 )
+            }
+        }
+    }
+
+    fun onSendMessagingToken() {
+        viewModelScope.launch {
+            executeUseCase(sendMessagingToken, sendMessagingTokenHandler) {
+                SendMessagingToken.Request(requireUserDevice().user.email)
             }
         }
     }
