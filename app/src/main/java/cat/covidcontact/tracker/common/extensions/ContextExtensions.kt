@@ -3,13 +3,16 @@ package cat.covidcontact.tracker.common.extensions
 import android.app.Dialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.annotation.StringRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import cat.covidcontact.tracker.MainActivity
 import cat.covidcontact.tracker.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -90,6 +93,12 @@ fun Context.showNotification(
 ) {
     createNotificationChannel(channelId, channelName, channelDescription)
 
+    val intent = Intent(this, MainActivity::class.java).apply {
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    }
+
+    val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
     val builder = NotificationCompat.Builder(this, channelId)
         .setSmallIcon(icon)
         .setLargeIcon(BitmapFactory.decodeResource(resources, icon))
@@ -97,6 +106,8 @@ fun Context.showNotification(
         .setContentText(text)
         .setStyle(NotificationCompat.BigTextStyle().bigText(text))
         .setPriority(NotificationCompat.PRIORITY_HIGH)
+        .setContentIntent(pendingIntent)
+        .setAutoCancel(true)
 
     NotificationManagerCompat.from(this).notify(notificationId, builder.build())
 }
