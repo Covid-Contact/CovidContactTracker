@@ -11,7 +11,7 @@ class ContactNetwork(
     var isVisible: Boolean = false,
     val isPasswordProtected: Boolean = false,
     var accessCode: String? = null,
-    val networkState: NetworkState = NetworkState.Normal
+    var networkState: NetworkState = NetworkState.Normal
 ) : Serializable {
 
     fun createPost(): PostContactNetwork {

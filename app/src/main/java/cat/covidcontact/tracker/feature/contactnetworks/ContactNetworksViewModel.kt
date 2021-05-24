@@ -1,28 +1,40 @@
 package cat.covidcontact.tracker.feature.contactnetworks
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import cat.covidcontact.model.ContactNetwork
 import cat.covidcontact.model.user.User
+import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
-import cat.covidcontact.usecases.createContactNetwork.CreateContactNetwork
+import cat.covidcontact.tracker.common.extensions.requireValue
+import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler
+import cat.covidcontact.usecases.notifypositive.NotifyPositive
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ContactNetworksViewModel @Inject constructor(
-    private val createContactNetwork: CreateContactNetwork
+    private val notifyPositive: NotifyPositive
 ) : BaseViewModel() {
-    private val _contactNetworks = MutableLiveData<List<ContactNetwork>>()
-    val contactNetworks: LiveData<List<ContactNetwork>>
-        get() = _contactNetworks
+    private val currentUser: MutableLiveData<User> = MutableLiveData()
+    val contactNetworks = currentUser.map { user -> user.contactNetworks }
+
+    private val notifyPositiveHandler = UseCaseResultHandler<NotifyPositive.Response>(
+        onSuccess = { response ->
+            currentUser.value = response.user
+            ScreenState.Nothing
+        },
+        onFailure = { ScreenState.OtherError }
+    )
 
     fun onCreateContactNetworkDialog() {
         loadState(ContactNetworksState.CreateContactNetwork)
     }
 
     fun onLoadContactNetworks(user: User) {
-        _contactNetworks.value = user.contactNetworks
+        currentUser.value = user
     }
 
     fun onShowContactNetworkSettings(contactNetwork: ContactNetwork) {
@@ -30,6 +42,10 @@ class ContactNetworksViewModel @Inject constructor(
     }
 
     fun onNotifyPositive() {
-
+        viewModelScope.launch {
+            executeUseCase(notifyPositive, notifyPositiveHandler) {
+                NotifyPositive.Request(currentUser.requireValue())
+            }
+        }
     }
 }

@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.observeList
+import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentContactNetworksBinding
 import cat.covidcontact.tracker.feature.contactnetworks.recyclerview.ContactNetworkAdapter
@@ -78,7 +80,13 @@ class ContactNetworksFragment : BaseFragment() {
         }
 
         btnPositive.setOnClickListener {
-
+            requireContext().showDialog(
+                title = R.string.positive_dialog_title,
+                message = R.string.positive_dialog_message,
+                positiveButtonText = R.string.yes,
+                positiveButtonAction = { _, _ -> viewModel.onNotifyPositive() },
+                negativeButtonText = R.string.no
+            )
         }
     }
 
