@@ -47,6 +47,9 @@ class MainFragment : BaseFragment() {
                 viewModel.onRegisterDevice(state.user, device)
             }
             MainState.DeviceRegistered -> {
+                viewModel.onSendMessagingToken()
+            }
+            MainState.MessagingTokenSent -> {
                 binding.bind()
                 startBluetoothDiscovery()
             }

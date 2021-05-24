@@ -13,4 +13,6 @@ interface UserRepository {
     suspend fun addUserData(user: User): String
 
     suspend fun registerUserDevice(email: String, device: Device)
+
+    suspend fun sendMessagingToken(email: String)
 }

@@ -54,7 +54,8 @@ class ContactNetwork(
                     owner = User(ownerUsername),
                     isVisible = isVisible,
                     accessCode = accessCode,
-                    isPasswordProtected = isPasswordProtected
+                    isPasswordProtected = isPasswordProtected,
+                    networkState = NetworkState.valueOf(state!!)
                 )
             }
         }

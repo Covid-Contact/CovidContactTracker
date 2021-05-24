@@ -68,6 +68,10 @@ dependencies {
     implementation libs.fuel_coroutines
     implementation libs.fuel_gson
 
+    // Play services
+    implementation platform(libs.firebaseBom)
+    implementation libs.fcm
+
     // Unit testing
     testImplementation libs.junit
     testImplementation libs.core_testing

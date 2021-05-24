@@ -3,6 +3,7 @@ package cat.covidcontact.data.controllers.user
 import cat.covidcontact.data.controllers.ServerResponse
 import cat.covidcontact.model.ApplicationUser
 import cat.covidcontact.model.post.PostDevice
+import cat.covidcontact.model.post.PostToken
 import cat.covidcontact.model.post.PostUser
 
 class UserControllerImpl : UserController() {
@@ -29,5 +30,9 @@ class UserControllerImpl : UserController() {
 
     override suspend fun registerUserDevice(email: String, device: PostDevice): ServerResponse {
         return post("$url/device", device, listOf("email" to email))
+    }
+
+    override suspend fun sendMessagingToken(token: PostToken): ServerResponse {
+        return post("$url/messagetoken", token)
     }
 }

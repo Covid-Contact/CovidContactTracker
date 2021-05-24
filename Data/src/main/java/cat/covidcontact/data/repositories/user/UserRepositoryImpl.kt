@@ -6,12 +6,16 @@ import cat.covidcontact.data.controllers.HttpStatus
 import cat.covidcontact.data.controllers.user.UserController
 import cat.covidcontact.model.ApplicationUser
 import cat.covidcontact.model.Device
+import cat.covidcontact.model.post.PostToken
 import cat.covidcontact.model.post.PostUser
 import cat.covidcontact.model.user.User
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
+import kotlinx.coroutines.tasks.await
 
 class UserRepositoryImpl(
-    private val userController: UserController
+    private val userController: UserController,
+    private val firebaseMessaging: FirebaseMessaging
 ) : UserRepository {
 
     override suspend fun makeLogIn(email: String, password: String) {
@@ -99,5 +103,28 @@ class UserRepositoryImpl(
                 else -> throw CommonException.OtherError
             }
         }
+    }
+
+    override suspend fun sendMessagingToken(email: String) {
+        val token = getMessagingToken()
+        val serverResponse = userController.sendMessagingToken(PostToken(email, token))
+        serverResponse.response.statusCode.run {
+            when (this) {
+                CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
+                HttpStatus.CREATED -> return@run
+                else -> throw CommonException.OtherError
+            }
+        }
+    }
+
+    private suspend fun getMessagingToken(): String {
+        val task = firebaseMessaging.token
+        task.await()
+
+        if (!task.isSuccessful) {
+            throw task.exception ?: CommonException.OtherError
+        }
+
+        return task.result!!
     }
 }
