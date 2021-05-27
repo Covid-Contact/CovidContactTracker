@@ -155,4 +155,7 @@
         contact
     </string>
 
+    <!-- Profile -->
+    <string name="profile_update">Update</string>
+
 </resources>

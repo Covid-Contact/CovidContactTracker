@@ -1,11 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.4.32"
+    ext.kotlin_version = "1.5.10"
     ext.gradleVersion = "4.1.2"
     ext.navigationVersion = "2.3.4"
     ext.googleServicesVersion = "4.3.5"
     ext.dokkaVersion = "0.10.1"
-    ext.daggerHiltVersion = "2.31.2-alpha"
+    ext.daggerHiltVersion = "2.35.1"
 
     repositories {
         google()
