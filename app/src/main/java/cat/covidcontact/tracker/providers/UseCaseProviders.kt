@@ -29,6 +29,8 @@ import cat.covidcontact.usecases.sendread.SendRead
 import cat.covidcontact.usecases.sendread.SendReadImpl
 import cat.covidcontact.usecases.signup.MakeSignUp
 import cat.covidcontact.usecases.signup.MakeSignUpImpl
+import cat.covidcontact.usecases.updateprofile.UpdateProfile
+import cat.covidcontact.usecases.updateprofile.UpdateProfileImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -117,4 +119,10 @@ class UseCaseProviders {
     fun provideNotifyPositive(
         interactionRepository: InteractionRepository
     ): NotifyPositive = NotifyPositiveImpl(interactionRepository)
+
+    @Provides
+    @Singleton
+    fun provideUpdateProfile(
+        userRepository: UserRepository
+    ): UpdateProfile = UpdateProfileImpl(userRepository)
 }

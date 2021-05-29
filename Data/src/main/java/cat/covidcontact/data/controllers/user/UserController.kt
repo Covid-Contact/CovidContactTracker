@@ -17,4 +17,15 @@ abstract class UserController : CovidContactBaseController() {
     abstract suspend fun addUserData(user: PostUser): ServerResponse
     abstract suspend fun registerUserDevice(email: String, device: PostDevice): ServerResponse
     abstract suspend fun sendMessagingToken(token: PostToken): ServerResponse
+
+    abstract suspend fun updateUserProfile(
+        email: String,
+        city: String,
+        studies: String,
+        occupation: String,
+        marriage: String,
+        children: Int,
+        positive: Boolean?,
+        vaccinated: Boolean?
+    ): ServerResponse
 }

@@ -80,13 +80,15 @@ inline fun <reified T : Enum<T>> TextInputLayout.setExposedMenuItems(
 fun TextInputLayout.setExposedMenuItems(
     context: Context,
     values: List<String>,
-    @LayoutRes layoutId: Int = R.layout.list_item
+    @LayoutRes layoutId: Int = R.layout.list_item,
+    selectedValue: String = ""
 ) {
     val adapter = ArrayAdapter(context, layoutId, values)
+    editText?.setText(selectedValue)
     (editText as? AutoCompleteTextView)?.setAdapter(adapter)
 }
 
-fun TextInputLayout.setText(text: String) {
+fun TextInputLayout.setText(text: String?) {
     editText?.setText(text)
 }
 

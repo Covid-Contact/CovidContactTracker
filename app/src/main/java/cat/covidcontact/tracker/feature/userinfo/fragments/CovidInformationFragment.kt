@@ -39,6 +39,7 @@ class CovidInformationFragment : UserInfoFragment() {
             getString(R.string.no),
             getString(R.string.decline_to_answer)
         )
+
         positiveLayout.setExposedMenuItems(requireContext(), options)
         vaccinatedLayout.setExposedMenuItems(requireContext(), options)
 

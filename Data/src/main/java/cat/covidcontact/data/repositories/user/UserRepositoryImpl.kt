@@ -117,6 +117,36 @@ class UserRepositoryImpl(
         }
     }
 
+    override suspend fun updateUserData(
+        email: String,
+        city: String,
+        studies: String,
+        occupation: String,
+        marriage: String,
+        children: Int,
+        positive: Boolean?,
+        vaccinated: Boolean?
+    ) {
+        val serverResponse = userController.updateUserProfile(
+            email,
+            city,
+            studies,
+            occupation,
+            marriage,
+            children,
+            positive,
+            vaccinated
+        )
+
+        serverResponse.response.statusCode.run {
+            when (this) {
+                CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
+                HttpStatus.NO_CONTENT -> return@run
+                else -> throw CommonException.OtherError
+            }
+        }
+    }
+
     private suspend fun getMessagingToken(): String {
         val task = firebaseMessaging.token
         task.await()
