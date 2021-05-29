@@ -35,4 +35,29 @@ class UserControllerImpl : UserController() {
     override suspend fun sendMessagingToken(token: PostToken): ServerResponse {
         return post("$url/messagetoken", token)
     }
+
+    override suspend fun updateUserProfile(
+        email: String,
+        city: String,
+        studies: String,
+        occupation: String,
+        marriage: String,
+        children: Int,
+        positive: Boolean?,
+        vaccinated: Boolean?
+    ): ServerResponse {
+        return put(
+            "$url/update",
+            listOf(
+                "email" to email,
+                "city" to city,
+                "studies" to studies,
+                "occupation" to occupation,
+                "marriage" to marriage,
+                "children" to children,
+                "positive" to positive,
+                "vaccinated" to vaccinated
+            )
+        )
+    }
 }

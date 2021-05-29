@@ -12,6 +12,7 @@ import cat.covidcontact.model.user.Occupation
 import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
+import cat.covidcontact.tracker.common.extensions.addOnTextChanged
 import cat.covidcontact.tracker.common.extensions.observeText
 import cat.covidcontact.tracker.common.extensions.setExposedMenuItems
 import cat.covidcontact.tracker.common.extensions.setText
@@ -70,6 +71,10 @@ class ProfileFragment : BaseFragment() {
 
         positiveLayout.setUpExposedDropdown(options, user.hasBeenPositive, viewModel.positive)
         vaccinatedLayout.setUpExposedDropdown(options, user.isVaccinated, viewModel.vaccinated)
+
+        btnUpdateChanges.setOnClickListener {
+            viewModel.onUpdateProfile(mainViewModel.requireUserDevice().user.email)
+        }
     }
 
     private fun TextInputLayout.setUp(
@@ -78,14 +83,14 @@ class ProfileFragment : BaseFragment() {
         onBeforeAdding: TextInputLayout.() -> Unit = {}
     ) {
         onBeforeAdding(this)
-        setText(text)
         observeText(liveData)
+        setText(text)
     }
 
     private fun TextInputLayout.setUpExposedDropdown(
         options: List<String>,
         value: Boolean?,
-        liveData: MutableLiveData<String>
+        liveData: MutableLiveData<Boolean?>
     ) {
         val textId = when (value) {
             null -> R.string.decline_to_answer
@@ -94,7 +99,22 @@ class ProfileFragment : BaseFragment() {
         }
 
         val text = getString(textId)
+        addOnTextChanged { newText ->
+            updateBooleanLiveData(liveData, newText.toString())
+        }
+
         setExposedMenuItems(requireContext(), options, selectedValue = text)
-        observeText(liveData)
+        updateBooleanLiveData(liveData, text)
+    }
+
+    private fun updateBooleanLiveData(
+        liveData: MutableLiveData<Boolean?>,
+        newText: String?
+    ) {
+        liveData.value = when (newText.toString()) {
+            getString(R.string.decline_to_answer) -> null
+            getString(R.string.yes) -> true
+            else -> false
+        }
     }
 }
