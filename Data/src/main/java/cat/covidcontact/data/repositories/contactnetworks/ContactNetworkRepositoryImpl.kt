@@ -126,6 +126,17 @@ class ContactNetworkRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun exitContactNetwork(email: String, contactNetworkName: String) {
+        val serverResponse = contactNetworkController.exitContactNetwork(email, contactNetworkName)
+        serverResponse.onStatusCode {
+            when (this) {
+                CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
+                HttpStatus.NO_CONTENT -> return@onStatusCode
+                else -> throw CommonException.OtherError
+            }
+        }
+    }
+
     private fun String.hashPassword(): String {
         return MessageDigest.getInstance("SHA-256")
             .digest(toByteArray())

@@ -31,4 +31,9 @@ abstract class ContactNetworkController : CovidContactBaseController() {
         email: String,
         contactNetworkName: String
     ): ServerResponse
+
+    abstract suspend fun exitContactNetwork(
+        email: String,
+        contactNetworkName: String
+    ): ServerResponse
 }
