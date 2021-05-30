@@ -9,6 +9,7 @@ import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.extensions.requireValue
 import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler
+import cat.covidcontact.usecases.exitcontactnetwork.ExitContactNetwork
 import cat.covidcontact.usecases.notifypositive.NotifyPositive
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ContactNetworksViewModel @Inject constructor(
-    private val notifyPositive: NotifyPositive
+    private val notifyPositive: NotifyPositive,
+    private val exitContactNetwork: ExitContactNetwork
 ) : BaseViewModel() {
     private val currentUser: MutableLiveData<User> = MutableLiveData()
     val contactNetworks = currentUser.map { user -> user.contactNetworks }
@@ -26,6 +28,11 @@ class ContactNetworksViewModel @Inject constructor(
             currentUser.value = response.user
             ScreenState.Nothing
         },
+        onFailure = { ScreenState.OtherError }
+    )
+
+    private val exitContactNetworkHandler = UseCaseResultHandler<ExitContactNetwork.Response>(
+        onSuccess = { ScreenState.Nothing },
         onFailure = { ScreenState.OtherError }
     )
 
@@ -45,6 +52,14 @@ class ContactNetworksViewModel @Inject constructor(
         viewModelScope.launch {
             executeUseCase(notifyPositive, notifyPositiveHandler) {
                 NotifyPositive.Request(currentUser.requireValue())
+            }
+        }
+    }
+
+    fun onExitContactNetwork(contactNetwork: ContactNetwork) {
+        viewModelScope.launch {
+            executeUseCase(exitContactNetwork, exitContactNetworkHandler) {
+                ExitContactNetwork.Request(currentUser.requireValue(), contactNetwork)
             }
         }
     }

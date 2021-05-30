@@ -99,7 +99,24 @@ class ContactNetworksFragment : BaseFragment() {
                 userDevice.user.username,
                 NetworkCardStateColor(),
                 NetworkCardStateText(),
-                onSettingsClick = { viewModel.onShowContactNetworkSettings(it) }
+                onSettingsClick = { contactNetwork ->
+                    viewModel.onShowContactNetworkSettings(contactNetwork)
+                },
+                onExitContactNetwork = { contactNetwork ->
+                    requireContext().showDialog(
+                        title = getString(
+                            R.string.exit_contact_network_dialog_title,
+                            contactNetwork.name
+                        ),
+                        message = getString(
+                            R.string.exit_contact_network_dialog_message,
+                            contactNetwork.name
+                        ),
+                        positiveButtonAction = { _, _ ->
+                            viewModel.onExitContactNetwork(contactNetwork)
+                        }
+                    )
+                }
             )
             binding.contactNetworkList.adapter = adapter
             binding.contactNetworkList.layoutManager = LinearLayoutManager(requireContext())
