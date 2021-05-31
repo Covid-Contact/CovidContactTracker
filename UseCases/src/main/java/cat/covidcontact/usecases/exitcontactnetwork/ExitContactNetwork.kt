@@ -11,5 +11,7 @@ interface ExitContactNetwork : UseCase<ExitContactNetwork.Request, ExitContactNe
         val contactNetwork: ContactNetwork
     ) : UseCase.UseCaseRequest
 
-    class Response : UseCase.UseCaseResponse
+    data class Response(
+        val user: User
+    ) : UseCase.UseCaseResponse
 }

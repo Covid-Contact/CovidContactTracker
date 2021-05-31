@@ -48,7 +48,7 @@ class ContactNetworkControllerImpl : ContactNetworkController() {
         contactNetworkName: String
     ): ServerResponse {
         val name = contactNetworkName.modifyInvalidCharacters()
-        return delete("$url/$name/delete", listOf("email" to email))
+        return delete("$url/$name/exit", listOf("email" to email))
     }
 
     private fun String.modifyInvalidCharacters() = replace(" ", "%20").replace("#", "%23")

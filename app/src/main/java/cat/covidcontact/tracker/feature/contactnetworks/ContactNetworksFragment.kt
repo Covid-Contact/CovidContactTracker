@@ -112,9 +112,11 @@ class ContactNetworksFragment : BaseFragment() {
                             R.string.exit_contact_network_dialog_message,
                             contactNetwork.name
                         ),
+                        positiveButtonText = getString(R.string.yes),
                         positiveButtonAction = { _, _ ->
                             viewModel.onExitContactNetwork(contactNetwork)
-                        }
+                        },
+                        negativeButtonText = getString(R.string.no)
                     )
                 }
             )

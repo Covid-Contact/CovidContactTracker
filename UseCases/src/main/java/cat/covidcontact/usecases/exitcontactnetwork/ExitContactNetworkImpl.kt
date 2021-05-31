@@ -14,6 +14,6 @@ class ExitContactNetworkImpl(
         )
 
         request.user.removeContactNetwork(request.contactNetwork)
-        ExitContactNetwork.Response()
+        ExitContactNetwork.Response(request.user)
     }
 }
