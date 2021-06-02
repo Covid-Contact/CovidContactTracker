@@ -41,6 +41,9 @@ class ContactNetworksFragment : BaseFragment() {
                     )
                 navigate(action)
             }
+            ContactNetworksState.ExitContactNetwork -> {
+                requireActivity().recreate()
+            }
         }
     }
 

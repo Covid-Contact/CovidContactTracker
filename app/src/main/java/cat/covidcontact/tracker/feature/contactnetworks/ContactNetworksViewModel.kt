@@ -39,7 +39,7 @@ class ContactNetworksViewModel @Inject constructor(
         onSuccess = { response ->
             _contactNetworks.value = listOf()
             _contactNetworks.value = response.user.contactNetworks
-            ScreenState.Nothing
+            ContactNetworksState.ExitContactNetwork
         },
         onFailure = { ScreenState.OtherError }
     )
