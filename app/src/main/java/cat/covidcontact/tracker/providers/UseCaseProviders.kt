@@ -9,6 +9,8 @@ import cat.covidcontact.usecases.createContactNetwork.CreateContactNetwork
 import cat.covidcontact.usecases.createContactNetwork.CreateContactNetworkImpl
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAddition
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAdditionImpl
+import cat.covidcontact.usecases.exitcontactnetwork.ExitContactNetwork
+import cat.covidcontact.usecases.exitcontactnetwork.ExitContactNetworkImpl
 import cat.covidcontact.usecases.generateAccessCode.GenerateAccessCode
 import cat.covidcontact.usecases.generateAccessCode.GenerateAccessCodeImpl
 import cat.covidcontact.usecases.getContactNetworkByAccessCode.GetContactNetworkByAccessCode
@@ -125,4 +127,10 @@ class UseCaseProviders {
     fun provideUpdateProfile(
         userRepository: UserRepository
     ): UpdateProfile = UpdateProfileImpl(userRepository)
+
+    @Provides
+    @Singleton
+    fun provideExitContactNetwork(
+        contactNetworkRepository: ContactNetworkRepository
+    ): ExitContactNetwork = ExitContactNetworkImpl(contactNetworkRepository)
 }

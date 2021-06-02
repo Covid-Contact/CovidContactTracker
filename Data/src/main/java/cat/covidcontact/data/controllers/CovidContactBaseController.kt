@@ -1,6 +1,5 @@
 package cat.covidcontact.data.controllers
 
-import android.util.Log
 import com.github.kittinunf.fuel.core.Parameters
 import com.github.kittinunf.fuel.gson.jsonBody
 import com.github.kittinunf.fuel.httpDelete
@@ -65,14 +64,6 @@ abstract class CovidContactBaseController {
         return token?.let {
             if (isAuthenticated) mapOf(AUTH_HEADER to it) else emptyMap()
         } ?: emptyMap()
-    }
-
-    private fun ServerResponse.logConnectionResult(): ServerResponse {
-        Log.i("Server", "Request: $request")
-        Log.i("Server", "Response: $response")
-        Log.i("Server", "Result: $result")
-
-        return this
     }
 
     companion object {

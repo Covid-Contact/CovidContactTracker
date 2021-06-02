@@ -20,7 +20,8 @@ class ContactNetworkAdapter(
     private val currentUsername: String,
     private val colorManager: ColorManager<NetworkState>,
     private val textManager: TextManager<NetworkState>,
-    private val onSettingsClick: (ContactNetwork) -> Unit = {}
+    private val onSettingsClick: (ContactNetwork) -> Unit = {},
+    private val onExitContactNetwork: (ContactNetwork) -> Unit = {}
 ) : ListAdapter<ContactNetwork, ContactNetworkAdapter.ContactNetworkViewHolder>(
     ContactNetworkDiff
 ), ColorManager<NetworkState> by colorManager, TextManager<NetworkState> by textManager {
@@ -56,6 +57,8 @@ class ContactNetworkAdapter(
             binding.root.setOnClickListener {
                 if (isCurrentUserOwner) {
                     onSettingsClick(contactNetwork)
+                } else {
+                    onExitContactNetwork(contactNetwork)
                 }
             }
         }

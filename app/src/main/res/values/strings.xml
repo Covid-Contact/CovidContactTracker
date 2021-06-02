@@ -101,6 +101,8 @@
         Are you sure you want to notify the system that you are positive? Your identity will not be
         revealed to other users.
     </string>
+    <string name="exit_contact_network_dialog_title">Exit %s</string>
+    <string name="exit_contact_network_dialog_message">Do you really want to exit %s?</string>
 
     <!-- Create Contact Network fragment -->
     <string name="create_contact_network_title">Create contact network</string>

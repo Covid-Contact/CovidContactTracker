@@ -29,6 +29,10 @@ class User(
         contactNetworks.forEach { addContactNetwork(it) }
     }
 
+    fun removeContactNetwork(contactNetwork: ContactNetwork) {
+        _contactNetworks.remove(contactNetwork)
+    }
+
     fun createPost(): PostUser {
         return PostUser(
             username,

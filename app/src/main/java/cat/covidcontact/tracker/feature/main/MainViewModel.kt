@@ -163,12 +163,14 @@ class MainViewModel @Inject constructor(
 
     fun onFinishInteraction() {
         viewModelScope.launch {
-            executeUseCase(sendRead, sendReadHandler, isExecutingUseCaseStateLoad = false) {
-                SendRead.Request(
-                    currentDeviceId = userDevice.requireValue().device.id,
-                    deviceIds = emptySet(),
-                    time = System.currentTimeMillis()
-                )
+            if (userDevice.value != null) {
+                executeUseCase(sendRead, sendReadHandler, isExecutingUseCaseStateLoad = false) {
+                    SendRead.Request(
+                        currentDeviceId = userDevice.requireValue().device.id,
+                        deviceIds = emptySet(),
+                        time = System.currentTimeMillis()
+                    )
+                }
             }
         }
     }
