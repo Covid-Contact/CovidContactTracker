@@ -97,7 +97,7 @@
     <string name="network_limit">Limit</string>
     <string name="network_over_limit">Over limit</string>
     <string name="network_positive_detected">Positive detected</string>
-    <string name="positive_button">I am positive</string>
+    <string name="positive_button">I am positive of COVID</string>
     <string name="positive_dialog_title">Sending positive</string>
     <string name="positive_dialog_message">
         Are you sure you want to notify the system that you are positive? Your identity will not be
