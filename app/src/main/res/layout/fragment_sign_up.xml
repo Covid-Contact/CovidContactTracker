@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".feature.signup.SignUpFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout style="@style/full_color_constraint_layout">
+
+        <TextView
+            android:id="@+id/signUpAppTitle"
+            style="@style/app_title"
+            android:text="@string/app_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/signUpLinearLayout"
+            style="@style/round_linear_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signUpEmailLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signUpPasswordLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/password"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signUpRepeatPasswordLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/repeat_password"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtMakeLogIn"
+            style="@style/text_click"
+            android:layout_marginStart="@dimen/app_padding"
+            android:layout_marginEnd="@dimen/app_padding"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
+            android:text="@string/already_account"
+            app:layout_constraintBottom_toTopOf="@+id/btnSignUp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignUp"
+            style="@style/fullWidthButton"
+            android:layout_marginStart="@dimen/app_padding"
+            android:layout_marginEnd="@dimen/app_padding"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
+            android:text="@string/sign_up"
+            app:layout_constraintBottom_toBottomOf="@+id/signUpLinearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

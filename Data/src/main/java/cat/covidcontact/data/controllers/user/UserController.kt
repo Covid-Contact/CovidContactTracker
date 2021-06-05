@@ -1,0 +1,34 @@
+package cat.covidcontact.data.controllers.user
+
+import cat.covidcontact.data.controllers.CovidContactBaseController
+import cat.covidcontact.data.controllers.ServerResponse
+import cat.covidcontact.model.ApplicationUser
+import cat.covidcontact.model.post.PostDevice
+import cat.covidcontact.model.post.PostToken
+import cat.covidcontact.model.post.PostUser
+
+abstract class UserController : CovidContactBaseController() {
+    override val url = "${super.url}/user"
+
+    abstract suspend fun makeSignUp(applicationUser: ApplicationUser): ServerResponse
+    abstract suspend fun isUserValidated(email: String): ServerResponse
+    abstract suspend fun makeLogIn(applicationUser: ApplicationUser): ServerResponse
+    abstract suspend fun getUserData(email: String): ServerResponse
+    abstract suspend fun addUserData(user: PostUser): ServerResponse
+    abstract suspend fun registerUserDevice(email: String, device: PostDevice): ServerResponse
+    abstract suspend fun sendMessagingToken(token: PostToken): ServerResponse
+
+    abstract suspend fun updateUserProfile(
+        email: String,
+        city: String,
+        studies: String,
+        occupation: String,
+        marriage: String,
+        children: Int,
+        positive: Boolean?,
+        vaccinated: Boolean?
+    ): ServerResponse
+
+    abstract suspend fun makeLogOut(email: String, deviceId: String): ServerResponse
+    abstract suspend fun deleteAccount(email: String): ServerResponse
+}

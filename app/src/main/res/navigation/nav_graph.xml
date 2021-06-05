@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/logInFragment">
+
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="cat.covidcontact.tracker.feature.login.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in">
+        <action
+            android:id="@+id/action_logInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="cat.covidcontact.tracker.feature.signup.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="cat.covidcontact.tracker.feature.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_mainFragment_to_logInFragment"
+            app:destination="@id/logInFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="cat.covidcontact.tracker.feature.userinfo.fragments.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcomeFragment_to_basicUserInfoFragment"
+            app:destination="@id/basicUserInfoFragment" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/basicUserInfoFragment"
+        android:name="cat.covidcontact.tracker.feature.userinfo.fragments.BasicUserInfoFragment"
+        android:label="fragment_basic_user_info"
+        tools:layout="@layout/fragment_basic_user_info">
+        <action
+            android:id="@+id/action_basicUserInfoFragment_to_personalInformationFragment"
+            app:destination="@id/personalInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalInformationFragment"
+        android:name="cat.covidcontact.tracker.feature.userinfo.fragments.PersonalInformationFragment"
+        android:label="fragment_personal_information"
+        tools:layout="@layout/fragment_personal_information">
+        <action
+            android:id="@+id/action_personalInformationFragment_to_covidInformationFragment"
+            app:destination="@id/covidInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/covidInformationFragment"
+        android:name="cat.covidcontact.tracker.feature.userinfo.fragments.CovidInformationFragment"
+        android:label="fragment_covid_information"
+        tools:layout="@layout/fragment_covid_information">
+        <action
+            android:id="@+id/action_covidInformationFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
