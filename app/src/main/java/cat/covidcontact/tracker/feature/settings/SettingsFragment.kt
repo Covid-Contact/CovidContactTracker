@@ -1,15 +1,16 @@
 package cat.covidcontact.tracker.feature.settings
 
 import android.content.res.Configuration
-import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.DropDownPreference
 import androidx.preference.Preference
+import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreference
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseSettingsFragment
+import cat.covidcontact.tracker.common.extensions.enableDarkTheme
 import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.feature.main.MainFragment
@@ -51,8 +52,24 @@ class SettingsFragment : BaseSettingsFragment(), Preference.OnPreferenceChangeLi
     }
 
     override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
-        Log.i("Settings", "onPreferenceChange: ${preference?.key}")
+        when (preference?.key) {
+            APP_LANGUAGE -> {
+                addSkipRead()
+                requireActivity().recreate()
+            }
+            ENABLE_DARK_THEME -> {
+                addSkipRead()
+                enableDarkTheme(newValue as Boolean)
+            }
+        }
         return true
+    }
+
+    private fun addSkipRead() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(SKIP, true)
+        editor.apply()
     }
 
     override fun onPreferenceClick(preference: Preference?): Boolean {
@@ -82,10 +99,11 @@ class SettingsFragment : BaseSettingsFragment(), Preference.OnPreferenceChangeLi
         requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
     companion object {
-        private const val APP_LANGUAGE = "app_language"
-        private const val ENABLE_DARK_THEME = "enable_dark_theme"
-        private const val VERSION = "version"
-        private const val LOG_OUT = "log_out"
-        private const val DELETE_ACCOUNT = "delete_account"
+        const val APP_LANGUAGE = "app_language"
+        const val ENABLE_DARK_THEME = "enable_dark_theme"
+        const val VERSION = "version"
+        const val LOG_OUT = "log_out"
+        const val DELETE_ACCOUNT = "delete_account"
+        const val SKIP = "skip"
     }
 }

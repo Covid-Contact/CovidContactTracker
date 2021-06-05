@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import cat.covidcontact.model.Device
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
@@ -22,6 +23,7 @@ import cat.covidcontact.tracker.common.extensions.generateDeviceId
 import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentMainBinding
+import cat.covidcontact.tracker.feature.settings.SettingsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("HardwareIds")
@@ -77,6 +79,9 @@ class MainFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
+        viewModel.onSetSkip(sharedPreferences.getBoolean(SettingsFragment.SKIP, false))
     }
 
     override fun showBluetoothInfo() {

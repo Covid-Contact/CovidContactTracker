@@ -46,6 +46,8 @@ class MainViewModel @Inject constructor(
     val userDevice: LiveData<UserDevice>
         get() = _userDevice
 
+    private val isSkipping = MutableLiveData(false)
+
     private val finishInteraction = OneTimeWorkRequestBuilder<FinishInteractionWorker>().build()
 
     private val getUserDataHandler = UseCaseResultHandler<GetUserData.Response>(
@@ -64,7 +66,8 @@ class MainViewModel @Inject constructor(
             PublishCodeWorker.deviceId = it.userDevice.device.id
             MainState.DeviceRegistered
         },
-        onFailure = { ScreenState.Nothing }
+        onFailure = { ScreenState.Nothing },
+        isCommonEnabled = false
     )
 
     private val sendReadHandler = UseCaseResultHandler<SendRead.Response>(
@@ -78,7 +81,8 @@ class MainViewModel @Inject constructor(
             }
             ScreenState.Nothing
         },
-        onFailure = { ScreenState.Nothing }
+        onFailure = { ScreenState.Nothing },
+        isCommonEnabled = false
     )
 
     private val sendMessagingTokenHandler = UseCaseResultHandler<SendMessagingToken.Response>(
@@ -127,18 +131,25 @@ class MainViewModel @Inject constructor(
                 Log.i("Read", "onFound: $strMessage")
 
                 viewModelScope.launch {
-                    workManager.cancelUniqueWork(FINISH_INTERACTION_NAME)
-                    val coordinates = getLocationCoordinates()
-                    Log.i("Test", "onFound: $coordinates")
+                    if (!isSkipping.requireValue()) {
+                        workManager.cancelUniqueWork(FINISH_INTERACTION_NAME)
+                        val coordinates = getLocationCoordinates()
 
-                    executeUseCase(sendRead, sendReadHandler, isExecutingUseCaseStateLoad = false) {
-                        SendRead.Request(
-                            currentDeviceId = userDevice.requireValue().device.id,
-                            deviceIds = setOf(strMessage),
-                            time = System.currentTimeMillis(),
-                            lat = coordinates?.first,
-                            lon = coordinates?.second
-                        )
+                        executeUseCase(
+                            sendRead,
+                            sendReadHandler,
+                            isExecutingUseCaseStateLoad = false
+                        ) {
+                            SendRead.Request(
+                                currentDeviceId = userDevice.requireValue().device.id,
+                                deviceIds = setOf(strMessage),
+                                time = System.currentTimeMillis(),
+                                lat = coordinates?.first,
+                                lon = coordinates?.second
+                            )
+                        }
+                    } else {
+                        isSkipping.value = false
                     }
                 }
             }
@@ -203,6 +214,10 @@ class MainViewModel @Inject constructor(
                 SendMessagingToken.Request(requireUserDevice().user.email)
             }
         }
+    }
+
+    fun onSetSkip(isSkipEnabled: Boolean) {
+        isSkipping.value = isSkipEnabled
     }
 
     fun requireUserDevice(): UserDevice = userDevice.value ?: throw Exception("UserDevice not set")

@@ -127,6 +127,7 @@
     <string name="enable_password_user_addition">Request password to join</string>
     <string name="access_code">Access code</string>
     <string name="access_code_generation">Generate access code</string>
+    <string name="manage_contact_network">Manage contact network</string>
     <string name="delete_contact_network">Delete contact network</string>
 
     <!-- Search -->

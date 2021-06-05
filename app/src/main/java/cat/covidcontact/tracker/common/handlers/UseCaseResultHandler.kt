@@ -9,6 +9,7 @@ import cat.covidcontact.usecases.UseCaseResult
 class UseCaseResultHandler<T : UseCase.UseCaseResponse>(
     private val onSuccess: (T) -> ScreenState,
     private val onFailure: (Exception) -> ScreenState,
+    private val isCommonEnabled: Boolean = true
 ) {
 
     fun getScreenState(useCaseResult: UseCaseResult<*>?): ScreenState {
@@ -17,7 +18,11 @@ class UseCaseResultHandler<T : UseCase.UseCaseResponse>(
             is UseCaseResult.Success -> onSuccess(useCaseResult.result as T)
             else -> {
                 when (val exception = (useCaseResult as UseCaseResult.Error).exception) {
-                    CommonException.OtherError -> ScreenState.OtherError
+                    CommonException.OtherError -> if (isCommonEnabled) {
+                        ScreenState.OtherError
+                    } else {
+                        ScreenState.Nothing
+                    }
                     else -> onFailure(exception)
                 }
             }
