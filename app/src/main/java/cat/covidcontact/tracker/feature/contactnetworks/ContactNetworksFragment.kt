@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.observeList
+import cat.covidcontact.tracker.common.extensions.observeVisible
 import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentContactNetworksBinding
@@ -91,6 +92,11 @@ class ContactNetworksFragment : BaseFragment() {
                 negativeButtonText = R.string.no
             )
         }
+
+        layoutNoContactNetworks.observeVisible(
+            viewLifecycleOwner,
+            viewModel.isNoContactNetworksVisible
+        )
     }
 
     private fun MainViewModel.observe() {

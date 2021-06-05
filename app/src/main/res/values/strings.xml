@@ -105,6 +105,7 @@
     </string>
     <string name="exit_contact_network_dialog_title">Exit %s</string>
     <string name="exit_contact_network_dialog_message">Do you really want to exit %s?</string>
+    <string name="no_contact_network_available">There is not any contact network</string>
 
     <!-- Create Contact Network fragment -->
     <string name="create_contact_network_title">Create contact network</string>

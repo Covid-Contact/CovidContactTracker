@@ -17,6 +17,7 @@ abstract class CovidContactBaseController {
     ): ServerResponse {
         val (request, response, result) = url.httpGet(parameters)
             .header(getAuthHeader(isAuthenticated))
+            .timeout(TIMEOUT)
             .responseString()
 
         return ServerResponse(request, response, result).logConnectionResult()
@@ -31,6 +32,7 @@ abstract class CovidContactBaseController {
         val (request, response, result) = url.httpPost(parameters)
             .jsonBody(body)
             .header(getAuthHeader(isAuthenticated))
+            .timeout(TIMEOUT)
             .responseString()
 
         return ServerResponse(request, response, result).logConnectionResult()
@@ -43,6 +45,7 @@ abstract class CovidContactBaseController {
     ): ServerResponse {
         val (request, response, result) = url.httpPut(parameters)
             .header(getAuthHeader(isAuthenticated))
+            .timeout(TIMEOUT)
             .responseString()
 
         return ServerResponse(request, response, result).logConnectionResult()
@@ -55,6 +58,7 @@ abstract class CovidContactBaseController {
     ): ServerResponse {
         val (request, response, result) = url.httpDelete(parameters)
             .header(getAuthHeader(isAuthenticated))
+            .timeout(TIMEOUT)
             .responseString()
 
         return ServerResponse(request, response, result).logConnectionResult()
@@ -69,6 +73,7 @@ abstract class CovidContactBaseController {
     companion object {
         const val NO_INTERNET = -1
         const val AUTH_HEADER = "Authorization"
+        const val TIMEOUT = 60000
         var token: String? = null
     }
 }

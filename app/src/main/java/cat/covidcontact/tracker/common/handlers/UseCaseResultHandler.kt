@@ -17,7 +17,6 @@ class UseCaseResultHandler<T : UseCase.UseCaseResponse>(
             is UseCaseResult.Success -> onSuccess(useCaseResult.result as T)
             else -> {
                 when (val exception = (useCaseResult as UseCaseResult.Error).exception) {
-                    CommonException.NoInternetException -> ScreenState.NoInternet
                     CommonException.OtherError -> ScreenState.OtherError
                     else -> onFailure(exception)
                 }
