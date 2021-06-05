@@ -68,6 +68,14 @@
             android:layout_marginTop="@dimen/app_padding"
             android:text="@string/access_code_generation" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDeleteContactNetwork"
+            style="@style/fullWidthButton"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/app_padding"
+            android:text="@string/delete_contact_network"
+            app:backgroundTint="@color/red" />
+
     </LinearLayout>
 
 </FrameLayout>

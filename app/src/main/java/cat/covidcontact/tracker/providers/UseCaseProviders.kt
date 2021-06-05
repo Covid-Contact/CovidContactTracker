@@ -9,6 +9,8 @@ import cat.covidcontact.usecases.createContactNetwork.CreateContactNetwork
 import cat.covidcontact.usecases.createContactNetwork.CreateContactNetworkImpl
 import cat.covidcontact.usecases.deleteaccount.DeleteAccount
 import cat.covidcontact.usecases.deleteaccount.DeleteAccountImpl
+import cat.covidcontact.usecases.deletecontactnetwork.DeleteContactNetwork
+import cat.covidcontact.usecases.deletecontactnetwork.DeleteContactNetworkImpl
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAddition
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAdditionImpl
 import cat.covidcontact.usecases.exitcontactnetwork.ExitContactNetwork
@@ -149,4 +151,10 @@ class UseCaseProviders {
     fun provideDeleteAccount(
         userRepository: UserRepository
     ): DeleteAccount = DeleteAccountImpl(userRepository)
+
+    @Provides
+    @Singleton
+    fun provideDeleteContactNetwork(
+        contactNetworkRepository: ContactNetworkRepository
+    ): DeleteContactNetwork = DeleteContactNetworkImpl(contactNetworkRepository)
 }

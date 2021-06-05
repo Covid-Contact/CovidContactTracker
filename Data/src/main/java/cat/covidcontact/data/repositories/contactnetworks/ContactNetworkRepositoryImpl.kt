@@ -137,6 +137,10 @@ class ContactNetworkRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun deleteContactNetwork(contactNetworkName: String, email: String) {
+
+    }
+
     private fun String.hashPassword(): String {
         return MessageDigest.getInstance("SHA-256")
             .digest(toByteArray())

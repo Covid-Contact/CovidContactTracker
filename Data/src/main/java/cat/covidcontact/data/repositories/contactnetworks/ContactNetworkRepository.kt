@@ -11,4 +11,5 @@ interface ContactNetworkRepository {
     suspend fun getContactNetworkByAccessCode(accessCode: String): ContactNetwork
     suspend fun joinContactNetwork(email: String, contactNetworkName: String)
     suspend fun exitContactNetwork(email: String, contactNetworkName: String)
+    suspend fun deleteContactNetwork(contactNetworkName: String, email: String)
 }
