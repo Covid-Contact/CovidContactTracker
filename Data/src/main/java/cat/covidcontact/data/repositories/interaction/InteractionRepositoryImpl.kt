@@ -11,12 +11,20 @@ class InteractionRepositoryImpl @Inject constructor(
     private val interactionController: InteractionController
 ) : InteractionRepository {
 
-    override suspend fun registerRead(currentDeviceId: String, deviceIds: Set<String>, time: Long) {
+    override suspend fun registerRead(
+        currentDeviceId: String,
+        deviceIds: Set<String>,
+        time: Long,
+        lat: Double?,
+        lon: Double?
+    ) {
         val serverResponse = interactionController.registerRead(
             PostRead(
                 currentDeviceId = currentDeviceId,
                 deviceIds = deviceIds.toList(),
-                dateTime = time
+                dateTime = time,
+                lat = lat,
+                lon = lon
             )
         )
 

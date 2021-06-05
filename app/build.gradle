@@ -112,6 +112,7 @@ dependencies {
     implementation platform(libs.firebaseBom)
     implementation libs.nearby
     implementation libs.fcm
+    implementation libs.location
 
     // Unit testing
     testImplementation libs.junit

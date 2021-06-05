@@ -9,7 +9,13 @@ class SendReadImpl @Inject constructor(
 ) : SendRead {
 
     override suspend fun execute(request: SendRead.Request) = runUseCase {
-        interactionRepository.registerRead(request.currentDeviceId, request.deviceIds, request.time)
+        interactionRepository.registerRead(
+            request.currentDeviceId,
+            request.deviceIds,
+            request.time,
+            request.lat,
+            request.lon
+        )
         SendRead.Response(request.deviceIds.isEmpty())
     }
 }
