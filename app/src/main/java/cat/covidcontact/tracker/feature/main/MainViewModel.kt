@@ -66,7 +66,9 @@ class MainViewModel @Inject constructor(
             PublishCodeWorker.deviceId = it.userDevice.device.id
             MainState.DeviceRegistered
         },
-        onFailure = { ScreenState.Nothing },
+        onFailure = {
+            ScreenState.Nothing
+        },
         isCommonEnabled = false
     )
 
