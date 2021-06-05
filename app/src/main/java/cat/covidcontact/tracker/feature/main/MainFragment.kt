@@ -99,7 +99,8 @@ class MainFragment : BaseFragment() {
             topLevelDestinationIds = setOf(
                 R.id.contactNetworksFragment,
                 R.id.searchFragment,
-                R.id.profileFragment
+                R.id.profileFragment,
+                R.id.settingsFragment
             )
         )
 

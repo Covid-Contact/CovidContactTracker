@@ -146,6 +146,17 @@
                 style="@style/fullWidthButton"
                 android:text="@string/profile_update" />
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <TextView
+                style="@style/section_title"
+                android:layout_marginBottom="@dimen/app_padding_half"
+                android:text="@string/COVID19_information" />
+
+            <View style="@style/divider" />
+
         </LinearLayout>
 
     </ScrollView>

@@ -83,9 +83,11 @@
 
     <!-- Fragment names -->
     <string name="contact_networks_fragment">Contact Networks</string>
+    <string name="contact_networks_fragment_short">Networks</string>
     <string name="search_contact_networks_fragment">Search</string>
     <string name="profile_bottom_fragments">Profile</string>
     <string name="create_contact_network_fragment">Create Contact Network</string>
+    <string name="settings_bottom_fragment">Settings</string>
 
     <!-- Contact networks -->
     <string name="quit">Quit</string>
@@ -159,5 +161,18 @@
 
     <!-- Profile -->
     <string name="profile_update">Update</string>
+
+    <!-- Settings -->
+    <string name="language_and_theme">Language and theme</string>
+    <string name="select_app_language_title">App language</string>
+    <string name="select_app_language_summary">Select app language</string>
+    <string name="dark_theme">Theme</string>
+    <string name="dark_theme_title">Enable dark theme</string>
+    <string name="about">About application</string>
+    <string name="current_version">Current version</string>
+    <string name="log_out_title">Log out</string>
+    <string name="log_out_summary">Log out and select another account</string>
+    <string name="delete_account_title">Delete account</string>
+    <string name="delete_account_summary">Delete your account and all of your data</string>
 
 </resources>

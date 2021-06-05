@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.preference.PreferenceCategory
+        app:key="language_and_theme"
+        app:title="@string/language_and_theme">
+
+        <androidx.preference.DropDownPreference
+            app:entries="@array/app_languages"
+            app:entryValues="@array/app_languages_values"
+            app:icon="@drawable/ic_app_language"
+            app:key="app_language"
+            app:summary="@string/select_app_language_summary"
+            app:title="@string/select_app_language_title" />
+
+        <androidx.preference.SwitchPreference
+            app:icon="@drawable/ic_dark_theme"
+            app:key="enable_dark_theme"
+            app:singleLineTitle="true"
+            app:title="@string/dark_theme_title" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="about"
+        app:title="@string/about">
+
+        <androidx.preference.Preference
+            app:icon="@drawable/ic_android"
+            app:key="version"
+            app:title="@string/current_version"
+            tools:summary="1.0.0" />
+
+        <androidx.preference.Preference
+            app:icon="@drawable/ic_log_out"
+            app:key="log_out"
+            app:summary="@string/log_out_summary"
+            app:title="@string/log_out_title" />
+
+        <androidx.preference.Preference
+            app:icon="@drawable/ic_delete"
+            app:key="delete_account"
+            app:summary="@string/delete_account_summary"
+            app:title="@string/delete_account_title" />
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>
