@@ -7,6 +7,8 @@ import cat.covidcontact.usecases.adduserdata.AddUserData
 import cat.covidcontact.usecases.adduserdata.AddUserDataImpl
 import cat.covidcontact.usecases.createContactNetwork.CreateContactNetwork
 import cat.covidcontact.usecases.createContactNetwork.CreateContactNetworkImpl
+import cat.covidcontact.usecases.deleteaccount.DeleteAccount
+import cat.covidcontact.usecases.deleteaccount.DeleteAccountImpl
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAddition
 import cat.covidcontact.usecases.enableUserAddition.EnableUserAdditionImpl
 import cat.covidcontact.usecases.exitcontactnetwork.ExitContactNetwork
@@ -19,8 +21,10 @@ import cat.covidcontact.usecases.getuserdata.GetUserData
 import cat.covidcontact.usecases.getuserdata.GetUserDataImpl
 import cat.covidcontact.usecases.joinContactNetwork.JoinContactNetwork
 import cat.covidcontact.usecases.joinContactNetwork.JoinContactNetworkImpl
-import cat.covidcontact.usecases.login.MakeLogIn
-import cat.covidcontact.usecases.login.MakeLogInImpl
+import cat.covidcontact.usecases.makelogin.MakeLogIn
+import cat.covidcontact.usecases.makelogin.MakeLogInImpl
+import cat.covidcontact.usecases.makelogout.MakeLogOut
+import cat.covidcontact.usecases.makelogout.MakeLogOutImpl
 import cat.covidcontact.usecases.notifypositive.NotifyPositive
 import cat.covidcontact.usecases.notifypositive.NotifyPositiveImpl
 import cat.covidcontact.usecases.registerDevice.RegisterDevice
@@ -133,4 +137,16 @@ class UseCaseProviders {
     fun provideExitContactNetwork(
         contactNetworkRepository: ContactNetworkRepository
     ): ExitContactNetwork = ExitContactNetworkImpl(contactNetworkRepository)
+
+    @Provides
+    @Singleton
+    fun provideMakeLogOut(
+        userRepository: UserRepository
+    ): MakeLogOut = MakeLogOutImpl(userRepository)
+
+    @Provides
+    @Singleton
+    fun provideDeleteAccount(
+        userRepository: UserRepository
+    ): DeleteAccount = DeleteAccountImpl(userRepository)
 }

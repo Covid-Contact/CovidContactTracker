@@ -28,4 +28,7 @@ abstract class UserController : CovidContactBaseController() {
         positive: Boolean?,
         vaccinated: Boolean?
     ): ServerResponse
+
+    abstract suspend fun makeLogOut(email: String, deviceId: String): ServerResponse
+    abstract suspend fun deleteAccount(email: String): ServerResponse
 }

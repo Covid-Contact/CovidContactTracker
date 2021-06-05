@@ -60,4 +60,12 @@ class UserControllerImpl : UserController() {
             )
         )
     }
+
+    override suspend fun makeLogOut(email: String, deviceId: String): ServerResponse {
+        return put("$url/logout", listOf("email" to email, "deviceId" to deviceId))
+    }
+
+    override suspend fun deleteAccount(email: String): ServerResponse {
+        return delete("$url/delete", listOf("email" to email))
+    }
 }

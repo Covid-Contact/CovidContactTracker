@@ -147,6 +147,28 @@ class UserRepositoryImpl(
         }
     }
 
+    override suspend fun makeLogOut(email: String, device: String) {
+        val serverResponse = userController.makeLogOut(email, device)
+        serverResponse.onStatusCode {
+            when (this) {
+                CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
+                HttpStatus.NO_CONTENT -> return@onStatusCode
+                else -> throw CommonException.OtherError
+            }
+        }
+    }
+
+    override suspend fun deleteAccount(email: String) {
+        val serverResponse = userController.deleteAccount(email)
+        serverResponse.onStatusCode {
+            when (this) {
+                CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
+                HttpStatus.NO_CONTENT -> return@onStatusCode
+                else -> throw CommonException.OtherError
+            }
+        }
+    }
+
     private suspend fun getMessagingToken(): String {
         val task = firebaseMessaging.token
         task.await()

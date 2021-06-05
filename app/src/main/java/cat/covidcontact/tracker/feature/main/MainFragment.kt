@@ -121,39 +121,10 @@ class MainFragment : BaseFragment() {
 
     private fun startBluetoothDiscovery() = runWithBluetoothPermission {
         viewModel.onConfigureMessageClient()
+    }
 
-        /*val messageListener = object : MessageListener() {
-            override fun onFound(message: Message) {
-                Log.i("Test", "onFound: ${String(message.content)}")
-            }
-        }
-
-        messagesClient.subscribe(messageListener).addOnSuccessListener {
-            Log.i("Test", "startBluetoothDiscovery: Subscribe success")
-        }.addOnFailureListener {
-            Log.i("Test", "startBluetoothDiscovery: Subscribe failure")
-            it.printStackTrace()
-        }
-
-        binding.btnPublish.setOnClickListener {
-            val message = Message("Hello".toByteArray())
-            messagesClient.publish(message).addOnSuccessListener {
-                Log.i("Test", "startBluetoothDiscovery: Publish success")
-            }.addOnFailureListener {
-                Log.i("Test", "startBluetoothDiscovery: Publish failure")
-                it.printStackTrace()
-            }.addOnCompleteListener {
-                Log.i("Test", "startBluetoothDiscovery: Publish completed")
-            }
-        }*/
-
-        /*val bluetoothWork = OneTimeWorkRequestBuilder<DetectUsersWorker>().build()
-        workManager.enqueueUniqueWork("bluetoothWork", ExistingWorkPolicy.REPLACE, bluetoothWork)*/
-
-        /*val testRequest = OneTimeWorkRequestBuilder<TestWorker>()
-            .setInitialDelay(5, TimeUnit.SECONDS)
-            .build()
-
-        workManager.enqueueUniqueWork("test", ExistingWorkPolicy.REPLACE, testRequest)*/
+    fun navigateToLogin() {
+        val action = MainFragmentDirections.actionMainFragmentToLogInFragment()
+        navigate(action)
     }
 }

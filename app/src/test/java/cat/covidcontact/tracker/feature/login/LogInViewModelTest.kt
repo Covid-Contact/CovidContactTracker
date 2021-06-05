@@ -9,7 +9,7 @@ import cat.covidcontact.tracker.common.fieldvalidator.FieldValidator
 import cat.covidcontact.tracker.getAfterLoading
 import cat.covidcontact.tracker.getOrAwaitValue
 import cat.covidcontact.usecases.UseCaseResult
-import cat.covidcontact.usecases.login.MakeLogIn
+import cat.covidcontact.usecases.makelogin.MakeLogIn
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.MatcherAssert.assertThat

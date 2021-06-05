@@ -21,4 +21,7 @@ interface UserRepository {
         positive: Boolean?,
         vaccinated: Boolean?
     )
+
+    suspend fun makeLogOut(email: String, device: String)
+    suspend fun deleteAccount(email: String)
 }

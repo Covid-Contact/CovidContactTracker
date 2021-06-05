@@ -174,5 +174,9 @@
     <string name="log_out_summary">Log out and select another account</string>
     <string name="delete_account_title">Delete account</string>
     <string name="delete_account_summary">Delete your account and all of your data</string>
+    <string name="delete_account_dialog_title">Delete account</string>
+    <string name="delete_account_dialog_message">
+        Are you sure you want to delete your account? This action is not reversible
+    </string>
 
 </resources>

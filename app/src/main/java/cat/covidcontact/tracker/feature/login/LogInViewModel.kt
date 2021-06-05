@@ -6,7 +6,7 @@ import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.fieldvalidator.FieldValidator
 import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler
-import cat.covidcontact.usecases.login.MakeLogIn
+import cat.covidcontact.usecases.makelogin.MakeLogIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
