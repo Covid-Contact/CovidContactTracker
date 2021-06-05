@@ -73,6 +73,7 @@ dependencies {
     implementation libs.legacy
     implementation libs.recycler_view
     implementation libs.support_compat
+    implementation libs.preference
 
     // Activity and fragment extensions for kotlin
     implementation libs.activity
@@ -111,6 +112,7 @@ dependencies {
     implementation platform(libs.firebaseBom)
     implementation libs.nearby
     implementation libs.fcm
+    implementation libs.location
 
     // Unit testing
     testImplementation libs.junit

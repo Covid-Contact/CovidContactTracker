@@ -1,0 +1,149 @@
+<resources>
+    <string name="app_name">Covid Contact Tracker</string>
+
+    <!-- Common -->
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="decline_to_answer">No vull respondre</string>
+    <string name="not_empty">%s no pot estar buit</string>
+    <string name="no_internet_title">Sense internet</string>
+    <string name="no_internet_message">L\'aplicació no es pot connectar a internet. Si us plau comprovi la seva connexió</string>
+    <string name="other_error_title">Error inesperat</string>
+    <string name="other_error_message">Hi ha hagut un error inesperat. Si us plau contacti amb el servei tècnic</string>
+    <string name="optional">Opcional</string>
+    <string name="close">Tancar</string>
+
+    <!-- Authentication -->
+    <string name="email">Correu electrònic</string>
+    <string name="password">Contrasenya</string>
+    <string name="repeat_password">Repeteixi la contrasenya</string>
+    <string name="log_in">Accedir</string>
+    <string name="sign_up">Registrar-se</string>
+    <string name="invalid_email">El correu electrònic és invalid</string>
+    <string name="invalid_password">
+        La contrasenya ha de tenir com a mínim 8 caràcters i ha de contenir com a mínim:
+        una majúcula, una minúscula, un dígit i un caràcter especial.
+    </string>
+    <string name="passwords_not_equals">Les contrassenyes no són iguals</string>
+    <string name="not_account">No tens cap compte?</string>
+    <string name="already_account">Ja tens un compte?</string>
+    <string name="wrong_password_title">Contrasenya incorrecta</string>
+    <string name="wrong_password_message">La contrasenya que has introduït no pertany a aquest correu electrònic.</string>
+    <string name="email_already_registered_title">Correu electrònic ja utilitzat</string>
+    <string name="email_already_registered_message">El correu electrònic %s ja està en ús\n    "</string>
+    <string name="verify_email_title">Verifiqui el seu correu</string>
+    <string name="verify_email_message">S\'ha enviat un correu de confirmació a %s</string>
+    <string name="email_not_found_title">Correu electrònic no trobat</string>
+    <string name="email_not_found_message">El correu electrònic %s no estpa associat a cap compte.</string>
+    <string name="email_not_validated_title">Correu electrónic no verificat</string>
+    <string name="email_not_validated_message">Si us plau comprovi la bústia d\'entrada de %s per tal de verificar el seu compte."</string>
+
+    <!-- User info -->
+    <string name="welcome">Benvingut a</string>
+    <string name="next_screens_information">En les següents pantalles se li mostraran uns camps per emplenar amb informació sobre vostè.</string>
+    <string name="private_information">L\'única informació pública és el seu nom d\'usuari, el qual no es pot canviar posteriorment.</string>
+    <string name="required_fields">Només els camps indicats amb un asterisc (*) són obligatoris.</string>
+    <string name="basic_information">Informació bàsica</string>
+    <string name="personal_information">Informació personal</string>
+    <string name="COVID19_information">Informació sobre la COVID-19</string>
+    <string name="select_birth_date">Seleccioni la seva data de naixement</string>
+
+    <string name="gender">Génere</string>
+    <string name="birth_date">Data de naixement</string>
+    <string name="city">Ciutat</string>
+    <string name="studies">Estudis</string>
+    <string name="occupation">Ocupació</string>
+    <string name="marriage">Estat matrimonial</string>
+    <string name="being_positive">Has donat positiu?</string>
+    <string name="being_vaccinated">Està vacunat?</string>
+
+    <!-- Fragment names -->
+    <string name="contact_networks_fragment">Xarxes de contactes</string>
+    <string name="contact_networks_fragment_short">Xarxes</string>
+    <string name="search_contact_networks_fragment">Búsqueda</string>
+    <string name="profile_bottom_fragments">Perfil</string>
+    <string name="create_contact_network_fragment">Creació d\'una xarxa de contactes</string>
+
+    <!-- Contact networks -->
+    <string name="quit">Sortir</string>
+    <string name="owner_info">Creada per %s</string>
+    <string name="network_normal">Normal</string>
+    <string name="network_almost_limit">Quasi al límit</string>
+    <string name="network_limit">Límit</string>
+    <string name="network_over_limit">Per sobre del límit</string>
+    <string name="network_positive_detected">Positiu detectat</string>
+    <string name="positive_dialog_title">Notificació de positiu</string>
+    <string name="positive_dialog_message">Està segur que vol notificar al sistema que és positiu? La seva identitat no es farà pública a la resta d\'usuaris.</string>
+    <string name="exit_contact_network_dialog_title">Sortir %s</string>
+    <string name="exit_contact_network_dialog_message">De veritat vol sortir de %s?</string>
+    <string name="no_contact_network_available">No hi ha cap xarxa de contactes</string>
+
+    <!-- Create Contact Network fragment -->
+    <string name="create_contact_network_title">Creació d\'una xarxa de contactes</string>
+    <string name="create_contact_network_content_description">
+        @string/create_contact_network_title
+    </string>
+    <string name="contact_network_name">Nom</string>
+    <string name="contact_network_password">Contrasenya</string>
+    <string name="contact_network_name_cannot_be_empty">El nom no pot estar buit</string>
+    <string name="contact_network_existing_message">Ja tens una xarxa de contactes amb aquest nom, si us plai triïn un altre.</string>
+
+    <!-- Contact Network Settings fragment -->
+    <string name="enable_users_addition">Permetre que altres usuaris s\'hi uneixin</string>
+    <string name="access_code">Codi d\'accés</string>
+    <string name="access_code_generation">Generar codi d\'accés</string>
+    <string name="manage_contact_network">Administració de la xarxa de contactes</string>
+    <string name="delete_contact_network">Eliminar la xarxa de contactes</string>
+
+    <!-- Search -->
+    <string name="access_code_search">Codi d\'accés</string>
+    <string name="contact_network_joined_message">S\'ha unit correctament a %s.</string>
+    <string name="contact_network_already_joined_title">Ja es membre</string>
+    <string name="contact_network_already_joined_message">Ja és un membre de %s.</string>
+
+    <!-- Main -->
+    <string name="bluetooth_info_message">
+        Per tal de detectar els altres usuaris de les seves xarxe de contactes es necessari tenir
+        activat el Bluetooth. La seva identitat serà privada i, per tant, ningú podrà tenir accés
+        al seu dispositiu mòbil a través de Bluetooth i no enviarem cap tipus d\'informació sensible
+        a través d\'aquestes connexions.
+    </string>
+    <string name="enable_bluetooth_yes">Habilitar Bluetooth</string>
+    <string name="enable_bluetooth_no">Deshabilitar Bluetooth</string>
+
+    <!-- Notifications -->
+    <string name="notification_quarantine_title">És un contacte estret</string>
+    <string name="notification_quarantine_text">S\'ha detectat un positiu en alguna de les seves xarxes de contactes i vosté és un contacte estret</string>
+    <string name="notification_prevention_text">S\'ha detectat un positiu en alguna de les seves xarxes de contactes, però vostè no es un contacte estret</string>
+
+    <!-- Profile -->
+    <string name="profile_update">Actualitzar</string>
+
+    <!-- Settings -->
+    <string name="language_and_theme">Idioma i temàtica</string>
+    <string name="select_app_language_summary">Seleccioni l\'idioma de l\'aplicació</string>
+    <string name="dark_theme">Temàtica</string>
+    <string name="dark_theme_title">Habilitar el mode fosc</string>
+    <string name="about">Sobre l\'aplicació</string>
+    <string name="log_out_summary">Tancar la sessió i seleccionar-ne una altra</string>
+    <string name="delete_account_title">Eliminar compte</string>
+    <string name="delete_account_summary">Elimini el seu compte i totes les seves dades</string>
+    <string name="delete_account_dialog_title">Eliminar compte</string>
+    <string name="delete_account_dialog_message">Està segur que vol eliminar el seu compte? Aquesta acció no és reversible</string>
+    <string name="confirm">Confirmar</string>
+    <string name="username">Nom d\'usuari</string>
+    <string name="children">Fills i filles</string>
+    <string name="settings_bottom_fragment">Configuració</string>
+    <string name="positive_button">Sóc positiu de COVID-19</string>
+    <string name="contact_network_existing_title">El nom ja existeix</string>
+    <string name="create">Crear</string>
+    <string name="visibility_configuration">Configuració de la visibilitat</string>
+    <string name="enable_password_user_addition">Sol·licitar la contrasenya per unir-s\'hi</string>
+    <string name="contact_network_joined_title">S\'hi ha unit</string>
+    <string name="bluetooth_info_title">El Bluetooth es necessari</string>
+    <string name="notification_prevention_title">Vigili amb la seva salut</string>
+    <string name="select_app_language_title">Idioma de l\'aplicació</string>
+    <string name="current_version">Versió actual</string>
+    <string name="log_out_title">Tancar sessió</string>
+
+</resources>

@@ -51,5 +51,13 @@ class ContactNetworkControllerImpl : ContactNetworkController() {
         return delete("$url/$name/exit", listOf("email" to email))
     }
 
+    override suspend fun deleteContactNetwork(
+        email: String,
+        contactNetworkName: String
+    ): ServerResponse {
+        val name = contactNetworkName.modifyInvalidCharacters()
+        return delete("$url/$name/delete", listOf("email" to email))
+    }
+
     private fun String.modifyInvalidCharacters() = replace(" ", "%20").replace("#", "%23")
 }

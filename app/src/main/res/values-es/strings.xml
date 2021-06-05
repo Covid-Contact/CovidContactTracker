@@ -1,0 +1,149 @@
+<resources>
+    <string name="app_name">Covid Contact Tracker</string>
+
+    <!-- Common -->
+    <string name="yes">No</string>
+    <string name="no">No</string>
+    <string name="decline_to_answer">No quiero responder</string>
+    <string name="confirm">Confirmar</string>
+    <string name="not_empty">%s no puede estar vacío</string>
+    <string name="no_internet_title">Sin internet</string>
+    <string name="no_internet_message">La aplicación no se puede conectar a internet. Por favor revise su conexión</string>
+    <string name="other_error_title">Error inesperado</string>
+    <string name="other_error_message">Ha habido un error inesperado. Por favor contacte con el servicio técnico</string>
+    <string name="optional">Opcional</string>
+    <string name="close">Cerrar</string>
+
+    <!-- Authentication -->
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="repeat_password">Repita la contraseña</string>
+    <string name="log_in">Acceder</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="invalid_email">El correo electrónico es invalido</string>
+    <string name="invalid_password">
+        La contraseña tiene que tener como mínimo 8 carácteres i contener como mínimo:
+        un mayúscula, una minúscula, un dígito y un carácter especial
+    </string>
+    <string name="passwords_not_equals">Las contraseñas no son iguales</string>
+    <string name="already_account">¿Ya tienes una cuenta?</string>
+    <string name="wrong_password_message">La contraseña que has introducido no pertenece a ese correo electrónico.</string>
+    <string name="email_already_registered_title">Correo electrónico ya utilizado</string>
+    <string name="email_already_registered_message">El correo electrónico %s ya está en uso</string>
+    <string name="verify_email_title">Verifique su correo</string>
+    <string name="verify_email_message">Se ha enviado un correo de confirmación a %s</string>
+    <string name="email_not_found_title">Correo electrónico no encontrado</string>
+    <string name="email_not_found_message">El correo electrónico %s no está associado a ninguna cuenta."</string>
+    <string name="email_not_validated_title">Correo electrónico no verificado</string>
+    <string name="email_not_validated_message">Por favor compruebe el buzón de entrada de %s para verificar su cuenta.</string>
+
+    <!-- User info -->
+    <string name="welcome">Bienvenido a</string>
+    <string name="next_screens_information">En las siguientes pantallas se le mostrarán unos campos para rellenar con información sobre usted."</string>
+    <string name="private_information">La única información pública es su nombre de usuario, el cual no se puede cambiar posteriormente."</string>
+    <string name="required_fields">Solo los campos indicados con un asterisco (*) son obligatórios.</string>
+    <string name="basic_information">Información básica</string>
+    <string name="personal_information">Información personal</string>
+    <string name="COVID19_information">Información sobre la COVID-19</string>
+    <string name="select_birth_date">Seleccione su fecha de nacimiento</string>
+
+    <string name="username">Nombre de usuario</string>
+    <string name="gender">Género</string>
+    <string name="birth_date">Fecha de nacimiento</string>
+    <string name="city">Ciudad</string>
+    <string name="studies">Estudios</string>
+    <string name="occupation">Ocupación</string>
+    <string name="marriage">Estado matrimonial</string>
+    <string name="children">Hijos e hijas</string>
+    <string name="being_vaccinated">¿Ha sido vacunado?</string>
+
+    <!-- Fragment names -->
+    <string name="contact_networks_fragment">Redes de contactos</string>
+    <string name="contact_networks_fragment_short">Redes</string>
+    <string name="search_contact_networks_fragment">Búsqueda</string>
+    <string name="profile_bottom_fragments">Perfil</string>
+    <string name="create_contact_network_fragment">Creación de una red de contactos</string>
+    <string name="settings_bottom_fragment">Configuración</string>
+
+    <!-- Contact networks -->
+    <string name="quit">Salir</string>
+    <string name="owner_info">Creada por %s</string>
+    <string name="network_normal">Normal</string>
+    <string name="network_almost_limit">Casi al límite</string>
+    <string name="network_limit">Límite</string>
+    <string name="network_over_limit">Por sobre del límite</string>
+    <string name="network_positive_detected">Positivo detectado</string>
+    <string name="positive_button">Soy positivo de COVID-19</string>
+    <string name="positive_dialog_title">Notificación de positivo</string>
+    <string name="positive_dialog_message">¿Está seguro que quiere notificar al sistema que es positivo? Su identidad no se revelará al resto de usuarios.</string>
+    <string name="exit_contact_network_dialog_title">Salir %s</string>
+    <string name="exit_contact_network_dialog_message">¿De verdad quiere salir de %s?</string>
+    <string name="no_contact_network_available">No hay ninguna red de contactos</string>
+
+    <!-- Create Contact Network fragment -->
+    <string name="create_contact_network_title">Creación de una red de contactos</string>
+    <string name="create_contact_network_content_description">
+        @string/create_contact_network_title
+    </string>
+    <string name="contact_network_name">Nombre</string>
+    <string name="contact_network_password">Contraseña</string>
+    <string name="contact_network_name_cannot_be_empty">El nombre no puede estar vacío</string>
+    <string name="contact_network_existing_title">El nombre ya existe</string>
+    <string name="contact_network_existing_message">Ya tiene una red de contactos con ese nombre, por favor eliga otro.</string>
+    <string name="create">Crear</string>
+
+    <!-- Contact Network Settings fragment -->
+    <string name="visibility_configuration">Configuración de la visibilidad</string>
+    <string name="enable_users_addition">Permitir que otros usuarios se unan</string>
+    <string name="enable_password_user_addition">Solicitar la contraseña para unirse</string>
+    <string name="access_code">Codi de acceso</string>
+    <string name="access_code_generation">Generar código de acceso</string>
+    <string name="manage_contact_network">Administración de la red de contactos</string>
+    <string name="delete_contact_network">Eliminar la red de contactos</string>
+
+    <!-- Search -->
+    <string name="access_code_search">Código de acceso</string>
+    <string name="contact_network_joined_title">Te has unido</string>
+    <string name="contact_network_joined_message">Se ha unido correctamente a %s.</string>
+    <string name="contact_network_already_joined_message">Ya es miembro de %s.</string>
+
+    <!-- Main -->
+    <string name="bluetooth_info_title">El Bluetooth es necesareo</string>
+    <string name="bluetooth_info_message">
+        Con el fin de detectar los otros usuarios de sus redes de contactos es necesareo tener el
+        Bluetooth activado. Su identidad será privada i, por lo tanto, nadie tendrá acceso a su
+        dispositivo móbil a través de Bluetooth i no enviarem ningún tipo de información sensible
+        a través de esas connexiones.
+    </string>
+    <string name="enable_bluetooth_yes">Habilitar Bluetooth</string>
+    <string name="enable_bluetooth_no">Deshabilitar Bluetooth</string>
+
+    <!-- Notifications -->
+    <string name="notification_quarantine_text">Se ha detectado un positivo en alguna de sus redes de contactos i usted es un contacto estrecho</string>
+    <string name="notification_prevention_title">Vigile con su salud</string>
+    <string name="notification_prevention_text">Se ha detectado un positivo en alguna de seus redes de contactos, pero usted no es un contacto estrecho</string>
+
+    <!-- Profile -->
+    <string name="profile_update">Actualizar</string>
+
+    <!-- Settings -->
+    <string name="language_and_theme">Idioma y temática</string>
+    <string name="select_app_language_title">Idioma de la aplicación</string>
+    <string name="select_app_language_summary">Seleccione el idioma de la aplicación</string>
+    <string name="dark_theme">Temática</string>
+    <string name="about">Sobre la aplciación</string>
+    <string name="current_version">Versión actual</string>
+    <string name="log_out_title">Cerrar sessión</string>
+    <string name="log_out_summary">Cerrar la sesión i seleccionar otra cuenta</string>
+    <string name="delete_account_title">Eliminar cuenta</string>
+    <string name="delete_account_summary">Elimine su cuenta y todos sus datos</string>
+    <string name="delete_account_dialog_title">Eliminar cuenta</string>
+    <string name="delete_account_dialog_message">¿Está seguro que quiere eliminar su cuenta? Esta acción no es reversible</string>
+    <string name="not_account">¿No tienes ninguna cuenta?</string>
+    <string name="wrong_password_title">Contraseña incorrecta</string>
+    <string name="being_positive">¿Has dado positivo?</string>
+    <string name="contact_network_already_joined_title">Ya es miembro</string>
+    <string name="notification_quarantine_title">Es un contacto estrecho</string>
+    <string name="dark_theme_title">Habilitar el modo oscuro</string>
+
+</resources>

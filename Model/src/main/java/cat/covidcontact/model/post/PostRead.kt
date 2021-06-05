@@ -11,5 +11,11 @@ data class PostRead(
     val deviceIds: List<String>,
 
     @SerializedName("date_time")
-    val dateTime: Long
+    val dateTime: Long,
+
+    @SerializedName("lat")
+    val lat: Double?,
+
+    @SerializedName("lon")
+    val lon: Double?
 ) : Serializable

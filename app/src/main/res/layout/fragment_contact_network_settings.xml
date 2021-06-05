@@ -15,26 +15,32 @@
         <TextView
             style="@style/section_title"
             android:layout_marginBottom="@dimen/app_padding_half"
-            android:text="@string/visibility_configuration" />
+            android:text="@string/visibility_configuration"
+            android:visibility="gone" />
 
-        <View style="@style/divider" />
+        <View
+            style="@style/divider"
+            android:visibility="gone" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/swEnableUserAddition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/enable_users_addition" />
+            android:text="@string/enable_users_addition"
+            android:visibility="gone" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/swEnablePasswordAddition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/enable_password_user_addition" />
+            android:text="@string/enable_password_user_addition"
+            android:visibility="gone" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtJoinPassword"
             style="@style/fullWidthTextInputLayout"
             android:hint="@string/contact_network_password"
+            android:visibility="gone"
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
@@ -43,7 +49,8 @@
 
         <Space
             android:layout_width="0dp"
-            android:layout_height="@dimen/space_more" />
+            android:layout_height="@dimen/space_more"
+            android:visibility="gone" />
 
         <TextView
             style="@style/section_title"
@@ -67,6 +74,25 @@
             style="@style/fullWidthButton"
             android:layout_marginTop="@dimen/app_padding"
             android:text="@string/access_code_generation" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space_more" />
+
+        <TextView
+            style="@style/section_title"
+            android:layout_marginBottom="@dimen/app_padding_half"
+            android:text="@string/manage_contact_network" />
+
+        <View style="@style/divider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDeleteContactNetwork"
+            style="@style/fullWidthButton"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/app_padding"
+            android:text="@string/delete_contact_network"
+            app:backgroundTint="@color/red" />
 
     </LinearLayout>
 

@@ -6,14 +6,15 @@
     <color name="secondaryColor">#ffa726</color>
     <color name="secondaryLightColor">#ffd95b</color>
     <color name="secondaryDarkColor">#c77800</color>
-    <color name="primaryTextColor">#ffffff</color>
+    <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
     <color name="red">#F44336</color>
     <color name="card_secondary_text">#8F555151</color>
-    <color name="network_visible">@color/primaryColor</color>
+    <color name="network_visible">#4caf50</color>
     <color name="network_invisible">#8F918E8E</color>
     <color name="network_almost_limit">#C8FF5900</color>
     <color name="network_limit">#B4FF0000</color>
     <color name="network_overlimit">#B7B80000</color>
     <color name="network_positive_detected">#8F0040FF</color>
+    <color name="login_round_layout_color">@android:color/white</color>
 </resources>

@@ -35,6 +35,7 @@ ext {
     activityKotlinVersion = "1.3.0-alpha04"
     androidTestJunitVersion = "1.1.2"
     androidXCoreVersion = "1.3.2"
+    androidXPreferenceVersion = "1.1.1"
     appCompatVersion = "1.2.0"
     archVersion = "2.1.0"
     constraintLayoutVersion = "2.0.4"
@@ -56,6 +57,7 @@ ext {
     mockkVersion = "1.11.0"
     moshiVersion = "1.11.0"
     supportCompatVersion = "28.0.0"
+    playServicesLocation = "18.0.0"
     playServicesNearby = "17.0.0"
     recyclerViewVersion = "1.1.0"
     resultVersion = "4.0.0"
@@ -71,6 +73,7 @@ ext {
         legacy                : "androidx.legacy:legacy-support-v4:$legacySupportVersion",
         recycler_view         : "androidx.recyclerview:recyclerview:$recyclerViewVersion",
         support_compat        : "com.android.support:support-compat:$supportCompatVersion",
+        preference            : "androidx.preference:preference-ktx:$androidXPreferenceVersion",
 
         // Activity and fragment extensions for kotlin
         activity              : "androidx.activity:activity-ktx:$activityKotlinVersion",
@@ -118,6 +121,7 @@ ext {
         firebaseBom           : "com.google.firebase:firebase-bom:$firebaseBomVersion",
         nearby                : "com.google.android.gms:play-services-nearby:$playServicesNearby",
         fcm                   : "com.google.firebase:firebase-messaging",
+        location              : "com.google.android.gms:play-services-location:$playServicesLocation",
 
         // Unit testing
         junit                 : "junit:junit:$junitVersion",

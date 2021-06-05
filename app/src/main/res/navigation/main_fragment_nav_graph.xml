@@ -44,4 +44,8 @@
             android:name="name"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="cat.covidcontact.tracker.feature.settings.SettingsFragment"
+        android:label="@string/settings_bottom_fragment" />
 </navigation>

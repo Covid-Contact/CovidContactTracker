@@ -1,5 +1,6 @@
 package cat.covidcontact.tracker.providers
 
+import android.content.Context
 import cat.covidcontact.data.controllers.contactnetwork.ContactNetworkController
 import cat.covidcontact.data.controllers.contactnetwork.ContactNetworkControllerImpl
 import cat.covidcontact.data.controllers.interaction.InteractionController
@@ -12,10 +13,13 @@ import cat.covidcontact.data.repositories.interaction.InteractionRepository
 import cat.covidcontact.data.repositories.interaction.InteractionRepositoryImpl
 import cat.covidcontact.data.repositories.user.UserRepository
 import cat.covidcontact.data.repositories.user.UserRepositoryImpl
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -56,4 +60,10 @@ class DataProviders {
     @Provides
     @Singleton
     fun provideInteractionController(): InteractionController = InteractionControllerImpl()
+
+    @Provides
+    @Singleton
+    fun provideFusedLocationProvider(
+        @ApplicationContext context: Context
+    ): FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
 }

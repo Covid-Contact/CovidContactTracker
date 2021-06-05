@@ -42,9 +42,11 @@
                 android:id="@+id/logInPasswordLayout"
                 style="@style/fullWidthTextInputLayout"
                 android:hint="@string/password"
-                app:endIconMode="password_toggle">
+                app:passwordToggleEnabled="true">
 
-                <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/edit_text"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

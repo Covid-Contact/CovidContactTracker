@@ -2,6 +2,7 @@ package cat.covidcontact.tracker.feature.contactnetworks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import cat.covidcontact.model.ContactNetwork
 import cat.covidcontact.model.user.User
@@ -25,6 +26,8 @@ class ContactNetworksViewModel @Inject constructor(
     private val _contactNetworks = MutableLiveData<List<ContactNetwork>>()
     val contactNetworks: LiveData<List<ContactNetwork>>
         get() = _contactNetworks
+
+    val isNoContactNetworksVisible = _contactNetworks.map { it.isEmpty() }
 
     private val notifyPositiveHandler = UseCaseResultHandler<NotifyPositive.Response>(
         onSuccess = { response ->

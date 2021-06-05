@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="app_languages">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>Catalan</item>
+    </string-array>
+    <string-array name="app_languages_values">
+        <item>en</item>
+        <item>es</item>
+        <item>ca</item>
+    </string-array>
+</resources>

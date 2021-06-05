@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -86,5 +87,19 @@ class SearchFragment : BaseFragment() {
         txtInputAccessCode.setEndIconOnClickListener {
             viewModel.onGetContactNetworkByAccessCode()
         }
+        txtInputAccessCode.editText?.setOnEditorActionListener { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    viewModel.onGetContactNetworkByAccessCode()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        layoutNoContactNetworks.observeVisible(
+            viewLifecycleOwner,
+            viewModel.isNoContactNetworksVisible
+        )
     }
 }

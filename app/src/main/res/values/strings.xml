@@ -34,15 +34,13 @@
     <string name="passwords_not_equals">The passwords do not match</string>
     <string name="not_account">You do not have an account?</string>
     <string name="already_account">You already have an account?</string>
-    <string name="wrong_password_title">Wrong password</string>
     <string name="wrong_password_message">
         The password you have introduced does not belong to that email.
     </string>
-    <string name="email_already_registered_title">Email already registered</string>
     <string name="email_already_registered_message">
         The email %s is already registered
     </string>
-    <string name="verify_email_title">Verify email</string>
+    <string name="verify_email_title">Verify your email</string>
     <string name="verify_email_message">An email has been sent to %s</string>
     <string name="email_not_found_title">Email not found</string>
     <string name="email_not_found_message">
@@ -83,9 +81,11 @@
 
     <!-- Fragment names -->
     <string name="contact_networks_fragment">Contact Networks</string>
+    <string name="contact_networks_fragment_short">Networks</string>
     <string name="search_contact_networks_fragment">Search</string>
     <string name="profile_bottom_fragments">Profile</string>
     <string name="create_contact_network_fragment">Create Contact Network</string>
+    <string name="settings_bottom_fragment">Settings</string>
 
     <!-- Contact networks -->
     <string name="quit">Quit</string>
@@ -95,7 +95,7 @@
     <string name="network_limit">Limit</string>
     <string name="network_over_limit">Over limit</string>
     <string name="network_positive_detected">Positive detected</string>
-    <string name="positive_button">I am positive</string>
+    <string name="positive_button">I am positive of COVID-19</string>
     <string name="positive_dialog_title">Sending positive</string>
     <string name="positive_dialog_message">
         Are you sure you want to notify the system that you are positive? Your identity will not be
@@ -103,6 +103,7 @@
     </string>
     <string name="exit_contact_network_dialog_title">Exit %s</string>
     <string name="exit_contact_network_dialog_message">Do you really want to exit %s?</string>
+    <string name="no_contact_network_available">There is not any contact network</string>
 
     <!-- Create Contact Network fragment -->
     <string name="create_contact_network_title">Create contact network</string>
@@ -124,6 +125,8 @@
     <string name="enable_password_user_addition">Request password to join</string>
     <string name="access_code">Access code</string>
     <string name="access_code_generation">Generate access code</string>
+    <string name="manage_contact_network">Manage contact network</string>
+    <string name="delete_contact_network">Delete contact network</string>
 
     <!-- Search -->
     <string name="access_code_search">Access code</string>
@@ -141,7 +144,7 @@
     <string name="bluetooth_info_message">
         In order to detect the other users from your contact networks the bluetooth have to be
         enabled. Your identity will be private, thus anyone cannot access your phone via Bluetooth
-        and we will not send any information throughout those connections.
+        and we will not send any sensible information throughout those connections.
     </string>
     <string name="enable_bluetooth_yes">Enable Bluetooth</string>
     <string name="enable_bluetooth_no">Disable Bluetooth</string>
@@ -159,5 +162,24 @@
 
     <!-- Profile -->
     <string name="profile_update">Update</string>
+
+    <!-- Settings -->
+    <string name="language_and_theme">Language and theme</string>
+    <string name="select_app_language_title">App language</string>
+    <string name="select_app_language_summary">Select app language</string>
+    <string name="dark_theme">Theme</string>
+    <string name="dark_theme_title">Enable dark theme</string>
+    <string name="about">About application</string>
+    <string name="current_version">Current version</string>
+    <string name="log_out_title">Log out</string>
+    <string name="log_out_summary">Log out and select another account</string>
+    <string name="delete_account_title">Delete account</string>
+    <string name="delete_account_dialog_title">Delete account</string>
+    <string name="delete_account_dialog_message">
+        Are you sure you want to delete your account? This action is not reversible
+    </string>
+    <string name="wrong_password_title">Wrong password</string>
+    <string name="email_already_registered_title">Email already registered</string>
+    <string name="delete_account_summary">Delete your account and all of your data</string>
 
 </resources>

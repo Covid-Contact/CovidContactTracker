@@ -1,5 +1,6 @@
 package cat.covidcontact.tracker.feature.main
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,6 +22,7 @@ import cat.covidcontact.usecases.getuserdata.GetUserData
 import cat.covidcontact.usecases.registerDevice.RegisterDevice
 import cat.covidcontact.usecases.sendmessagingtoken.SendMessagingToken
 import cat.covidcontact.usecases.sendread.SendRead
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.nearby.messages.Message
 import com.google.android.gms.nearby.messages.MessageListener
 import com.google.android.gms.nearby.messages.MessagesClient
@@ -34,6 +36,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val messagesClient: MessagesClient,
     private val workManager: WorkManager,
+    private val fusedLocationProviderClient: FusedLocationProviderClient,
     private val getUserData: GetUserData,
     private val registerDevice: RegisterDevice,
     private val sendRead: SendRead,
@@ -42,6 +45,8 @@ class MainViewModel @Inject constructor(
     private val _userDevice = MutableLiveData<UserDevice>()
     val userDevice: LiveData<UserDevice>
         get() = _userDevice
+
+    private val isSkipping = MutableLiveData(false)
 
     private val finishInteraction = OneTimeWorkRequestBuilder<FinishInteractionWorker>().build()
 
@@ -61,7 +66,8 @@ class MainViewModel @Inject constructor(
             PublishCodeWorker.deviceId = it.userDevice.device.id
             MainState.DeviceRegistered
         },
-        onFailure = { ScreenState.Nothing }
+        onFailure = { ScreenState.Nothing },
+        isCommonEnabled = false
     )
 
     private val sendReadHandler = UseCaseResultHandler<SendRead.Response>(
@@ -75,7 +81,8 @@ class MainViewModel @Inject constructor(
             }
             ScreenState.Nothing
         },
-        onFailure = { ScreenState.Nothing }
+        onFailure = { ScreenState.Nothing },
+        isCommonEnabled = false
     )
 
     private val sendMessagingTokenHandler = UseCaseResultHandler<SendMessagingToken.Response>(
@@ -124,13 +131,25 @@ class MainViewModel @Inject constructor(
                 Log.i("Read", "onFound: $strMessage")
 
                 viewModelScope.launch {
-                    workManager.cancelUniqueWork(FINISH_INTERACTION_NAME)
-                    executeUseCase(sendRead, sendReadHandler, isExecutingUseCaseStateLoad = false) {
-                        SendRead.Request(
-                            currentDeviceId = userDevice.requireValue().device.id,
-                            deviceIds = setOf(strMessage),
-                            time = System.currentTimeMillis()
-                        )
+                    if (!isSkipping.requireValue()) {
+                        workManager.cancelUniqueWork(FINISH_INTERACTION_NAME)
+                        val coordinates = getLocationCoordinates()
+
+                        executeUseCase(
+                            sendRead,
+                            sendReadHandler,
+                            isExecutingUseCaseStateLoad = false
+                        ) {
+                            SendRead.Request(
+                                currentDeviceId = userDevice.requireValue().device.id,
+                                deviceIds = setOf(strMessage),
+                                time = System.currentTimeMillis(),
+                                lat = coordinates?.first,
+                                lon = coordinates?.second
+                            )
+                        }
+                    } else {
+                        isSkipping.value = false
                     }
                 }
             }
@@ -141,6 +160,16 @@ class MainViewModel @Inject constructor(
 
         task.exception?.printStackTrace()
         return task.isSuccessful
+    }
+
+    @SuppressLint("MissingPermission")
+    private suspend fun getLocationCoordinates(): Pair<Double, Double>? {
+        val task = fusedLocationProviderClient.lastLocation
+        task.await()
+
+        return if (task.isSuccessful) task.result?.let { location ->
+            location.latitude to location.longitude
+        } else null
     }
 
     private fun setUpWorkManager() {
@@ -164,11 +193,15 @@ class MainViewModel @Inject constructor(
     fun onFinishInteraction() {
         viewModelScope.launch {
             if (userDevice.value != null) {
+                val coordinates = getLocationCoordinates()
+
                 executeUseCase(sendRead, sendReadHandler, isExecutingUseCaseStateLoad = false) {
                     SendRead.Request(
                         currentDeviceId = userDevice.requireValue().device.id,
                         deviceIds = emptySet(),
-                        time = System.currentTimeMillis()
+                        time = System.currentTimeMillis(),
+                        lat = coordinates?.first,
+                        lon = coordinates?.second
                     )
                 }
             }
@@ -181,6 +214,10 @@ class MainViewModel @Inject constructor(
                 SendMessagingToken.Request(requireUserDevice().user.email)
             }
         }
+    }
+
+    fun onSetSkip(isSkipEnabled: Boolean) {
+        isSkipping.value = isSkipEnabled
     }
 
     fun requireUserDevice(): UserDevice = userDevice.value ?: throw Exception("UserDevice not set")

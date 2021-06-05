@@ -16,7 +16,7 @@
             android:id="@+id/contactNetworkBorder"
             android:layout_width="6dp"
             android:layout_height="match_parent"
-            android:background="@color/primaryColor"
+            android:background="@color/network_visible"
             android:orientation="vertical" />
 
         <LinearLayout
@@ -58,7 +58,7 @@
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/roboto_medium"
                 android:textAllCaps="true"
-                android:textColor="@android:color/black"
+                android:textColor="@color/primaryTextColor"
                 tools:text="Invisible" />
 
             <Space
@@ -70,7 +70,7 @@
                 style="@style/card_secondary_text_weight"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="@android:color/black"
+                android:textColor="@color/primaryTextColor"
                 tools:text="Created by AlbertPG" />
 
         </LinearLayout>

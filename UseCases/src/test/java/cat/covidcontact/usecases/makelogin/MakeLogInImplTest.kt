@@ -1,4 +1,4 @@
-package cat.covidcontact.usecases.login
+package cat.covidcontact.usecases.makelogin
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import cat.covidcontact.data.CommonException

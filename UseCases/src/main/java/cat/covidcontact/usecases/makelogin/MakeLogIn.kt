@@ -1,4 +1,4 @@
-package cat.covidcontact.usecases.login
+package cat.covidcontact.usecases.makelogin
 
 import cat.covidcontact.usecases.UseCase
 

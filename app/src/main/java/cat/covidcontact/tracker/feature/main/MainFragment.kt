@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import cat.covidcontact.model.Device
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
@@ -22,6 +23,7 @@ import cat.covidcontact.tracker.common.extensions.generateDeviceId
 import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
 import cat.covidcontact.tracker.databinding.FragmentMainBinding
+import cat.covidcontact.tracker.feature.settings.SettingsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("HardwareIds")
@@ -77,6 +79,9 @@ class MainFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
+        viewModel.onSetSkip(sharedPreferences.getBoolean(SettingsFragment.SKIP, false))
     }
 
     override fun showBluetoothInfo() {
@@ -99,7 +104,8 @@ class MainFragment : BaseFragment() {
             topLevelDestinationIds = setOf(
                 R.id.contactNetworksFragment,
                 R.id.searchFragment,
-                R.id.profileFragment
+                R.id.profileFragment,
+                R.id.settingsFragment
             )
         )
 
@@ -120,39 +126,10 @@ class MainFragment : BaseFragment() {
 
     private fun startBluetoothDiscovery() = runWithBluetoothPermission {
         viewModel.onConfigureMessageClient()
+    }
 
-        /*val messageListener = object : MessageListener() {
-            override fun onFound(message: Message) {
-                Log.i("Test", "onFound: ${String(message.content)}")
-            }
-        }
-
-        messagesClient.subscribe(messageListener).addOnSuccessListener {
-            Log.i("Test", "startBluetoothDiscovery: Subscribe success")
-        }.addOnFailureListener {
-            Log.i("Test", "startBluetoothDiscovery: Subscribe failure")
-            it.printStackTrace()
-        }
-
-        binding.btnPublish.setOnClickListener {
-            val message = Message("Hello".toByteArray())
-            messagesClient.publish(message).addOnSuccessListener {
-                Log.i("Test", "startBluetoothDiscovery: Publish success")
-            }.addOnFailureListener {
-                Log.i("Test", "startBluetoothDiscovery: Publish failure")
-                it.printStackTrace()
-            }.addOnCompleteListener {
-                Log.i("Test", "startBluetoothDiscovery: Publish completed")
-            }
-        }*/
-
-        /*val bluetoothWork = OneTimeWorkRequestBuilder<DetectUsersWorker>().build()
-        workManager.enqueueUniqueWork("bluetoothWork", ExistingWorkPolicy.REPLACE, bluetoothWork)*/
-
-        /*val testRequest = OneTimeWorkRequestBuilder<TestWorker>()
-            .setInitialDelay(5, TimeUnit.SECONDS)
-            .build()
-
-        workManager.enqueueUniqueWork("test", ExistingWorkPolicy.REPLACE, testRequest)*/
+    fun navigateToLogin() {
+        val action = MainFragmentDirections.actionMainFragmentToLogInFragment()
+        navigate(action)
     }
 }

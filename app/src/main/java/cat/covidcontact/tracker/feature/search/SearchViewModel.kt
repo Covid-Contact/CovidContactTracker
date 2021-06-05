@@ -26,6 +26,8 @@ class SearchViewModel @Inject constructor(
     val contactNetworks: LiveData<List<ContactNetwork>>
         get() = _contactNetworks
 
+    val isNoContactNetworksVisible = _contactNetworks.map { it.isEmpty() }
+
     val accessCode = MutableLiveData("")
     val isSearchByAccessCodeEnabled = accessCode.map { accessCode -> accessCode.length == 6 }
 

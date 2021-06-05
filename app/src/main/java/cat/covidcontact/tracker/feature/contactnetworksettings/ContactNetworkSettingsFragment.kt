@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.observeChecked
@@ -20,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ContactNetworkSettingsFragment : BaseFragment() {
     private lateinit var binding: FragmentContactNetworkSettingsBinding
     private val args: ContactNetworkSettingsFragmentArgs by navArgs()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override val viewModel: ContactNetworkSettingsViewModel by viewModels()
     override val screenStateHandler =
@@ -28,10 +30,17 @@ class ContactNetworkSettingsFragment : BaseFragment() {
                 is ContactNetworkSettingsState.AccessCodeGenerated -> {
                     binding.txtAccessCode.text = state.accessCode
                 }
+                is ContactNetworkSettingsState.ContactNetworkDeleted -> {
+                    val userDevice = mainViewModel.requireUserDevice()
+                    userDevice.user.removeContactNetwork(state.contactNetwork)
+
+                    val navHostFragment = parentFragment as? NavHostFragment
+                    navHostFragment?.navController?.let { navController ->
+                        navigateUp(navController)
+                    }
+                }
             }
         }
-
-    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +72,10 @@ class ContactNetworkSettingsFragment : BaseFragment() {
 
         btnGenerateAccessCode.setOnClickListener {
             viewModel.onGenerateAccessCode(mainViewModel.requireUserDevice().user.email)
+        }
+
+        btnDeleteContactNetwork.setOnClickListener {
+            viewModel.onDeleteContactNetwork(mainViewModel.requireUserDevice().user)
         }
     }
 }
