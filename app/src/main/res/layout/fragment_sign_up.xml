@@ -41,9 +41,11 @@
                 android:id="@+id/signUpPasswordLayout"
                 style="@style/fullWidthTextInputLayout"
                 android:hint="@string/password"
-                app:endIconMode="password_toggle">
+                app:passwordToggleEnabled="true">
 
-                <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/edit_text"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,9 +57,12 @@
                 android:id="@+id/signUpRepeatPasswordLayout"
                 style="@style/fullWidthTextInputLayout"
                 android:hint="@string/repeat_password"
-                app:endIconMode="password_toggle">
+                app:passwordToggleEnabled="true">
 
-                <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/edit_text"
+                    android:imeOptions="actionGo"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

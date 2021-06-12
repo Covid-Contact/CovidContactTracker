@@ -1,5 +1,6 @@
 package cat.covidcontact.tracker.messages
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import androidx.hilt.work.HiltWorker
@@ -34,12 +35,15 @@ class PublishCodeWorker @AssistedInject constructor(
 
         repeat(NUM_MESSAGES) {
             Log.i("Read", "Sending message #$it")
-            val task = messagesClient.publish(message)
-            task.await()
 
-            if (!task.isSuccessful) {
-                task.exception?.printStackTrace()
-                Result.failure()
+            if (onCheckBluetoothPermission(context)) {
+                val task = messagesClient.publish(message)
+                task.await()
+
+                if (!task.isSuccessful) {
+                    task.exception?.printStackTrace()
+                    Result.failure()
+                }
             }
 
             delay(DELAY)
@@ -48,8 +52,11 @@ class PublishCodeWorker @AssistedInject constructor(
         Result.success()
     }
 
+    @SuppressLint("StaticFieldLeak")
     companion object {
         lateinit var deviceId: String
+        lateinit var context: Context
+        var onCheckBluetoothPermission: (Context) -> Boolean = { true }
         private const val NUM_MESSAGES = 3
         private const val DELAY = 50000L
     }

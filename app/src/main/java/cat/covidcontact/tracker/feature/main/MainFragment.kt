@@ -124,8 +124,8 @@ class MainFragment : BaseFragment() {
         return Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
     }
 
-    private fun startBluetoothDiscovery() = runWithBluetoothPermission {
-        viewModel.onConfigureMessageClient()
+    private fun startBluetoothDiscovery() = runWithBluetoothPermission { grantResult ->
+        viewModel.onConfigureMessageClient(requireContext())
     }
 
     fun navigateToLogin() {

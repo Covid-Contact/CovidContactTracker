@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
 import cat.covidcontact.tracker.R
 import cat.covidcontact.tracker.common.BaseFragment
 import cat.covidcontact.tracker.common.extensions.hideKeyboard
-import cat.covidcontact.tracker.common.extensions.navigate
 import cat.covidcontact.tracker.common.extensions.observeInvalidField
 import cat.covidcontact.tracker.common.extensions.showDialog
 import cat.covidcontact.tracker.common.handlers.ScreenStateHandler
@@ -83,11 +83,25 @@ class LogInFragment : BaseFragment() {
 
         btnLogIn.setOnClickListener {
             hideKeyboard()
-            val email = logInEmailLayout.editText?.text.toString()
-            val password = logInPasswordLayout.editText?.text.toString()
-
-            viewModel.onMakeLogIn(email, password)
+            makeLogIn()
         }
+
+        logInPasswordLayout.editText?.setOnEditorActionListener { _, actionId, event ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_GO -> {
+                    makeLogIn()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun FragmentLogInBinding.makeLogIn() {
+        val email = logInEmailLayout.editText?.text.toString()
+        val password = logInPasswordLayout.editText?.text.toString()
+
+        viewModel.onMakeLogIn(email, password)
     }
 
 

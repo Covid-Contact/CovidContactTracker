@@ -56,6 +56,7 @@
                 style="@style/fullWidthTextInputLayout"
                 android:hint="@string/birth_date"
                 app:endIconDrawable="@drawable/ic_calendar"
+                android:inputType="none"
                 app:endIconMode="custom">
 
                 <com.google.android.material.textfield.TextInputEditText

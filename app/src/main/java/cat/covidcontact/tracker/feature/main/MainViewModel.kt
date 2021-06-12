@@ -1,7 +1,11 @@
 package cat.covidcontact.tracker.feature.main
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.pm.PackageManager
 import android.util.Log
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -117,16 +121,16 @@ class MainViewModel @Inject constructor(
         loadState(MainState.BluetoothInfo)
     }
 
-    fun onConfigureMessageClient() {
+    fun onConfigureMessageClient(context: Context) {
         viewModelScope.launch {
-            val isSubscribed = setUpMessageListener()
+            val isSubscribed = setUpMessageListener(context)
             if (isSubscribed) {
-                setUpWorkManager()
+                setUpWorkManager(context)
             }
         }
     }
 
-    private suspend fun setUpMessageListener(): Boolean {
+    private suspend fun setUpMessageListener(context: Context): Boolean {
         val messageListener = object : MessageListener() {
             override fun onFound(message: Message) {
                 val strMessage = String(message.content)
@@ -135,7 +139,11 @@ class MainViewModel @Inject constructor(
                 viewModelScope.launch {
                     if (!isSkipping.requireValue()) {
                         workManager.cancelUniqueWork(FINISH_INTERACTION_NAME)
-                        val coordinates = getLocationCoordinates()
+                        val coordinates = if (isLocationPermissionGranted(context)) {
+                            getLocationCoordinates()
+                        } else {
+                            null
+                        }
 
                         executeUseCase(
                             sendRead,
@@ -164,6 +172,7 @@ class MainViewModel @Inject constructor(
         return task.isSuccessful
     }
 
+
     @SuppressLint("MissingPermission")
     private suspend fun getLocationCoordinates(): Pair<Double, Double>? {
         val task = fusedLocationProviderClient.lastLocation
@@ -174,13 +183,16 @@ class MainViewModel @Inject constructor(
         } else null
     }
 
-    private fun setUpWorkManager() {
+    private fun setUpWorkManager(context: Context) {
         FinishInteractionWorker.onSend = {
             viewModelScope.launch {
                 Log.i("Read", "Send empty interaction")
                 onFinishInteraction()
             }
         }
+
+        PublishCodeWorker.context = context
+        PublishCodeWorker.onCheckBluetoothPermission = ::isBluetoothPermissionGranted
 
         val publishWork = PeriodicWorkRequestBuilder<PublishCodeWorker>(PERIOD, TimeUnit.MINUTES)
             .build()
@@ -223,6 +235,14 @@ class MainViewModel @Inject constructor(
     }
 
     fun requireUserDevice(): UserDevice = userDevice.value ?: throw Exception("UserDevice not set")
+
+    private fun isLocationPermissionGranted(context: Context) =
+        ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED
+
+    private fun isBluetoothPermissionGranted(context: Context) =
+        ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) ==
+            PackageManager.PERMISSION_GRANTED
 
     companion object {
         private const val PERIOD = 16L
