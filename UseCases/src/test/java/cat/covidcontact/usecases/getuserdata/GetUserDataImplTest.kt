@@ -1,33 +1,23 @@
 package cat.covidcontact.usecases.getuserdata
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import cat.covidcontact.data.CommonException
 import cat.covidcontact.data.repositories.contactnetworks.ContactNetworkRepository
 import cat.covidcontact.data.repositories.user.UserException
 import cat.covidcontact.data.repositories.user.UserRepository
-import cat.covidcontact.model.user.Gender
-import cat.covidcontact.model.user.User
-import cat.covidcontact.usecases.MainCoroutineRule
-import cat.covidcontact.usecases.UseCaseResult
+import cat.covidcontact.usecases.*
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class GetUserDataImplTest {
-    private lateinit var getUserDataImpl: GetUserDataImpl
+    private lateinit var useCase: GetUserDataImpl
 
-    private val email = "albert@gmail.com"
-    private val username = email.substring(0, email.indexOf("@"))
-    private val user = User(email, username, Gender.Male, System.currentTimeMillis())
+    private val request = GetUserData.Request(EMAIL)
 
     @MockK
     private lateinit var userRepository: UserRepository
@@ -35,63 +25,42 @@ class GetUserDataImplTest {
     @MockK
     private lateinit var contactNetworkRepository: ContactNetworkRepository
 
-    @get:Rule
-    var mainCoroutineRule = MainCoroutineRule()
-
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
-
     @Before
     fun setUp() {
         userRepository = mockk()
+        coEvery { userRepository.getUserData(EMAIL) } returns user
+
         contactNetworkRepository = mockk()
-        getUserDataImpl = GetUserDataImpl(userRepository, contactNetworkRepository)
+        coEvery { contactNetworkRepository.getContactNetworks(any()) } returns emptyList()
+
+        useCase = GetUserDataImpl(userRepository, contactNetworkRepository)
     }
 
     @Test
-    fun `when there is no internet then the result is an error`() = runBlockingTest {
-        coEvery { userRepository.getUserData(email) } throws CommonException.NoInternetException
-        val result = getUserDataImpl.execute(GetUserData.Request(email))
-
-        assertThat(result, instanceOf(UseCaseResult.Error::class.java))
-
-        val exception = (result as UseCaseResult.Error).exception
-        assertThat(exception, instanceOf(CommonException.NoInternetException::class.java))
-    }
+    fun `when there is no internet then the use case fails`() =
+        runNoInternetTest(useCase, request) {
+            coEvery {
+                userRepository.getUserData(EMAIL)
+            } throws CommonException.NoInternetException
+        }
 
     @Test
-    fun `when there is an other error then the result is an error`() = runBlockingTest {
-        coEvery { userRepository.getUserData(email) } throws CommonException.OtherError
-        val result = getUserDataImpl.execute(GetUserData.Request(email))
-
-        assertThat(result, instanceOf(UseCaseResult.Error::class.java))
-
-        val exception = (result as UseCaseResult.Error).exception
-        assertThat(exception, instanceOf(CommonException.OtherError::class.java))
-    }
+    fun `when user info is not found then the use case fails`() =
+        runErrorTest(useCase, request, UserException.UserInfoNotFound::class) {
+            coEvery {
+                userRepository.getUserData(EMAIL)
+            } throws UserException.UserInfoNotFound(EMAIL)
+        }
 
     @Test
-    fun `when the user info is not found then the result is an error`() = runBlockingTest {
-        coEvery { userRepository.getUserData(email) } throws UserException.UserInfoNotFound(email)
-        val result = getUserDataImpl.execute(GetUserData.Request(email))
-
-        assertThat(result, instanceOf(UseCaseResult.Error::class.java))
-
-        val exception = (result as UseCaseResult.Error).exception
-        assertThat(exception, instanceOf(UserException.UserInfoNotFound::class.java))
-
-        val emailResult = (exception as UserException.UserInfoNotFound).email
-        assertThat(emailResult, `is`(email))
-    }
+    fun `when there is an unexpected error then the use case fails`() =
+        runOtherErrorTest(useCase, request) {
+            coEvery { userRepository.getUserData(EMAIL) } throws Exception()
+        }
 
     @Test
-    fun `when the user info is found then the result is a success`() = runBlockingTest {
-        coEvery { userRepository.getUserData(email) } returns user
-        val result = getUserDataImpl.execute(GetUserData.Request(email))
-
-        assertThat(result, instanceOf(UseCaseResult.Success::class.java))
-
-        val successResult = (result as UseCaseResult.Success).result
-        assertThat(successResult.user, `is`(user))
-    }
+    fun `when there is not any error then the use case succeeds`() =
+        runSuccessTest(useCase, request) { response ->
+            assertThat(response.user, isEqualTo(user))
+        }
 }
