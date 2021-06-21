@@ -28,10 +28,10 @@ class InteractionRepositoryImpl @Inject constructor(
             )
         )
 
-        serverResponse.response.statusCode.run {
+        serverResponse.onStatusCode {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
-                HttpStatus.CREATED -> return@run
+                HttpStatus.CREATED -> return@onStatusCode
                 else -> throw CommonException.OtherError
             }
         }
@@ -39,10 +39,10 @@ class InteractionRepositoryImpl @Inject constructor(
 
     override suspend fun notifyPositive(email: String) {
         val serverResponse = interactionController.notifyPositive(email)
-        serverResponse.response.statusCode.run {
+        serverResponse.onStatusCode {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
-                HttpStatus.NO_CONTENT -> return@run
+                HttpStatus.NO_CONTENT -> return@onStatusCode
                 else -> throw CommonException.OtherError
             }
         }
