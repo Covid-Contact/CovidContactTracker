@@ -17,6 +17,7 @@ val user = User(username = USERNAME, email = EMAIL)
 
 const val NAME = "testContactNetwork"
 const val PASSWORD = "1234"
+const val ACCESS_CODE = "123456"
 val contactNetwork = ContactNetwork(name = NAME, password = PASSWORD, owner = user)
 
 const val DEVICE_ID = "1234"
