@@ -5,6 +5,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.instanceOf
+import org.hamcrest.Matcher
 import org.hamcrest.MatcherAssert.assertThat
 import kotlin.reflect.KClass
 
@@ -72,4 +73,4 @@ fun <T : UseCase<I, O>, I : UseCase.UseCaseRequest, O : UseCase.UseCaseResponse>
     assertUseCaseSuccess(useCase, request, onAssertResult)
 }
 
-fun <T> isEqualTo(other: T) = `is`(other)
+fun <T> isEqualTo(other: T): Matcher<T> = `is`(other)

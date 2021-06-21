@@ -24,7 +24,7 @@ class MakeLogInImplTest {
     @Before
     fun setUp() {
         userRepository = mockk()
-        coEvery { userRepository.makeLogIn(any(), any()) } returns Unit
+        coEvery { userRepository.validateAndMakeLogIn(any(), any()) } returns Unit
 
         useCase = MakeLogInImpl(userRepository)
     }
@@ -33,7 +33,7 @@ class MakeLogInImplTest {
     fun `when there is no internet then the use case fails`() =
         runNoInternetTest(useCase, request) {
             coEvery {
-                userRepository.makeLogIn(any(), any())
+                userRepository.validateAndMakeLogIn(any(), any())
             } throws CommonException.NoInternetException
         }
 
@@ -41,7 +41,7 @@ class MakeLogInImplTest {
     fun `when password is wrong then use case fails`() =
         runErrorTest(useCase, request, UserException.WrongPasswordException::class) {
             coEvery {
-                userRepository.makeLogIn(any(), any())
+                userRepository.validateAndMakeLogIn(any(), any())
             } throws UserException.WrongPasswordException
         }
 
@@ -49,7 +49,7 @@ class MakeLogInImplTest {
     fun `when email not found then use case fails`() =
         runErrorTest(useCase, request, UserException.EmailNotFoundException::class) {
             coEvery {
-                userRepository.makeLogIn(any(), any())
+                userRepository.validateAndMakeLogIn(any(), any())
             } throws UserException.EmailNotFoundException(EMAIL)
         }
 
@@ -57,14 +57,14 @@ class MakeLogInImplTest {
     fun `when email not validated then use case fails`() =
         runErrorTest(useCase, request, UserException.EmailNotValidatedException::class) {
             coEvery {
-                userRepository.makeLogIn(any(), any())
+                userRepository.validateAndMakeLogIn(any(), any())
             } throws UserException.EmailNotValidatedException(EMAIL)
         }
 
     @Test
     fun `when there is an unexpected error then the use case fails`() =
         runOtherErrorTest(useCase, request) {
-            coEvery { userRepository.makeLogIn(any(), any()) } throws Exception()
+            coEvery { userRepository.validateAndMakeLogIn(any(), any()) } throws Exception()
         }
 
     @Test
