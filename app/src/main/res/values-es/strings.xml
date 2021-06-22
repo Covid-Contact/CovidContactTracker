@@ -1,8 +1,25 @@
+<!--
+  ~  Copyright (C) 2021  Albert Pinto
+  ~
+  ~  This program is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  This program is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
 <resources>
     <string name="app_name">Covid Contact Tracker</string>
 
     <!-- Common -->
-    <string name="yes">No</string>
+    <string name="yes">Sí</string>
     <string name="no">No</string>
     <string name="decline_to_answer">No quiero responder</string>
     <string name="confirm">Confirmar</string>
@@ -111,8 +128,8 @@
     <string name="bluetooth_info_title">El Bluetooth es necesareo</string>
     <string name="bluetooth_info_message">
         Con el fin de detectar los otros usuarios de sus redes de contactos es necesareo tener el
-        Bluetooth activado. Su identidad será privada i, por lo tanto, nadie tendrá acceso a su
-        dispositivo móbil a través de Bluetooth i no enviarem ningún tipo de información sensible
+        Bluetooth activado. Su identidad será privada y, por lo tanto, nadie tendrá acceso a su
+        dispositivo móbil a través de Bluetooth y no enviaremos ningún tipo de información sensible
         a través de esas connexiones.
     </string>
     <string name="enable_bluetooth_yes">Habilitar Bluetooth</string>
@@ -131,7 +148,7 @@
     <string name="select_app_language_title">Idioma de la aplicación</string>
     <string name="select_app_language_summary">Seleccione el idioma de la aplicación</string>
     <string name="dark_theme">Temática</string>
-    <string name="about">Sobre la aplciación</string>
+    <string name="about">Sobre la aplicación</string>
     <string name="current_version">Versión actual</string>
     <string name="log_out_title">Cerrar sessión</string>
     <string name="log_out_summary">Cerrar la sesión i seleccionar otra cuenta</string>

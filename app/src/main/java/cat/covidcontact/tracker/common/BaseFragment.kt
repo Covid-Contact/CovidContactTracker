@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2021  Albert Pinto
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package cat.covidcontact.tracker.common
 
 import android.Manifest
@@ -31,7 +48,7 @@ abstract class BaseFragment : Fragment() {
 
     private lateinit var bluetoothPermission: ActivityResultLauncher<Array<String>>
     private lateinit var enableBluetooth: ActivityResultLauncher<Unit>
-    private var onBluetoothGranted: () -> Unit = {}
+    private var onBluetoothGranted: (Map<String, Boolean>) -> Unit = {}
 
     @Inject
     lateinit var bluetoothAdapter: BluetoothAdapter
@@ -70,7 +87,7 @@ abstract class BaseFragment : Fragment() {
         viewModel.onLoadNothing()
     }
 
-    protected fun runWithBluetoothPermission(action: () -> Unit) {
+    protected fun runWithBluetoothPermission(action: (Map<String, Boolean>) -> Unit) {
         onBluetoothGranted = action
         requestBluetoothPermissions()
     }
@@ -96,11 +113,11 @@ abstract class BaseFragment : Fragment() {
         bluetoothPermission = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { grantedResult ->
-            val isGranted = grantedResult.values.all { it }
+            val isBluetoothGranted = grantedResult[Manifest.permission.BLUETOOTH] ?: false
 
-            if (isGranted) {
+            if (isBluetoothGranted) {
                 if (bluetoothAdapter.isEnabled) {
-                    onBluetoothGranted()
+                    onBluetoothGranted(grantedResult)
                 } else {
                     enableBluetooth.launch(Unit)
                 }
