@@ -31,7 +31,7 @@ abstract class BaseFragment : Fragment() {
 
     private lateinit var bluetoothPermission: ActivityResultLauncher<Array<String>>
     private lateinit var enableBluetooth: ActivityResultLauncher<Unit>
-    private var onBluetoothGranted: () -> Unit = {}
+    private var onBluetoothGranted: (Map<String, Boolean>) -> Unit = {}
 
     @Inject
     lateinit var bluetoothAdapter: BluetoothAdapter
@@ -70,7 +70,7 @@ abstract class BaseFragment : Fragment() {
         viewModel.onLoadNothing()
     }
 
-    protected fun runWithBluetoothPermission(action: () -> Unit) {
+    protected fun runWithBluetoothPermission(action: (Map<String, Boolean>) -> Unit) {
         onBluetoothGranted = action
         requestBluetoothPermissions()
     }
@@ -96,11 +96,11 @@ abstract class BaseFragment : Fragment() {
         bluetoothPermission = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { grantedResult ->
-            val isGranted = grantedResult.values.all { it }
+            val isBluetoothGranted = grantedResult[Manifest.permission.BLUETOOTH] ?: false
 
-            if (isGranted) {
+            if (isBluetoothGranted) {
                 if (bluetoothAdapter.isEnabled) {
-                    onBluetoothGranted()
+                    onBluetoothGranted(grantedResult)
                 } else {
                     enableBluetooth.launch(Unit)
                 }

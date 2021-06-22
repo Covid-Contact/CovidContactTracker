@@ -18,12 +18,12 @@ class UserRepositoryImpl(
     private val firebaseMessaging: FirebaseMessaging
 ) : UserRepository {
 
-    override suspend fun makeLogIn(email: String, password: String) {
+    override suspend fun validateAndMakeLogIn(email: String, password: String) {
         val serverResponse = userController.isUserValidated(email)
-        serverResponse.response.statusCode.run {
+        serverResponse.onStatusCode {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
-                HttpStatus.OK -> return@run
+                HttpStatus.OK -> return@onStatusCode
                 HttpStatus.NOT_FOUND -> throw UserException.EmailNotFoundException(email)
                 HttpStatus.BAD_REQUEST -> throw UserException.EmailNotValidatedException(email)
                 else -> throw CommonException.OtherError
@@ -37,12 +37,12 @@ class UserRepositoryImpl(
         makeLogInRequest(email, password)
     }
 
-    private suspend fun makeLogInRequest(email: String, password: String) {
+    suspend fun makeLogInRequest(email: String, password: String) {
         val serverResponse = userController.makeLogIn(ApplicationUser(email, password))
-        serverResponse.response.statusCode.run {
+        serverResponse.onStatusCode {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
-                HttpStatus.OK -> return@run
+                HttpStatus.OK -> return@onStatusCode
                 HttpStatus.FORBIDDEN -> throw UserException.WrongPasswordException
                 HttpStatus.NOT_FOUND -> throw UserException.EmailNotFoundException(email)
                 else -> throw CommonException.OtherError
@@ -56,20 +56,22 @@ class UserRepositoryImpl(
 
     override suspend fun makeSignUp(email: String, password: String) {
         val serverResponse = userController.makeSignUp(ApplicationUser(email, password))
-        when (serverResponse.response.statusCode) {
-            CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
-            HttpStatus.CREATED -> return
-            HttpStatus.BAD_REQUEST -> throw UserException.EmailAlreadyRegistered(email)
-            else -> throw CommonException.OtherError
+        serverResponse.onStatusCode {
+            when (this) {
+                CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
+                HttpStatus.CREATED -> return@onStatusCode
+                HttpStatus.BAD_REQUEST -> throw UserException.EmailAlreadyRegistered(email)
+                else -> throw CommonException.OtherError
+            }
         }
     }
 
     override suspend fun getUserData(email: String): User {
         val serverResponse = userController.getUserData(email)
-        serverResponse.response.statusCode.run {
+        serverResponse.onStatusCode {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
-                HttpStatus.OK -> return@run
+                HttpStatus.OK -> return@onStatusCode
                 HttpStatus.NOT_FOUND -> throw UserException.UserInfoNotFound(email)
                 else -> throw CommonException.OtherError
             }
@@ -81,11 +83,11 @@ class UserRepositoryImpl(
 
     override suspend fun addUserData(user: User): String {
         val serverResponse = userController.addUserData(user.createPost())
-        serverResponse.response.statusCode.run {
+        serverResponse.onStatusCode {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
-                HttpStatus.CREATED -> return@run
-                HttpStatus.BAD_REQUEST -> UserException.UserInfoFound(user.email)
+                HttpStatus.CREATED -> return@onStatusCode
+                HttpStatus.BAD_REQUEST -> throw UserException.UserInfoFound(user.email)
                 else -> throw CommonException.OtherError
             }
         }
@@ -95,10 +97,10 @@ class UserRepositoryImpl(
 
     override suspend fun registerUserDevice(email: String, device: Device) {
         val serverResponse = userController.registerUserDevice(email, device.createPost())
-        serverResponse.response.statusCode.run {
+        serverResponse.onStatusCode {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
-                HttpStatus.CREATED -> return@run
+                HttpStatus.CREATED -> return@onStatusCode
                 HttpStatus.NOT_FOUND -> throw UserException.EmailNotFoundException(email)
                 else -> throw CommonException.OtherError
             }
@@ -108,10 +110,10 @@ class UserRepositoryImpl(
     override suspend fun sendMessagingToken(email: String) {
         val token = getMessagingToken()
         val serverResponse = userController.sendMessagingToken(PostToken(email, token))
-        serverResponse.response.statusCode.run {
+        serverResponse.onStatusCode {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
-                HttpStatus.CREATED -> return@run
+                HttpStatus.CREATED -> return@onStatusCode
                 else -> throw CommonException.OtherError
             }
         }
@@ -138,10 +140,10 @@ class UserRepositoryImpl(
             vaccinated
         )
 
-        serverResponse.response.statusCode.run {
+        serverResponse.onStatusCode {
             when (this) {
                 CovidContactBaseController.NO_INTERNET -> throw CommonException.NoInternetException
-                HttpStatus.NO_CONTENT -> return@run
+                HttpStatus.NO_CONTENT -> return@onStatusCode
                 else -> throw CommonException.OtherError
             }
         }

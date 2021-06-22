@@ -46,6 +46,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/edit_text"
+                    android:imeOptions="actionGo"
                     android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>

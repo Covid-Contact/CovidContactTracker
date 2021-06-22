@@ -38,7 +38,7 @@ class PostUser(
     @SerializedName("has_been_positive")
     var hasBeenPositive: Boolean? = null,
 
-    @SerializedName("is_vaccinated")
+    @SerializedName("vaccinated")
     var isVaccinated: Boolean? = null,
 
     @SerializedName("state")

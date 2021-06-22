@@ -1,11 +1,12 @@
 package cat.covidcontact.usecases.updateprofile
 
+import cat.covidcontact.model.user.User
 import cat.covidcontact.usecases.UseCase
 
 interface UpdateProfile : UseCase<UpdateProfile.Request, UpdateProfile.Response> {
 
     data class Request(
-        val email: String,
+        val user: User,
         val city: String,
         val studies: String,
         val occupation: String,
