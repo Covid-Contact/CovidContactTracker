@@ -25,12 +25,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment() {
     private lateinit var binding: FragmentProfileBinding
+    private val mainViewModel: MainViewModel by activityViewModels()
+
     override val viewModel: ProfileViewModel by viewModels()
     override val screenStateHandler = ScreenStateHandler<ProfileState> { context, state ->
-
+        when (state) {
+            ProfileState.ProfileEdited -> {
+                binding.bind(mainViewModel.requireUserDevice().user)
+            }
+        }
     }
-
-    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +77,7 @@ class ProfileFragment : BaseFragment() {
         vaccinatedLayout.setUpExposedDropdown(options, user.isVaccinated, viewModel.vaccinated)
 
         btnUpdateChanges.setOnClickListener {
-            viewModel.onUpdateProfile(mainViewModel.requireUserDevice().user.email)
+            viewModel.onUpdateProfile(mainViewModel.requireUserDevice().user)
         }
     }
 

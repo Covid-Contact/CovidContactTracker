@@ -2,6 +2,7 @@ package cat.covidcontact.tracker.feature.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.extensions.requireValue
@@ -28,11 +29,11 @@ class ProfileViewModel @Inject constructor(
         onFailure = { ScreenState.OtherError }
     )
 
-    fun onUpdateProfile(email: String) {
+    fun onUpdateProfile(user: User) {
         viewModelScope.launch {
             executeUseCase(updateProfile, updateProfileHandler) {
                 UpdateProfile.Request(
-                    email,
+                    user,
                     city.requireValue(),
                     studies.requireValue(),
                     occupation.requireValue(),

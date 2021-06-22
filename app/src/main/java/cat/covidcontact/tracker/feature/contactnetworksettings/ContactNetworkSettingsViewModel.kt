@@ -8,6 +8,7 @@ import cat.covidcontact.model.user.User
 import cat.covidcontact.tracker.ScreenState
 import cat.covidcontact.tracker.common.BaseViewModel
 import cat.covidcontact.tracker.common.extensions.combine
+import cat.covidcontact.tracker.common.extensions.notify
 import cat.covidcontact.tracker.common.extensions.requireValue
 import cat.covidcontact.tracker.common.handlers.UseCaseResultHandler
 import cat.covidcontact.usecases.deletecontactnetwork.DeleteContactNetwork
@@ -43,6 +44,7 @@ class ContactNetworkSettingsViewModel @Inject constructor(
         onSuccess = {
             val accessCode = it.accessCode
             contactNetwork.value?.accessCode = accessCode
+            contactNetwork.notify()
             ContactNetworkSettingsState.AccessCodeGenerated(accessCode)
         },
         onFailure = { ScreenState.Nothing }

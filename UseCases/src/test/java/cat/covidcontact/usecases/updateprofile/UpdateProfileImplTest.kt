@@ -18,7 +18,7 @@ class UpdateProfileImplTest {
     private lateinit var userRepository: UserRepository
 
     private val request = UpdateProfile.Request(
-        email = EMAIL,
+        user = user,
         city = CITY,
         studies = STUDIES,
         occupation = OCCUPATION,
