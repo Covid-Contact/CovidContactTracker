@@ -37,7 +37,8 @@ android {
         versionCode 2
         versionName "1.0.0-beta2"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "cat.covidcontact.tracker.HiltTestRunner"
     }
 
     buildTypes {

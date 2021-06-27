@@ -44,8 +44,10 @@
             android:id="@+id/txtContactNetworkPassword"
             style="@style/fullWidthTextInputLayout"
             android:hint="@string/contact_network_password"
+            android:visibility="gone"
             app:endIconMode="password_toggle"
-            app:helperText="@string/optional">
+            app:helperText="@string/optional"
+            tools:visibility="visible">
 
             <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
 
