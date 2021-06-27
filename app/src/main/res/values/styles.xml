@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyright (C) 2021  Albert Pinto
+  ~
+  ~  This program is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  This program is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryLightColor</item>
+    </style>
+
+    <style name="dialog" parent="Base.Theme.MaterialComponents.Light.Dialog">
+        <item name="buttonBarPositiveButtonStyle">@style/materialAlertPositiveButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/materialAlertNegativeButton</item>
+        <item name="buttonBarNeutralButtonStyle">@style/materialAlertNeutralButton</item>
+    </style>
+
+    <style name="materialAlertPositiveButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <style name="materialAlertNegativeButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="materialAlertNeutralButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <style name="text_click">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/auth_text</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="fullWidthButton" parent="button">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="textInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="endIconMode">clear_text</item>
+    </style>
+
+    <style name="fullWidthTextInputLayout" parent="textInputLayout">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">text</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="singleLine">true</item>
+    </style>
+
+    <style name="exposed_dropdown_menu" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="full_width_exposed_dropdown_menu" parent="exposed_dropdown_menu">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="icon_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+
+    <style name="screen_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/user_info_title_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/user_info_title_size</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="app_title" parent="screen_title">
+        <item name="android:textSize">@dimen/title</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:text">@string/app_name</item>
+    </style>
+
+    <style name="main_app_title" parent="app_title">
+        <item name="android:layout_marginTop">@dimen/main_app_title_margin</item>
+    </style>
+
+    <style name="full_color_constraint_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/primaryColor</item>
+    </style>
+
+    <style name="welcome_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:textSize">@dimen/welcome_text</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="round_linear_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/app_padding</item>
+        <item name="android:layout_marginTop">@dimen/round_linear_layout_margin</item>
+        <item name="android:background">@drawable/linear_layout_corner</item>
+    </style>
+
+    <style name="card_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal|start</item>
+        <item name="android:textSize">@dimen/card_title</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxWidth">@dimen/card_title_max_width</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="card_secondary_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal|start</item>
+        <item name="android:textSize">@dimen/card_secondary_text</item>
+        <item name="android:textColor">@color/card_secondary_text</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+    </style>
+
+    <style name="card_secondary_text_weight" parent="card_secondary_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="section_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:textSize">@dimen/section</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="access_code" parent="section_title">
+        <item name="android:letterSpacing">1</item>
+    </style>
+
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+</resources>

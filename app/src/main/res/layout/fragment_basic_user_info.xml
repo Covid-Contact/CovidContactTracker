@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyright (C) 2021  Albert Pinto
+  ~
+  ~  This program is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  This program is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".feature.userinfo.fragments.BasicUserInfoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout style="@style/full_color_constraint_layout">
+
+        <TextView
+            android:id="@+id/basicUserInformationTitle"
+            style="@style/screen_title"
+            android:text="@string/basic_information"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/basicUserInfoLayout"
+            style="@style/round_linear_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/basicUserInformationTitle">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usernameLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/username">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/genderLayout"
+                style="@style/full_width_exposed_dropdown_menu"
+                android:hint="@string/gender">
+
+                <AutoCompleteTextView
+                    style="@style/edit_text"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/birthDateLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/birth_date"
+                app:endIconDrawable="@drawable/ic_calendar"
+                android:inputType="none"
+                app:endIconMode="custom">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/edit_text"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBasicInformationPrevious"
+            style="@style/icon_button"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
+            app:icon="@drawable/ic_arrow_previous"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBasicInformationNext"
+            style="@style/icon_button"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
+            android:enabled="false"
+            app:icon="@drawable/ic_arrow_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

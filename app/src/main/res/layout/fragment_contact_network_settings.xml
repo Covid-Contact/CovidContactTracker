@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyright (C) 2021  Albert Pinto
+  ~
+  ~  This program is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  This program is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/app_padding"
+    tools:context=".feature.contactnetworksettings.ContactNetworkSettingsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/section_title"
+            android:layout_marginBottom="@dimen/app_padding_half"
+            android:text="@string/visibility_configuration"
+            android:visibility="gone" />
+
+        <View
+            style="@style/divider"
+            android:visibility="gone" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/swEnableUserAddition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enable_users_addition"
+            android:visibility="gone" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/swEnablePasswordAddition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enable_password_user_addition"
+            android:visibility="gone" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtJoinPassword"
+            style="@style/fullWidthTextInputLayout"
+            android:hint="@string/contact_network_password"
+            android:visibility="gone"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space_more"
+            android:visibility="gone" />
+
+        <TextView
+            style="@style/section_title"
+            android:layout_marginBottom="@dimen/app_padding_half"
+            android:text="@string/access_code" />
+
+        <View style="@style/divider" />
+
+        <TextView
+            android:id="@+id/txtAccessCode"
+            style="@style/access_code"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/app_padding"
+            android:layout_marginBottom="@dimen/app_padding_half"
+            android:visibility="gone"
+            tools:text="123456"
+            tools:visibility="visible" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGenerateAccessCode"
+            style="@style/fullWidthButton"
+            android:layout_marginTop="@dimen/app_padding"
+            android:text="@string/access_code_generation" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space_more" />
+
+        <TextView
+            style="@style/section_title"
+            android:layout_marginBottom="@dimen/app_padding_half"
+            android:text="@string/manage_contact_network" />
+
+        <View style="@style/divider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDeleteContactNetwork"
+            style="@style/fullWidthButton"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/app_padding"
+            android:text="@string/delete_contact_network"
+            app:backgroundTint="@color/red" />
+
+    </LinearLayout>
+
+</FrameLayout>

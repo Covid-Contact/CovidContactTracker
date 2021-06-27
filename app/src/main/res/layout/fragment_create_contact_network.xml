@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyright (C) 2021  Albert Pinto
+  ~
+  ~  This program is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  This program is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/app_padding"
+    tools:context=".feature.createcontactnetwork.CreateContactNetworkFragment">
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtContactNetworkName"
+            style="@style/fullWidthTextInputLayout"
+            android:hint="@string/contact_network_name">
+
+            <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtContactNetworkPassword"
+            style="@style/fullWidthTextInputLayout"
+            android:hint="@string/contact_network_password"
+            android:visibility="gone"
+            app:endIconMode="password_toggle"
+            app:helperText="@string/optional"
+            tools:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="@dimen/space" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCreateContactNetwork"
+            style="@style/fullWidthButton"
+            android:text="@string/create" />
+
+    </LinearLayout>
+
+</FrameLayout>

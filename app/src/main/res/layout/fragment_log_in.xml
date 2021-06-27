@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyright (C) 2021  Albert Pinto
+  ~
+  ~  This program is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  This program is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cat.covidcontact.tracker.feature.login.LogInFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout style="@style/full_color_constraint_layout">
+
+        <TextView
+            android:id="@+id/logInAppTitle"
+            style="@style/app_title"
+            android:text="@string/app_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/logInLinearLayout"
+            style="@style/round_linear_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/logInEmailLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/edit_text"
+                    android:inputType="textEmailAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/logInPasswordLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/password"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/edit_text"
+                    android:imeOptions="actionGo"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtMakeSignUp"
+            style="@style/text_click"
+            android:layout_marginStart="@dimen/app_padding"
+            android:layout_marginEnd="@dimen/app_padding"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
+            android:text="@string/not_account"
+            app:layout_constraintBottom_toTopOf="@+id/btnLogIn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogIn"
+            style="@style/fullWidthButton"
+            android:layout_marginStart="@dimen/app_padding"
+            android:layout_marginEnd="@dimen/app_padding"
+            android:layout_marginBottom="@dimen/button_bottom_margin"
+            android:text="@string/log_in"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

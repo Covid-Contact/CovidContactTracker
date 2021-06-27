@@ -1,3 +1,202 @@
+<!--
+  ~  Copyright (C) 2021  Albert Pinto
+  ~
+  ~  This program is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  This program is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
 <resources>
-    <string name="app_name">CovidContactTracker</string>
+    <string name="app_name">Covid Contact Tracker</string>
+
+    <!-- Common -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="decline_to_answer">Decline to answer</string>
+    <string name="confirm">Confirm</string>
+    <string name="not_empty">%s cannot be empty</string>
+    <string name="no_internet_title">No internet</string>
+    <string name="no_internet_message">
+        There has been a problem when connecting to the network.
+        Please check your internet connection
+    </string>
+    <string name="other_error_title">Unexpected error</string>
+    <string name="other_error_message">
+        There has been an unexpected error.
+        Please contact the support service
+    </string>
+    <string name="optional">Optional</string>
+    <string name="close">Close</string>
+
+    <!-- Authentication -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="invalid_email">The email is invalid</string>
+    <string name="invalid_password">
+        Password should have at least 8 characters and must contain at least:
+        an uppercase letter, an lowercase letter, a digit and a special character
+    </string>
+    <string name="passwords_not_equals">The passwords do not match</string>
+    <string name="not_account">You do not have an account?</string>
+    <string name="already_account">You already have an account?</string>
+    <string name="wrong_password_message">
+        The password you have introduced does not belong to that email.
+    </string>
+    <string name="email_already_registered_message">
+        The email %s is already registered
+    </string>
+    <string name="verify_email_title">Verify your email</string>
+    <string name="verify_email_message">An email has been sent to %s</string>
+    <string name="email_not_found_title">Email not found</string>
+    <string name="email_not_found_message">
+        The email %s is not associated with any account.
+    </string>
+    <string name="email_not_validated_title">Email not validated</string>
+    <string name="email_not_validated_message">
+        Please check your %s inbox to verify the account.
+    </string>
+
+    <!-- User info -->
+    <string name="welcome">Welcome to</string>
+    <string name="next_screens_information">
+        In the next screens you will be presented with some fields to be filled with information
+        about you.
+    </string>
+    <string name="private_information">
+        The only public information will be your username, which cannot be changed later.
+    </string>
+    <string name="required_fields">
+        Only the fields marked with an asterisk (*) are required.
+    </string>
+    <string name="basic_information">Basic Information</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="COVID19_information">COVID-19 Information</string>
+    <string name="select_birth_date">Select birth date</string>
+
+    <string name="username">Username</string>
+    <string name="gender">Gender</string>
+    <string name="birth_date">Birth date</string>
+    <string name="city">City</string>
+    <string name="studies">Studies</string>
+    <string name="occupation">Occupation</string>
+    <string name="marriage">Marriage</string>
+    <string name="children">Children</string>
+    <string name="being_positive">Have you been positive?</string>
+    <string name="being_vaccinated">Have you been vaccinated?</string>
+
+    <!-- Fragment names -->
+    <string name="contact_networks_fragment">Contact Networks</string>
+    <string name="contact_networks_fragment_short">Networks</string>
+    <string name="search_contact_networks_fragment">Search</string>
+    <string name="profile_bottom_fragments">Profile</string>
+    <string name="create_contact_network_fragment">Create Contact Network</string>
+    <string name="settings_bottom_fragment">Settings</string>
+
+    <!-- Contact networks -->
+    <string name="quit">Quit</string>
+    <string name="owner_info">Created by %s</string>
+    <string name="network_normal">Normal</string>
+    <string name="network_almost_limit">Almost limit</string>
+    <string name="network_limit">Limit</string>
+    <string name="network_over_limit">Over limit</string>
+    <string name="network_positive_detected">Positive detected</string>
+    <string name="positive_button">I am positive of COVID-19</string>
+    <string name="positive_dialog_title">Sending positive</string>
+    <string name="positive_dialog_message">
+        Are you sure you want to notify the system that you are positive? Your identity will not be
+        revealed to other users.
+    </string>
+    <string name="exit_contact_network_dialog_title">Exit %s</string>
+    <string name="exit_contact_network_dialog_message">Do you really want to exit %s?</string>
+    <string name="no_contact_network_available">There is not any contact network</string>
+
+    <!-- Create Contact Network fragment -->
+    <string name="create_contact_network_title">Create contact network</string>
+    <string name="create_contact_network_content_description">
+        @string/create_contact_network_title
+    </string>
+    <string name="contact_network_name">Name</string>
+    <string name="contact_network_password">Password</string>
+    <string name="contact_network_name_cannot_be_empty">The name cannot be empty</string>
+    <string name="contact_network_existing_title">Existing name</string>
+    <string name="contact_network_existing_message">
+        You already have a contact network with that name, please choose another one.
+    </string>
+    <string name="create">Create</string>
+
+    <!-- Contact Network Settings fragment -->
+    <string name="visibility_configuration">Visibility configuration</string>
+    <string name="enable_users_addition">Allow users to join</string>
+    <string name="enable_password_user_addition">Request password to join</string>
+    <string name="access_code">Access code</string>
+    <string name="access_code_generation">Generate access code</string>
+    <string name="manage_contact_network">Manage contact network</string>
+    <string name="delete_contact_network">Delete contact network</string>
+
+    <!-- Search -->
+    <string name="access_code_search">Access code</string>
+    <string name="contact_network_joined_title">Joined contact network</string>
+    <string name="contact_network_joined_message">
+        You have successfully joined %s.
+    </string>
+    <string name="contact_network_already_joined_title">Already joined</string>
+    <string name="contact_network_already_joined_message">
+        You have already joined %s.
+    </string>
+
+    <!-- Main -->
+    <string name="bluetooth_info_title">Bluetooth is required</string>
+    <string name="bluetooth_info_message">
+        In order to detect the other users from your contact networks the bluetooth have to be
+        enabled. Your identity will be private, thus anyone cannot access your phone via Bluetooth
+        and we will not send any sensible information throughout those connections.
+    </string>
+    <string name="enable_bluetooth_yes">Enable Bluetooth</string>
+    <string name="enable_bluetooth_no">Disable Bluetooth</string>
+
+    <!-- Notifications -->
+    <string name="notification_quarantine_title">You are a near contact</string>
+    <string name="notification_quarantine_text">
+        A positive has been detected in your Contact Networks and you are a near contact
+    </string>
+    <string name="notification_prevention_title">Take care of yourself</string>
+    <string name="notification_prevention_text">
+        A positive has been detected in your Contact Networks, but you are not a near
+        contact
+    </string>
+
+    <!-- Profile -->
+    <string name="profile_update">Update</string>
+
+    <!-- Settings -->
+    <string name="language_and_theme">Language and theme</string>
+    <string name="select_app_language_title">App language</string>
+    <string name="select_app_language_summary">Select app language</string>
+    <string name="dark_theme">Theme</string>
+    <string name="dark_theme_title">Enable dark theme</string>
+    <string name="about">About application</string>
+    <string name="current_version">Current version</string>
+    <string name="log_out_title">Log out</string>
+    <string name="log_out_summary">Log out and select another account</string>
+    <string name="delete_account_title">Delete account</string>
+    <string name="delete_account_dialog_title">Delete account</string>
+    <string name="delete_account_dialog_message">
+        Are you sure you want to delete your account? This action is not reversible
+    </string>
+    <string name="wrong_password_title">Wrong password</string>
+    <string name="email_already_registered_title">Email already registered</string>
+    <string name="delete_account_summary">Delete your account and all of your data</string>
+
 </resources>

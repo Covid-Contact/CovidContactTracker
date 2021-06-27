@@ -1,3 +1,20 @@
+/*
+ *  Copyright (C) 2021  Albert Pinto
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package cat.covidcontact.tracker
 
 import androidx.annotation.VisibleForTesting
@@ -9,7 +26,7 @@ import java.util.concurrent.TimeoutException
 
 @VisibleForTesting(otherwise = VisibleForTesting.NONE)
 fun <T> LiveData<T>.getOrAwaitValue(
-    time: Long = 2,
+    time: Long = 5,
     timeUnit: TimeUnit = TimeUnit.SECONDS,
     afterObserve: () -> Unit = {}
 ): T {
@@ -38,4 +55,34 @@ fun <T> LiveData<T>.getOrAwaitValue(
 
     @Suppress("UNCHECKED_CAST")
     return data as T
+}
+
+@VisibleForTesting(otherwise = VisibleForTesting.NONE)
+fun LiveData<ScreenState>.getAfterLoading(
+    time: Long = 5,
+    timeUnit: TimeUnit = TimeUnit.SECONDS
+): ScreenState {
+    var data: ScreenState? = null
+    val latch = CountDownLatch(1)
+    val observer: Observer<ScreenState> = object : Observer<ScreenState> {
+        override fun onChanged(value: ScreenState?) {
+            if (value !is ScreenState.Loading && value !is ScreenState.ExecutingUseCase) {
+                data = value
+                latch.countDown()
+                this@getAfterLoading.removeObserver(this)
+            }
+        }
+    }
+
+    this.observeForever(observer)
+
+    try {
+        if (!latch.await(time, timeUnit)) {
+            throw TimeoutException("LiveData value was never set or it always was Loading")
+        }
+    } finally {
+        this.removeObserver(observer)
+    }
+
+    return data!!
 }

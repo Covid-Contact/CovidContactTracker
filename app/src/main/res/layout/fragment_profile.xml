@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyright (C) 2021  Albert Pinto
+  ~
+  ~  This program is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  This program is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/app_padding"
+    tools:context=".feature.profile.ProfileFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/section_title"
+                android:layout_marginBottom="@dimen/app_padding_half"
+                android:text="@string/personal_information" />
+
+            <View style="@style/divider" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cityLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/city"
+                app:endIconDrawable="@drawable/ic_gps"
+                app:endIconMode="custom">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/studiesLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/studies">
+
+                <com.google.android.material.textfield.TextInputEditText style="@style/edit_text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/occupationLayout"
+                style="@style/full_width_exposed_dropdown_menu"
+                android:hint="@string/occupation">
+
+                <AutoCompleteTextView
+                    style="@style/edit_text"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/marriageLayout"
+                style="@style/full_width_exposed_dropdown_menu"
+                android:hint="@string/marriage">
+
+                <AutoCompleteTextView
+                    style="@style/edit_text"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/childrenLayout"
+                style="@style/fullWidthTextInputLayout"
+                android:hint="@string/children">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/edit_text"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <TextView
+                style="@style/section_title"
+                android:layout_marginBottom="@dimen/app_padding_half"
+                android:text="@string/COVID19_information" />
+
+            <View style="@style/divider" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/positiveLayout"
+                style="@style/full_width_exposed_dropdown_menu"
+                android:hint="@string/being_positive">
+
+                <AutoCompleteTextView
+                    style="@style/edit_text"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/vaccinatedLayout"
+                style="@style/full_width_exposed_dropdown_menu"
+                android:hint="@string/being_vaccinated">
+
+                <AutoCompleteTextView
+                    style="@style/edit_text"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUpdateChanges"
+                style="@style/fullWidthButton"
+                android:text="@string/profile_update" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>
