@@ -35,9 +35,9 @@ android {
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 2
-        versionName "1.0.0-beta2"
+        versionName "1.0.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "cat.covidcontact.tracker.HiltTestRunner"
     }
 
     buildTypes {
