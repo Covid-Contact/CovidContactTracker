@@ -49,8 +49,10 @@ class ContactNetworksViewModel @Inject constructor(
     private val notifyPositiveHandler = UseCaseResultHandler<NotifyPositive.Response>(
         onSuccess = { response ->
             currentUser.value = response.user
+            _contactNetworks.value = response.user.contactNetworks
             currentUser.notify()
-            ScreenState.Nothing
+            _contactNetworks.notify()
+            ContactNetworksState.PositiveNotified
         },
         onFailure = { ScreenState.OtherError }
     )
