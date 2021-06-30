@@ -114,6 +114,8 @@ class ContactNetworksFragment : BaseFragment() {
             viewLifecycleOwner,
             viewModel.isNoContactNetworksVisible
         )
+
+        flBtnCreateContactNetwork.show()
     }
 
     private fun MainViewModel.observe() {

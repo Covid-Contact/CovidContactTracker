@@ -78,7 +78,7 @@
 
                 <AutoCompleteTextView
                     style="@style/edit_text"
-                    android:inputType="none" />
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,7 +93,7 @@
 
                 <AutoCompleteTextView
                     style="@style/edit_text"
-                    android:inputType="none" />
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
