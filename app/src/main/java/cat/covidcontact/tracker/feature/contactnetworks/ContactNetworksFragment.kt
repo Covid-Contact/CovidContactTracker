@@ -76,11 +76,12 @@ class ContactNetworksFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-
         refreshContactNetworkList()
-        showFloatingActionButton()
+    }
 
-        binding.flBtnCreateContactNetwork.show()
+    override fun onResume() {
+        super.onResume()
+        showFloatingActionButton()
     }
 
     override fun onPause() {
