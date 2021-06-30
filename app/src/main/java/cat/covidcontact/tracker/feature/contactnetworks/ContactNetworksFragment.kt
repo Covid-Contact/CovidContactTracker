@@ -79,6 +79,8 @@ class ContactNetworksFragment : BaseFragment() {
 
         refreshContactNetworkList()
         showFloatingActionButton()
+
+        binding.flBtnCreateContactNetwork.show()
     }
 
     override fun onPause() {
