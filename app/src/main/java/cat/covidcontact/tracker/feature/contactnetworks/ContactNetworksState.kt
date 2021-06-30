@@ -24,4 +24,5 @@ sealed class ContactNetworksState : ScreenState() {
     object CreateContactNetwork : ContactNetworksState()
     class ShowContactNetworkSettings(val contactNetwork: ContactNetwork) : ContactNetworksState()
     object ExitContactNetwork : ContactNetworksState()
+    object PositiveNotified : ContactNetworksState()
 }

@@ -41,12 +41,24 @@ class UpdateProfileImpl(
         request.user.apply {
             city = request.city
             studies = request.studies
-            occupation = Occupation.valueOf(request.occupation)
-            marriage = Marriage.valueOf(request.marriage)
+            occupation = request.occupation.toOccupation()
+            marriage = request.marriage.toMarriage()
             children = request.children
             hasBeenPositive = request.positive
             isVaccinated = request.vaccinated
         }
         UpdateProfile.Response()
+    }
+
+    private fun String.toOccupation(): Occupation? = try {
+        Occupation.valueOf(this)
+    } catch (e: Exception) {
+        null
+    }
+
+    private fun String.toMarriage(): Marriage? = try {
+        Marriage.valueOf(this)
+    } catch (e: Exception) {
+        null
     }
 }

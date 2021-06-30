@@ -62,6 +62,9 @@ class ContactNetworksFragment : BaseFragment() {
             ContactNetworksState.ExitContactNetwork -> {
                 requireActivity().recreate()
             }
+            ContactNetworksState.PositiveNotified -> {
+                requireActivity().recreate()
+            }
         }
     }
 
