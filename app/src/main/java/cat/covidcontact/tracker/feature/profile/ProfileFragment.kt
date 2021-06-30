@@ -76,13 +76,13 @@ class ProfileFragment : BaseFragment() {
     private fun FragmentProfileBinding.bind(user: User) {
         cityLayout.setUp(user.city, viewModel.city)
         studiesLayout.setUp(user.studies, viewModel.studies)
-        occupationLayout.setUp(user.occupation.toString(), viewModel.occupation) {
+        occupationLayout.setUp(user.occupation.toStringOrEmpty(), viewModel.occupation) {
             setExposedMenuItems<Occupation>(requireContext())
         }
-        marriageLayout.setUp(user.marriage.toString(), viewModel.marriage) {
+        marriageLayout.setUp(user.marriage.toStringOrEmpty(), viewModel.marriage) {
             setExposedMenuItems<Marriage>(requireContext())
         }
-        childrenLayout.setUp(user.children.toString(), viewModel.children)
+        childrenLayout.setUp(user.children.toStringOrEmpty(), viewModel.children)
 
         val options = listOf(
             getString(R.string.yes),
@@ -105,7 +105,7 @@ class ProfileFragment : BaseFragment() {
     ) {
         onBeforeAdding(this)
         observeText(liveData)
-        setText(text)
+        setText(text ?: "")
     }
 
     private fun TextInputLayout.setUpExposedDropdown(
@@ -138,4 +138,6 @@ class ProfileFragment : BaseFragment() {
             else -> false
         }
     }
+
+    private fun Any?.toStringOrEmpty(): String = this?.toString() ?: ""
 }
